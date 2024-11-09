@@ -1,4 +1,4 @@
 package org.company.insurance.entity;
 
-public class Department {
+public class Department extends BaseEntity{
 }

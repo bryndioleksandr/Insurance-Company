@@ -1,4 +1,4 @@
 package org.company.insurance.entity;
 
-public class TravelInsurance {
+public class TravelInsurance extends BaseEntity{
 }

@@ -1,4 +1,4 @@
 package org.company.insurance.entity;
 
-public class PolicyHolder {
+public class PolicyHolder extends BaseEntity{
 }
