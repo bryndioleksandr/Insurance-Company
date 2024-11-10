@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.company.insurance.enums.Role;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -14,15 +15,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class User extends BaseEntity{
+public class User extends Person{
     @Column(name = "username")
     private String username;
 
     @Column(name = "password")
     private String password;
-
-    @Column(name = "email")
-    private String email;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")

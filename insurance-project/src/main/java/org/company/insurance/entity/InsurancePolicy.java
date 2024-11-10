@@ -34,4 +34,8 @@ public class InsurancePolicy extends BaseEntity{
 
     @OneToMany(mappedBy = "insurancePolicy")
     private List<Claim> claims;
+
+    @ManyToOne
+    @JoinColumn(name = "holder_id")
+    private PolicyHolder policyHolder;
 }
