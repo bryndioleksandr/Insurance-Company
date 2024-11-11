@@ -25,6 +25,4 @@ public class PolicyHolder extends Person{
 
     @OneToMany(mappedBy = "policyHolder")
     private List<InsurancePolicy> insurancePolicies;
-
-
 }

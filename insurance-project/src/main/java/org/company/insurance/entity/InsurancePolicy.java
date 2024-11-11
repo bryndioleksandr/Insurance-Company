@@ -38,4 +38,10 @@ public class InsurancePolicy extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "holder_id")
     private PolicyHolder policyHolder;
+
+    @OneToOne(mappedBy = "insurancePolicy", cascade = CascadeType.ALL)
+    private AutoInsurance autoInsurance;
+
+    @OneToOne(mappedBy = "insurancePolicy", cascade = CascadeType.ALL)
+    private TravelInsurance travelInsurance;
 }
