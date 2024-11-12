@@ -2,7 +2,7 @@ package org.company.insurance.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.company.insurance.enums.VehicleType;
+import org.company.insurance.enums.*;
 
 @Entity
 @Table(name = "auto_insurances")
@@ -32,6 +32,16 @@ public class AutoInsurance extends BaseEntity{
     @Column(name = "type")
     private VehicleType type;
 
+    @Column(name = "insurance_longevity")
+    private int insuranceLongevity;
+
+    @Column(name = "coverage_amount")
+    private double coverageAmount;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "insurance_type")
+    private AutoInsuranceType insuranceType;
+
     @OneToOne
     @JoinColumn(name = "policy_id")
     private InsurancePolicy insurancePolicy;
@@ -39,6 +49,4 @@ public class AutoInsurance extends BaseEntity{
     @OneToOne
     @JoinColumn(name = "holder_id")
     private PolicyHolder policyHolder;
-
-
 }

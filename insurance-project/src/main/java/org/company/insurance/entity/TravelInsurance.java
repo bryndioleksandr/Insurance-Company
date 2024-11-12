@@ -7,7 +7,7 @@ import org.company.insurance.enums.TravelType;
 import java.util.Date;
 
 @Entity
-@Table(name = "auto_insurances")
+@Table(name = "travel_insurances")
 @Getter
 @Setter
 @ToString
@@ -25,6 +25,9 @@ public class TravelInsurance extends BaseEntity{
     @Enumerated(EnumType.STRING)
     @Column(name = "travel_type")
     private TravelType type;
+
+    @Column(name = "coverage_amount")
+    private double coverageAmount;
 
     @OneToOne
     @JoinColumn(name = "policy_id")

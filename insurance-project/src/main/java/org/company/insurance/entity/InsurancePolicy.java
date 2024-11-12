@@ -28,6 +28,9 @@ public class InsurancePolicy extends BaseEntity{
     @Column(name = "end_date")
     private Date endDate;
 
+    @Column(name = "price")
+    private double price;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "policy_type")
     private InsuranceType insuranceType;
