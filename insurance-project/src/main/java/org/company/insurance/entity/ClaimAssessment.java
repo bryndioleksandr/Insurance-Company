@@ -27,7 +27,6 @@ public class ClaimAssessment extends BaseEntity{
     private Double assessmentAmount;
 
     @ManyToOne
-    @JoinColumn(name = "assesssor_id")
+    @JoinColumn(name = "agent_id")
     private Agent agent;
-
 }

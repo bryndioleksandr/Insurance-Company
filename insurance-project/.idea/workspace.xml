@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a25acca2-0852-4105-845d-2afbddd30798" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2723a53b-feaa-4468-99de-1e05937d4686.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/2723a53b-feaa-4468-99de-1e05937d4686.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2723a53b-feaa-4468-99de-1e05937d4686/storage_v2/_src_/database/bryinsurance.0Qbqug/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/2723a53b-feaa-4468-99de-1e05937d4686/storage_v2/_src_/database/bryinsurance.0Qbqug/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/AutoInsurance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/AutoInsurance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/HealthInsurance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/HealthInsurance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/InsurancePolicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/InsurancePolicy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/PropertyInsurance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/PropertyInsurance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/TravelInsurance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/TravelInsurance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/enums/TravelType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/enums/TravelType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/AutoInsuranceDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/AutoInsuranceDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/InsurancePolicyDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/InsurancePolicyDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/ClaimAssessment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/ClaimAssessment.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,47 +20,58 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
+        <option value="com.intellij.jpb.JpaRepository" />
+        <option value="com.intellij.jpb.NewRecord" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2oQwmfa53Pe597ZwymYW8lVySuj" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.InsuranceProjectApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DtoCreateDialog.USE_JAVA_RECORDS_INITIAL_PROP_KEY": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.InsuranceProjectApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -86,7 +91,8 @@
       <workItem from="1730815272121" duration="1029000" />
       <workItem from="1731153541939" duration="1228000" />
       <workItem from="1731155329404" duration="9685000" />
-      <workItem from="1731328750388" duration="8815000" />
+      <workItem from="1731328750388" duration="9916000" />
+      <workItem from="1731411713723" duration="2071000" />
     </task>
     <servers />
   </component>
