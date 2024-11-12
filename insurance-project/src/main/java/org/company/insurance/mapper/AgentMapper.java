@@ -1,5 +1,6 @@
 package org.company.insurance.mapper;
 
+import org.company.insurance.dto.AgentCreationDto;
 import org.company.insurance.entity.Agent;
 import org.company.insurance.dto.AgentDto;
 import org.mapstruct.*;
@@ -12,4 +13,11 @@ public interface AgentMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Agent partialUpdate(AgentDto agentDto, @MappingTarget Agent agent);
+
+    Agent toEntity(AgentCreationDto agentCreationDto);
+
+    AgentCreationDto toDto1(Agent agent);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    Agent partialUpdate(AgentCreationDto agentCreationDto, @MappingTarget Agent agent);
 }

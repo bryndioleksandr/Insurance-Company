@@ -1,6 +1,7 @@
 package org.company.insurance.dto;
 
 import org.company.insurance.enums.TravelType;
+import org.company.insurance.entity.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

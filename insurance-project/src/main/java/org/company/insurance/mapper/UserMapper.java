@@ -1,5 +1,6 @@
 package org.company.insurance.mapper;
 
+import org.company.insurance.dto.UserCreationDto;
 import org.company.insurance.dto.UserDto;
 import org.company.insurance.entity.User;
 import org.mapstruct.*;
@@ -12,4 +13,7 @@ public interface UserMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     User partialUpdate(UserDto userDto, @MappingTarget User user);
+
+    User toEntity(UserCreationDto userCreationDto);
+
 }

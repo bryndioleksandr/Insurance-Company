@@ -1,5 +1,6 @@
 package org.company.insurance.mapper;
 
+import org.company.insurance.dto.TravelInsuranceCreationDto;
 import org.company.insurance.dto.TravelInsuranceDto;
 import org.company.insurance.entity.TravelInsurance;
 import org.mapstruct.*;
@@ -12,4 +13,6 @@ public interface TravelInsuranceMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     TravelInsurance partialUpdate(TravelInsuranceDto travelInsuranceDto, @MappingTarget TravelInsurance travelInsurance);
+
+    TravelInsurance toEntity(TravelInsuranceCreationDto travelInsuranceCreationDto);
 }

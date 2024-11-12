@@ -1,5 +1,6 @@
 package org.company.insurance.mapper;
 
+import org.company.insurance.dto.HealthInsuranceCreationDto;
 import org.company.insurance.dto.HealthInsuranceDto;
 import org.company.insurance.entity.HealthInsurance;
 import org.mapstruct.*;
@@ -12,4 +13,11 @@ public interface HealthInsuranceMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     HealthInsurance partialUpdate(HealthInsuranceDto healthInsuranceDto, @MappingTarget HealthInsurance healthInsurance);
+
+    HealthInsurance toEntity(HealthInsuranceCreationDto healthInsuranceCreationDto);
+
+    HealthInsuranceCreationDto toDto1(HealthInsurance healthInsurance);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    HealthInsurance partialUpdate(HealthInsuranceCreationDto healthInsuranceCreationDto, @MappingTarget HealthInsurance healthInsurance);
 }
