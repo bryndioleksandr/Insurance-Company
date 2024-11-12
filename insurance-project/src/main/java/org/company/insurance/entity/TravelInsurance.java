@@ -4,33 +4,19 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.company.insurance.enums.TravelType;
 
-import java.util.Date;
-
 @Entity
 @Table(name = "travel_insurances")
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+public class TravelInsurance extends Insurance {
 
-public class TravelInsurance extends BaseEntity{
-
-    @Column(name = "trip_start_date")
-    private Date tripStartDate;
-
-    @Column(name = "trip_end_date")
-    private Date tripEndDate;
+    @Column(name = "destination")
+    private String destination;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "travel_type")
-    private TravelType type;
-
-    @Column(name = "coverage_amount")
-    private double coverageAmount;
-
-    @OneToOne
-    @JoinColumn(name = "policy_id")
-    private InsurancePolicy insurancePolicy;
-
+    private TravelType travelType;
 }

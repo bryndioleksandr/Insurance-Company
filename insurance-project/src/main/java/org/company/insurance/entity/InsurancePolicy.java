@@ -43,8 +43,5 @@ public class InsurancePolicy extends BaseEntity{
     private PolicyHolder policyHolder;
 
     @OneToOne(mappedBy = "insurancePolicy", cascade = CascadeType.ALL)
-    private AutoInsurance autoInsurance;
-
-    @OneToOne(mappedBy = "insurancePolicy", cascade = CascadeType.ALL)
-    private TravelInsurance travelInsurance;
+    private Insurance insurance;
 }

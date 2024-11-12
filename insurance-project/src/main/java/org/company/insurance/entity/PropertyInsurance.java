@@ -1,26 +1,17 @@
 package org.company.insurance.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
 @Table(name = "property_insurances")
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class PropertyInsurance extends BaseEntity{
+public class PropertyInsurance extends Insurance {
 
     @Column(name = "property_address")
     private String propertyAddress;
-
-    @Column(name = "insurance_longevity")
-    private int insuranceLongevity;
-
-    @Column(name = "coverage_amount")
-    private double coverageAmount;
 }

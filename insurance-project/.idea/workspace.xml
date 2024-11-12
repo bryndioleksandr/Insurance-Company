@@ -11,9 +11,9 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/AutoInsurance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/AutoInsurance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/HealthInsurance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/HealthInsurance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/InsurancePolicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/InsurancePolicy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/Payment.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/PropertyInsurance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/PropertyInsurance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/TravelInsurance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/TravelInsurance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/enums/TravelType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/enums/TravelType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -86,7 +86,7 @@
       <workItem from="1730815272121" duration="1029000" />
       <workItem from="1731153541939" duration="1228000" />
       <workItem from="1731155329404" duration="9685000" />
-      <workItem from="1731328750388" duration="7824000" />
+      <workItem from="1731328750388" duration="8815000" />
     </task>
     <servers />
   </component>
