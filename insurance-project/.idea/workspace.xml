@@ -6,9 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="a25acca2-0852-4105-845d-2afbddd30798" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/AutoInsuranceDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/AutoInsuranceDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/InsurancePolicyDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/InsurancePolicyDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/ClaimAssessment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/ClaimAssessment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/AgentDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/AutoInsuranceDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/ClaimAssessmentDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/ClaimDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/HealthInsuranceDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/InsuranceDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/InsurancePolicyDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/PersonDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/PolicyHolderDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/PropertyInsuranceDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/TravelInsuranceDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/UserDto.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +33,7 @@
         <option value="Interface" />
         <option value="com.intellij.jpb.JpaRepository" />
         <option value="com.intellij.jpb.NewRecord" />
+        <option value="com.intellij.jpb.NewInterface" />
       </list>
     </option>
   </component>
@@ -92,7 +103,7 @@
       <workItem from="1731153541939" duration="1228000" />
       <workItem from="1731155329404" duration="9685000" />
       <workItem from="1731328750388" duration="9916000" />
-      <workItem from="1731411713723" duration="2071000" />
+      <workItem from="1731411713723" duration="3284000" />
     </task>
     <servers />
   </component>

@@ -7,7 +7,5 @@ import java.util.Date;
 /**
  * DTO for {@link org.company.insurance.entity.PolicyHolder}
  */
-public record PolicyHolderDto(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, String email, String firstName,
-                              String surname, String phoneNumber, Date birthDate, String passportNumber,
-                              String address) implements Serializable {
-}
+public record PolicyHolderDto(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, String email, String firstName, String surname, String phoneNumber, Date birthDate, String passportNumber, String address) implements Serializable {
+  }

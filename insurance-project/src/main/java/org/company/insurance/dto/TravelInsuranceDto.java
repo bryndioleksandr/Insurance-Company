@@ -8,7 +8,5 @@ import java.time.LocalDateTime;
 /**
  * DTO for {@link org.company.insurance.entity.TravelInsurance}
  */
-public record TravelInsuranceDto(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, double coverageAmount,
-                                 int insuranceLongevity, String destination,
-                                 TravelType travelType) implements Serializable {
-}
+public record TravelInsuranceDto(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, double coverageAmount, int insuranceLongevity, String destination, TravelType travelType) implements Serializable {
+  }
