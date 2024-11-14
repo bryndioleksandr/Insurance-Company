@@ -3,6 +3,7 @@ package org.company.insurance.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -18,7 +19,7 @@ public class ClaimAssessment extends BaseEntity{
     private Claim claim;
 
     @Column(name = "assessment_date")
-    private Date assesmentDate;
+    private LocalDate assesmentDate;
 
     @Column(name = "assessment_notes", length = 1000)
     private String notes;

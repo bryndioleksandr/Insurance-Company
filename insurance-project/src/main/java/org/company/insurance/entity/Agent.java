@@ -6,6 +6,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -14,11 +16,10 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class Agent extends Person{
     @Column(name = "hire_date")
-    private Date hireDate;
+    private LocalDate hireDate;
 
     @Column(name = "position")
     private String position;

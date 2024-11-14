@@ -5,7 +5,10 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Date;
+
 
 @MappedSuperclass
 @Getter
@@ -24,5 +27,5 @@ public class Person extends BaseEntity{
     private String phoneNumber;
 
     @Column(name = "birth_date")
-    private Date birthDate;
+    private LocalDate birthDate;
 }

@@ -11,7 +11,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Insurance extends BaseEntity {
+public class Insurance extends BaseEntity {
 
     @Column(name = "coverage_amount")
     private double coverageAmount;

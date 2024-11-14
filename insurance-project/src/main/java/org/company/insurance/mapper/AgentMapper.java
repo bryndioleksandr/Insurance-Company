@@ -7,6 +7,9 @@ import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface AgentMapper {
+
+    @Mapping(target = "hireDate", source = "hireDate")
+    @Mapping(target = "position", source = "position")
     Agent toEntity(AgentDto agentDto);
 
     AgentDto toDto(Agent agent);
@@ -16,8 +19,4 @@ public interface AgentMapper {
 
     Agent toEntity(AgentCreationDto agentCreationDto);
 
-    AgentCreationDto toDto1(Agent agent);
-
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Agent partialUpdate(AgentCreationDto agentCreationDto, @MappingTarget Agent agent);
 }

@@ -5,6 +5,7 @@ import lombok.*;
 import org.company.insurance.enums.ClaimType;
 import org.company.insurance.enums.Status;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -17,7 +18,7 @@ import java.util.Date;
 
 public class Claim extends BaseEntity{
     @Column(name = "submission_date")
-    private Date submissionDate;
+    private LocalDate submissionDate;
 
     @Column(name = "amount")
     private Double amount;

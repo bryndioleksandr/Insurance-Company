@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.company.insurance.enums.InsuranceType;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -23,10 +24,10 @@ public class InsurancePolicy extends BaseEntity{
     private User user;
 
     @Column(name = "start_date")
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(name = "end_date")
-    private Date endDate;
+    private LocalDate endDate;
 
     @Column(name = "price")
     private double price;
