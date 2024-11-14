@@ -1,0 +1,137 @@
+GET http://localhost:8080/api/agents/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-11-14T151419.500.json
+
+###
+
+POST http://localhost:8080/api/agents
+Content-Type: application/json
+Content-Length: 201
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "email": "s.v.bryndo@mail.com",
+  "firstName": "Sasha",
+  "surname": "Shvets",
+  "phoneNumber": "0680970382",
+  "birthDate": "2006-05-06",
+  "hireDate": "2024-05-06",
+  "position": "frontend dev"
+}
+
+<> 2024-11-14T151236.200.json
+
+###
+
+POST http://localhost:8080/api/agents
+Content-Type: application/json
+Content-Length: 202
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "email": "s.v.bryndo@gmail.com",
+  "firstName": "Sasha",
+  "surname": "Bryndio",
+  "phoneNumber": "0680970382",
+  "birthDate": "2006-03-04",
+  "hireDate": "2024-03-04",
+  "position": "backend dev"
+}
+
+<> 2024-11-14T151135.200.json
+
+###
+
+POST http://localhost:8080/api/agents
+Content-Type: application/json
+Content-Length: 202
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "email": "s.v.bryndo@gmail.com",
+  "firstName": "Sasha",
+  "surname": "Bryndio",
+  "phoneNumber": "0680970382",
+  "birthDate": "2006-03-04",
+  "hireDate": "2024-03-04",
+  "position": "backend dev"
+}
+
+<> 2024-11-14T151045.200.json
+
+###
+
+POST http://localhost:8080/api/agents
+Content-Type: application/json
+Content-Length: 202
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "email": "s.v.bryndo@gmail.com",
+  "firstName": "Sasha",
+  "surname": "Bryndio",
+  "phoneNumber": "0680970382",
+  "birthDate": "2006-03-04",
+  "hireDate": "2024-03-04",
+  "position": "backend dev"
+}
+
+<> 2024-11-14T150847-1.200.json
+
+###
+
+POST http://localhost:8080/api/agents
+Content-Type: application/json
+Content-Length: 167
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "createdAt": "",
+  "updatedAt": "",
+  "email": "",
+  "firstName": "",
+  "surname": "",
+  "phoneNumber": "",
+  "birthDate": "",
+  "hireDate": "",
+  "position": ""
+}
+
+<> 2024-11-14T150847.200.json
+
+###
+
+POST http://localhost:8080/api/agents
+Content-Type: application/json
+Content-Length: 202
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "email": "s.v.bryndo@gmail.com",
+  "firstName": "Sasha",
+  "surname": "Bryndio",
+  "phoneNumber": "0680970382",
+  "birthDate": "04-03-2006",
+  "hireDate": "04-03-2024",
+  "position": "backend dev"
+}
+
+<> 2024-11-14T150730.400.json
+
+###
+
