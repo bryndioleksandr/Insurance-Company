@@ -10,5 +10,5 @@ import java.io.Serializable;
  */
 public record AutoInsuranceCreationDto(double coverageAmount, int insuranceLongevity, String brand, String model,
                                        int year, String plate, VehicleType type,
-                                       AutoInsuranceType insuranceType) implements Serializable {
+                                       AutoInsuranceType insuranceType, Long insurancePolicyId) implements Serializable {
 }

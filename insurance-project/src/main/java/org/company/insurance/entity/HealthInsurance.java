@@ -14,4 +14,8 @@ public class HealthInsurance extends Insurance {
 
     @Column(name = "medical_history")
     private String medicalHistory;
+
+    @OneToOne
+    @JoinColumn(name = "policy_id")
+    private InsurancePolicy insurancePolicy;
 }

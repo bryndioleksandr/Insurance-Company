@@ -33,4 +33,8 @@ public class AutoInsurance extends Insurance {
     @Enumerated(EnumType.STRING)
     @Column(name = "insurance_type")
     private AutoInsuranceType insuranceType;
+
+    @OneToOne
+    @JoinColumn(name = "policy_id")
+    private InsurancePolicy insurancePolicy;
 }

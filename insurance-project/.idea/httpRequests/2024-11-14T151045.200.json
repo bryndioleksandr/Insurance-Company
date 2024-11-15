@@ -1,0 +1,13 @@
+{
+  "id": null,
+  "createdAt": null,
+  "updatedAt": null,
+  "email": null,
+  "firstName": null,
+  "surname": null,
+  "phoneNumber": null,
+  "birthDate": null,
+  "hireDate": null,
+  "position": null,
+  "claimAssessmentIds": null
+}

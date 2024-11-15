@@ -19,4 +19,8 @@ public class TravelInsurance extends Insurance {
     @Enumerated(EnumType.STRING)
     @Column(name = "travel_type")
     private TravelType travelType;
+
+    @OneToOne
+    @JoinColumn(name = "policy_id")
+    private InsurancePolicy insurancePolicy;
 }
