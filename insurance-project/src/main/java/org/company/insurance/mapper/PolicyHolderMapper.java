@@ -7,6 +7,8 @@ import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface PolicyHolderMapper {
+    @Mapping(target = "passportNumber", source = "passportNumber")
+    @Mapping(target = "address", source = "address")
     PolicyHolder toEntity(PolicyHolderDto policyHolderDto);
 
     PolicyHolderDto toDto(PolicyHolder policyHolder);

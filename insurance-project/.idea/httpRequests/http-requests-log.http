@@ -1,137 +1,797 @@
-GET http://localhost:8080/api/agents/1
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-11-14T151419.500.json
-
-###
-
-POST http://localhost:8080/api/agents
+POST http://localhost:8081/api/insurance-policies
 Content-Type: application/json
-Content-Length: 201
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
+Content-Length: 289
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
 
 {
-  "email": "s.v.bryndo@mail.com",
-  "firstName": "Sasha",
-  "surname": "Shvets",
-  "phoneNumber": "0680970382",
-  "birthDate": "2006-05-06",
-  "hireDate": "2024-05-06",
-  "position": "frontend dev"
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+  "autoInsuranceId": 1,
+  "healthInsuranceId": null,
+  "travelInsuranceId": null,
+  "propertyInsuranceId": null
 }
 
-<> 2024-11-14T151236.200.json
+<> 2024-11-15T170359.500.json
 
 ###
 
-POST http://localhost:8080/api/agents
+POST http://localhost:8081/api/insurance-policies
 Content-Type: application/json
-Content-Length: 202
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
+Content-Length: 289
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
 
 {
-  "email": "s.v.bryndo@gmail.com",
-  "firstName": "Sasha",
-  "surname": "Bryndio",
-  "phoneNumber": "0680970382",
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+  "autoInsuranceId": 1,
+  "healthInsuranceId": null,
+  "travelInsuranceId": null,
+  "propertyInsuranceId": null
+}
+
+<> 2024-11-15T170221.500.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 289
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+  "autoInsuranceId": 1,
+  "healthInsuranceId": null,
+  "travelInsuranceId": null,
+  "propertyInsuranceId": null
+}
+
+<> 2024-11-15T165948.500.json
+
+###
+
+POST http://localhost:8081/api/auto-insurance
+Content-Type: application/json
+Content-Length: 203
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "coverageAmount": 250000,
+  "insuranceLongevity": 15,
+  "brand": "bmw",
+  "model": "m5",
+  "year": 2022,
+  "plate": "BO9099CD",
+  "type": "CAR",
+  "insuranceType": "OSAGO",
+  "insurancePolicyId": 0
+}
+
+<> 2024-11-15T165815.200.json
+
+###
+
+POST http://localhost:8081/api/policy-holders
+Content-Type: application/json
+Content-Length: 224
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "sanyabryndio@gmail.com",
+  "firstName": "asfewwf",
+  "surname": "sefrefsd",
+  "phoneNumber": "0708790790",
   "birthDate": "2006-03-04",
-  "hireDate": "2024-03-04",
-  "position": "backend dev"
+  "passportNumber": "0043543243",
+  "address": "Shevchenka 11, Chortkiv"
 }
 
-<> 2024-11-14T151135.200.json
+<> 2024-11-15T165743.200.json
 
 ###
 
-POST http://localhost:8080/api/agents
+POST http://localhost:8081/api/users
 Content-Type: application/json
-Content-Length: 202
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
+Content-Length: 203
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
 
 {
-  "email": "s.v.bryndo@gmail.com",
-  "firstName": "Sasha",
-  "surname": "Bryndio",
-  "phoneNumber": "0680970382",
+  "email": "someuser@gmail.com",
+  "firstName": "Some",
+  "surname": "User",
+  "phoneNumber": "0970828179",
+  "birthDate": "2003-11-06",
+  "username": "qwerty",
+  "password": "1234",
+  "role": "USER"
+}
+
+<> 2024-11-15T165739.200.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 292
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+  "autoInsuranceId": null,
+  "healthInsuranceId": null,
+  "travelInsuranceId": null,
+  "propertyInsuranceId": null
+}
+
+<> 2024-11-15T165005.500.json
+
+###
+
+POST http://localhost:8081/api/policy-holders
+Content-Type: application/json
+Content-Length: 224
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "sanyabryndio@gmail.com",
+  "firstName": "asfewwf",
+  "surname": "sefrefsd",
+  "phoneNumber": "0708790790",
   "birthDate": "2006-03-04",
-  "hireDate": "2024-03-04",
-  "position": "backend dev"
+  "passportNumber": "0043543243",
+  "address": "Shevchenka 11, Chortkiv"
 }
 
-<> 2024-11-14T151045.200.json
+<> 2024-11-15T164956.200.json
 
 ###
 
-POST http://localhost:8080/api/agents
+POST http://localhost:8081/api/users
 Content-Type: application/json
-Content-Length: 202
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
+Content-Length: 203
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
 
 {
-  "email": "s.v.bryndo@gmail.com",
-  "firstName": "Sasha",
-  "surname": "Bryndio",
-  "phoneNumber": "0680970382",
+  "email": "someuser@gmail.com",
+  "firstName": "Some",
+  "surname": "User",
+  "phoneNumber": "0970828179",
+  "birthDate": "2003-11-06",
+  "username": "qwerty",
+  "password": "1234",
+  "role": "USER"
+}
+
+<> 2024-11-15T164923.200.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 292
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+  "autoInsuranceId": null,
+  "healthInsuranceId": null,
+  "travelInsuranceId": null,
+  "propertyInsuranceId": null
+}
+
+<> 2024-11-15T163736.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 203
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "someuser@gmail.com",
+  "firstName": "Some",
+  "surname": "User",
+  "phoneNumber": "0970828179",
+  "birthDate": "2003-11-06",
+  "username": "qwerty",
+  "password": "1234",
+  "role": "USER"
+}
+
+<> 2024-11-15T163646.200.json
+
+###
+
+POST http://localhost:8081/api/policy-holders
+Content-Type: application/json
+Content-Length: 224
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "sanyabryndio@gmail.com",
+  "firstName": "asfewwf",
+  "surname": "sefrefsd",
+  "phoneNumber": "0708790790",
   "birthDate": "2006-03-04",
-  "hireDate": "2024-03-04",
-  "position": "backend dev"
+  "passportNumber": "0043543243",
+  "address": "Shevchenka 11, Chortkiv"
 }
 
-<> 2024-11-14T150847-1.200.json
+<> 2024-11-15T163644.200.json
 
 ###
 
-POST http://localhost:8080/api/agents
+POST http://localhost:8081/api/insurance-policies
 Content-Type: application/json
-Content-Length: 167
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
+Content-Length: 292
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
 
 {
-  "createdAt": "",
-  "updatedAt": "",
-  "email": "",
-  "firstName": "",
-  "surname": "",
-  "phoneNumber": "",
-  "birthDate": "",
-  "hireDate": "",
-  "position": ""
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+  "autoInsuranceId": null,
+  "healthInsuranceId": null,
+  "travelInsuranceId": null,
+  "propertyInsuranceId": null
 }
 
-<> 2024-11-14T150847.200.json
+<> 2024-11-15T163435.500.json
 
 ###
 
-POST http://localhost:8080/api/agents
+POST http://localhost:8081/api/insurance-policies
 Content-Type: application/json
-Content-Length: 202
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
+Content-Length: 176
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
 
 {
-  "email": "s.v.bryndo@gmail.com",
-  "firstName": "Sasha",
-  "surname": "Bryndio",
-  "phoneNumber": "0680970382",
-  "birthDate": "04-03-2006",
-  "hireDate": "04-03-2024",
-  "position": "backend dev"
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1
 }
 
-<> 2024-11-14T150730.400.json
+<> 2024-11-15T163333.500.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 180
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+
+}
+
+<> 2024-11-15T163327.400.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 289
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+  "autoInsuranceId": 1,
+  "healthInsuranceId": null,
+  "travelInsuranceId": null,
+  "propertyInsuranceId": null
+}
+
+<> 2024-11-15T163228.500.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 289
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+  "autoInsuranceId": 1,
+  "healthInsuranceId": null,
+  "travelInsuranceId": null,
+  "propertyInsuranceId": null
+}
+
+<> 2024-11-15T163225.500.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 292
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+  "autoInsuranceId": null,
+  "healthInsuranceId": null,
+  "travelInsuranceId": null,
+  "propertyInsuranceId": null
+}
+
+<> 2024-11-15T162803.500.json
+
+###
+
+POST http://localhost:8081/api/policy-holders
+Content-Type: application/json
+Content-Length: 224
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "sanyabryndio@gmail.com",
+  "firstName": "asfewwf",
+  "surname": "sefrefsd",
+  "phoneNumber": "0708790790",
+  "birthDate": "2006-03-04",
+  "passportNumber": "0043543243",
+  "address": "Shevchenka 11, Chortkiv"
+}
+
+<> 2024-11-15T162723.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 203
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "someuser@gmail.com",
+  "firstName": "Some",
+  "surname": "User",
+  "phoneNumber": "0970828179",
+  "birthDate": "2003-11-06",
+  "username": "qwerty",
+  "password": "1234",
+  "role": "USER"
+}
+
+<> 2024-11-15T162718.200.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 292
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+  "autoInsuranceId": null,
+  "healthInsuranceId": null,
+  "travelInsuranceId": null,
+  "propertyInsuranceId": null
+}
+
+<> 2024-11-15T154515.500.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 292
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+  "autoInsuranceId": null,
+  "healthInsuranceId": null,
+  "travelInsuranceId": null,
+  "propertyInsuranceId": null
+}
+
+<> 2024-11-15T153106.200.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 289
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "AUTO",
+  "policyHolderId": 1,
+  "autoInsuranceId": null,
+  "healthInsuranceId": null,
+  "travelInsuranceId": null,
+  "propertyInsuranceId": null
+}
+
+<> 2024-11-15T153045.400.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 291
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "12345-67890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "AUTO",
+  "policyHolderId": 1,
+  "autoInsuranceId": null,
+  "healthInsuranceId": null,
+  "travelInsuranceId": null,
+  "propertyInsuranceId": null
+}
+
+<> 2024-11-15T152934.400.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 134
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "startDate": "2024-11-11",
+  "endDate": "2025-11-11",
+  "price": 500.0,
+  "insuranceType": "AUTO"
+}
+
+<> 2024-11-15T152726.400.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 135
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "startDate": "2024-11-11",
+  "endDate": "2025-11-11",
+  "price": 500.0,
+  "insuranceType": "AUTO",
+}
+
+<> 2024-11-15T152719.400.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 174
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-11",
+  "endDate": "2025-11-11",
+  "price": 500.0,
+  "insuranceType": "AUTO",
+  "policyHolderId": 1
+}
+
+<> 2024-11-15T152709.400.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 290
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-11",
+  "endDate": "2025-11-11",
+  "price": 500.0,
+  "insuranceType": "AUTO",
+  "policyHolderId": 1,
+  "autoInsuranceId": null,
+  "travelInsuranceId": null,
+  "healthInsuranceId": null,
+  "propertyInsuranceId": null
+}
+
+<> 2024-11-15T152511.400.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 290
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "AUTO",
+  "policyHolderId": 1,
+  "autoInsuranceId": null,
+  "travelInsuranceId": null,
+  "healthInsuranceId": null,
+  "propertyInsuranceId": null
+}
+
+<> 2024-11-15T152320.400.json
+
+###
+
+POST http://localhost:8081/api/policy-holders
+Content-Type: application/json
+Content-Length: 224
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "sanyabryndio@gmail.com",
+  "firstName": "asfewwf",
+  "surname": "sefrefsd",
+  "phoneNumber": "0708790790",
+  "birthDate": "2006-03-04",
+  "passportNumber": "0043543243",
+  "address": "Shevchenka 11, Chortkiv"
+}
+
+<> 2024-11-15T151855.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 203
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "someuser@gmail.com",
+  "firstName": "Some",
+  "surname": "User",
+  "phoneNumber": "0970828179",
+  "birthDate": "2003-11-06",
+  "username": "qwerty",
+  "password": "1234",
+  "role": "USER"
+}
+
+<> 2024-11-15T151340.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 203
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "someuser@gmail.com",
+  "firstName": "Some",
+  "surname": "User",
+  "phoneNumber": "0970828179",
+  "birthDate": "2003-11-06",
+  "username": "qwerty",
+  "password": "1234",
+  "role": "USER"
+}
+
+<> 2024-11-15T150738.200.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 132
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "4353442",
+  "startDate": "2024-11-16",
+  "endDate": "2024-11-26",
+  "price": 650,
+  "insuranceType": "HEALTH"
+}
+
+<> 2024-11-15T145236.500.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 132
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "4353442",
+  "startDate": "2024-11-16",
+  "endDate": "2024-11-26",
+  "price": 650,
+  "insuranceType": "HEALTH"
+}
+
+<> 2024-11-15T145111.500.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 203
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "someuser@gmail.com",
+  "firstName": "Some",
+  "surname": "User",
+  "phoneNumber": "0970828179",
+  "birthDate": "2003-11-06",
+  "username": "qwerty",
+  "password": "1234",
+  "role": "USER"
+}
+
+<> 2024-11-15T144417.200.json
 
 ###
 

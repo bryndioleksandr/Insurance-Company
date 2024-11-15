@@ -1,6 +1,0 @@
-{
-  "timestamp": "2024-11-14T13:07:30.718+00:00",
-  "status": 400,
-  "error": "Bad Request",
-  "path": "/api/agents"
-}

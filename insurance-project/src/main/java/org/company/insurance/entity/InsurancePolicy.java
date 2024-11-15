@@ -43,15 +43,15 @@ public class InsurancePolicy extends BaseEntity{
     @JoinColumn(name = "holder_id")
     private PolicyHolder policyHolder;
 
-    @OneToOne(mappedBy = "insurancePolicy", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "insurancePolicy", cascade = CascadeType.MERGE)
     private AutoInsurance autoInsurance;
 
-    @OneToOne(mappedBy = "insurancePolicy", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "insurancePolicy", cascade = CascadeType.MERGE)
     private TravelInsurance travelInsurance;
 
-    @OneToOne(mappedBy = "insurancePolicy", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "insurancePolicy", cascade = CascadeType.MERGE)
     private HealthInsurance healthInsurance;
 
-    @OneToOne(mappedBy = "insurancePolicy", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "insurancePolicy", cascade = CascadeType.MERGE)
     private PropertyInsurance propertyInsurance;
 }

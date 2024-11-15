@@ -17,9 +17,9 @@ public class HealthInsuranceService {
         return healthInsuranceMapper.toDto(healthInsuranceRepository.findById(id).orElse(null));
     }
 
-//    public HealthInsuranceDto createHealthInsurance(HealthInsuranceCreationDto healthInsuranceDto) {
-//        return healthInsuranceMapper.toDto(healthInsuranceRepository.save(healthInsuranceMapper.toEntity(healthInsuranceDto)));
-//    }
+    public HealthInsuranceDto createHealthInsurance(HealthInsuranceCreationDto healthInsuranceDto) {
+        return healthInsuranceMapper.toDto(healthInsuranceRepository.save(healthInsuranceMapper.toEntity(healthInsuranceDto)));
+    }
 
     public HealthInsuranceDto updateHealthInsurance(HealthInsuranceDto healthInsuranceDto) {
         return healthInsuranceMapper.toDto(healthInsuranceRepository.save(healthInsuranceMapper.toEntity(healthInsuranceDto)));

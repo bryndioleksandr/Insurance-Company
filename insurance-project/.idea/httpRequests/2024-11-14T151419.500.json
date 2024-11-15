@@ -1,6 +1,0 @@
-{
-  "timestamp": "2024-11-14T13:14:18.985+00:00",
-  "status": 500,
-  "error": "Internal Server Error",
-  "path": "/api/agents/1"
-}

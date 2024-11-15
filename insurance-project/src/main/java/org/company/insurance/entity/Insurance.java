@@ -17,6 +17,4 @@ public abstract class Insurance extends BaseEntity {
 
     @Column(name = "insurance_longevity")
     private int insuranceLongevity;
-
-
 }

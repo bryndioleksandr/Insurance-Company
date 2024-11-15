@@ -1,6 +1,9 @@
 package org.company.insurance.mapper;
 
+import org.company.insurance.dto.PolicyHolderCreationDto;
+import org.company.insurance.dto.PropertyInsuranceCreationDto;
 import org.company.insurance.dto.PropertyInsuranceDto;
+import org.company.insurance.entity.PolicyHolder;
 import org.company.insurance.entity.PropertyInsurance;
 import org.mapstruct.*;
 
@@ -12,4 +15,6 @@ public interface PropertyInsuranceMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     PropertyInsurance partialUpdate(PropertyInsuranceDto propertyInsuranceDto, @MappingTarget PropertyInsurance propertyInsurance);
+
+    PropertyInsurance toEntity(PropertyInsuranceCreationDto propertyInsuranceCreationDto);
 }
