@@ -14,6 +14,10 @@ public interface HealthInsuranceMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     HealthInsurance partialUpdate(HealthInsuranceDto healthInsuranceDto, @MappingTarget HealthInsurance healthInsurance);
 
+    @Mapping(source = "insuranceLongevity", target = "insuranceLongevity")
+    @Mapping(source = "medicalHistory", target = "medicalHistory")
+    @Mapping(source = "coverageAmount", target = "coverageAmount")
+    @Mapping(source = "insurancePolicyId", target = "insurancePolicy.id")
     HealthInsurance toEntity(HealthInsuranceCreationDto healthInsuranceCreationDto);
 
     HealthInsuranceCreationDto toDto1(HealthInsurance healthInsurance);

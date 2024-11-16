@@ -1,5 +1,6 @@
 package org.company.insurance.service;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.company.insurance.dto.PolicyHolderCreationDto;
 import org.company.insurance.dto.PolicyHolderDto;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Service
+@Transactional
 public class PolicyHolderService {
     private PolicyHolderRepository policyHolderRepository;
     private PolicyHolderMapper policyHolderMapper;

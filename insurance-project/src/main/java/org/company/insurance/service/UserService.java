@@ -1,6 +1,7 @@
 package org.company.insurance.service;
 
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.company.insurance.dto.UserCreationDto;
 import org.company.insurance.dto.UserDto;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Service
+@Transactional
 public class UserService {
     private UserRepository userRepository;
     private UserMapper userMapper;
