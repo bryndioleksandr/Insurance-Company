@@ -16,6 +16,6 @@ public class PropertyInsurance extends Insurance {
     private String propertyAddress;
 
     @OneToOne
-    @JoinColumn(name = "policy_id")
+    @JoinColumn(name = "policy_id", nullable = false)
     private InsurancePolicy insurancePolicy;
 }

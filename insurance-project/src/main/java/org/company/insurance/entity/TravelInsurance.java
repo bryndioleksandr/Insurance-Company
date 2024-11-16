@@ -21,6 +21,6 @@ public class TravelInsurance extends Insurance {
     private TravelType travelType;
 
     @OneToOne
-    @JoinColumn(name = "policy_id")
+    @JoinColumn(name = "policy_id", nullable = false)
     private InsurancePolicy insurancePolicy;
 }

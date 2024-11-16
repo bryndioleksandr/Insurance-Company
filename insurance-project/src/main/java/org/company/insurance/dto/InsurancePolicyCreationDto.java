@@ -12,7 +12,5 @@ import java.util.Date;
  */
 public record InsurancePolicyCreationDto(LocalDateTime createdAt, LocalDateTime updatedAt, String policyNumber,
                                          Long userId, LocalDate startDate, LocalDate endDate, double price,
-                                         InsuranceType insuranceType, Long policyHolderId, Long autoInsuranceId,
-                                         Long travelInsuranceId, Long healthInsuranceId,
-                                         Long propertyInsuranceId) implements Serializable {
+                                         InsuranceType insuranceType, Long policyHolderId) implements Serializable {
 }

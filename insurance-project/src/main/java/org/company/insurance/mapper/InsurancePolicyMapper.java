@@ -18,10 +18,6 @@ public interface InsurancePolicyMapper {
     InsurancePolicy partialUpdate(InsurancePolicyDto insurancePolicyDto, @MappingTarget InsurancePolicy insurancePolicy);
 
 
-    @Mapping(source = "propertyInsuranceId", target = "propertyInsurance.id")
-    @Mapping(source = "healthInsuranceId", target = "healthInsurance.id")
-    @Mapping(source = "travelInsuranceId", target = "travelInsurance.id")
-    @Mapping(source = "autoInsuranceId", target = "autoInsurance.id")
     @Mapping(source = "policyHolderId", target = "policyHolder.id")
     @Mapping(source = "userId", target = "user.id")
     InsurancePolicy toEntity(InsurancePolicyCreationDto insurancePolicyCreationDto);

@@ -1,3 +1,550 @@
+POST http://localhost:8081/api/auto-insurance
+Content-Type: application/json
+Content-Length: 203
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "coverageAmount": 250000,
+  "insuranceLongevity": 15,
+  "brand": "bmw",
+  "model": "m5",
+  "year": 2022,
+  "plate": "BO9099CD",
+  "type": "CAR",
+  "insuranceType": "OSAGO",
+  "insurancePolicyId": 1
+}
+
+<> 2024-11-16T143921.500.json
+
+###
+
+POST http://localhost:8081/api/auto-insurance
+Content-Type: application/json
+Content-Length: 203
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "coverageAmount": 250000,
+  "insuranceLongevity": 15,
+  "brand": "bmw",
+  "model": "m5",
+  "year": 2022,
+  "plate": "BO9099CD",
+  "type": "CAR",
+  "insuranceType": "OSAGO",
+  "insurancePolicyId": 1
+}
+
+<> 2024-11-16T143907.500.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 176
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1
+}
+
+<> 2024-11-16T143804.200.json
+
+###
+
+POST http://localhost:8081/api/auto-insurance
+Content-Type: application/json
+Content-Length: 177
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "coverageAmount": 250000,
+  "insuranceLongevity": 15,
+  "brand": "bmw",
+  "model": "m5",
+  "year": 2022,
+  "plate": "BO9099CD",
+  "type": "CAR",
+  "insuranceType": "OSAGO"
+}
+
+<> 2024-11-16T143755.500.json
+
+###
+
+POST http://localhost:8081/api/policy-holders
+Content-Type: application/json
+Content-Length: 224
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "sanyabryndio@gmail.com",
+  "firstName": "asfewwf",
+  "surname": "sefrefsd",
+  "phoneNumber": "0708790790",
+  "birthDate": "2006-03-04",
+  "passportNumber": "0043543243",
+  "address": "Shevchenka 11, Chortkiv"
+}
+
+<> 2024-11-16T143746.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 203
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "someuser@gmail.com",
+  "firstName": "Some",
+  "surname": "User",
+  "phoneNumber": "0970828179",
+  "birthDate": "2003-11-06",
+  "username": "qwerty",
+  "password": "1234",
+  "role": "USER"
+}
+
+<> 2024-11-16T143736.200.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 176
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1
+}
+
+<> 2024-11-16T143354.500.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 176
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1
+}
+
+<> 2024-11-16T143343.500.json
+
+###
+
+POST http://localhost:8081/api/auto-insurance
+Content-Type: application/json
+Content-Length: 177
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "coverageAmount": 250000,
+  "insuranceLongevity": 15,
+  "brand": "bmw",
+  "model": "m5",
+  "year": 2022,
+  "plate": "BO9099CD",
+  "type": "CAR",
+  "insuranceType": "OSAGO"
+}
+
+<> 2024-11-16T143301.500.json
+
+###
+
+POST http://localhost:8081/api/policy-holders
+Content-Type: application/json
+Content-Length: 224
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "sanyabryndio@gmail.com",
+  "firstName": "asfewwf",
+  "surname": "sefrefsd",
+  "phoneNumber": "0708790790",
+  "birthDate": "2006-03-04",
+  "passportNumber": "0043543243",
+  "address": "Shevchenka 11, Chortkiv"
+}
+
+<> 2024-11-16T143257.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 203
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "someuser@gmail.com",
+  "firstName": "Some",
+  "surname": "User",
+  "phoneNumber": "0970828179",
+  "birthDate": "2003-11-06",
+  "username": "qwerty",
+  "password": "1234",
+  "role": "USER"
+}
+
+<> 2024-11-16T143253.200.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 200
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+  "autoInsuranceId": 1
+}
+
+<> 2024-11-16T142029.500.json
+
+###
+
+POST http://localhost:8081/api/auto-insurance
+Content-Type: application/json
+Content-Length: 177
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "coverageAmount": 250000,
+  "insuranceLongevity": 15,
+  "brand": "bmw",
+  "model": "m5",
+  "year": 2022,
+  "plate": "BO9099CD",
+  "type": "CAR",
+  "insuranceType": "OSAGO"
+}
+
+<> 2024-11-16T142024.200.json
+
+###
+
+POST http://localhost:8081/api/policy-holders
+Content-Type: application/json
+Content-Length: 224
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "sanyabryndio@gmail.com",
+  "firstName": "asfewwf",
+  "surname": "sefrefsd",
+  "phoneNumber": "0708790790",
+  "birthDate": "2006-03-04",
+  "passportNumber": "0043543243",
+  "address": "Shevchenka 11, Chortkiv"
+}
+
+<> 2024-11-16T142018.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 203
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "someuser@gmail.com",
+  "firstName": "Some",
+  "surname": "User",
+  "phoneNumber": "0970828179",
+  "birthDate": "2003-11-06",
+  "username": "qwerty",
+  "password": "1234",
+  "role": "USER"
+}
+
+<> 2024-11-16T142015.200.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 200
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+  "autoInsuranceId": 1
+}
+
+<> 2024-11-16T141639.500.json
+
+###
+
+POST http://localhost:8081/api/auto-insurance
+Content-Type: application/json
+Content-Length: 177
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "coverageAmount": 250000,
+  "insuranceLongevity": 15,
+  "brand": "bmw",
+  "model": "m5",
+  "year": 2022,
+  "plate": "BO9099CD",
+  "type": "CAR",
+  "insuranceType": "OSAGO"
+}
+
+<> 2024-11-16T141631.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 203
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "someuser@gmail.com",
+  "firstName": "Some",
+  "surname": "User",
+  "phoneNumber": "0970828179",
+  "birthDate": "2003-11-06",
+  "username": "qwerty",
+  "password": "1234",
+  "role": "USER"
+}
+
+<> 2024-11-16T141624.200.json
+
+###
+
+POST http://localhost:8081/api/policy-holders
+Content-Type: application/json
+Content-Length: 224
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "sanyabryndio@gmail.com",
+  "firstName": "asfewwf",
+  "surname": "sefrefsd",
+  "phoneNumber": "0708790790",
+  "birthDate": "2006-03-04",
+  "passportNumber": "0043543243",
+  "address": "Shevchenka 11, Chortkiv"
+}
+
+<> 2024-11-16T141620.200.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 200
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+  "autoInsuranceId": 1
+}
+
+<> 2024-11-16T140839.500.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 289
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "policyNumber": "123467890",
+  "userId": 1,
+  "startDate": "2024-11-15",
+  "endDate": "2025-11-15",
+  "price": 500.0,
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1,
+  "autoInsuranceId": 1,
+  "healthInsuranceId": null,
+  "travelInsuranceId": null,
+  "propertyInsuranceId": null
+}
+
+<> 2024-11-16T140644.500.json
+
+###
+
+POST http://localhost:8081/api/auto-insurance
+Content-Type: application/json
+Content-Length: 177
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "coverageAmount": 250000,
+  "insuranceLongevity": 15,
+  "brand": "bmw",
+  "model": "m5",
+  "year": 2022,
+  "plate": "BO9099CD",
+  "type": "CAR",
+  "insuranceType": "OSAGO"
+}
+
+<> 2024-11-16T140354.200.json
+
+###
+
+POST http://localhost:8081/api/auto-insurance
+Content-Type: application/json
+Content-Length: 178
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "coverageAmount": 250000,
+  "insuranceLongevity": 15,
+  "brand": "bmw",
+  "model": "m5",
+  "year": 2022,
+  "plate": "BO9099CD",
+  "type": "CAR",
+  "insuranceType": "OSAGO",
+}
+
+<> 2024-11-16T140344.400.json
+
+###
+
+POST http://localhost:8081/api/policy-holders
+Content-Type: application/json
+Content-Length: 224
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "sanyabryndio@gmail.com",
+  "firstName": "asfewwf",
+  "surname": "sefrefsd",
+  "phoneNumber": "0708790790",
+  "birthDate": "2006-03-04",
+  "passportNumber": "0043543243",
+  "address": "Shevchenka 11, Chortkiv"
+}
+
+<> 2024-11-16T140328.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 203
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "someuser@gmail.com",
+  "firstName": "Some",
+  "surname": "User",
+  "phoneNumber": "0970828179",
+  "birthDate": "2003-11-06",
+  "username": "qwerty",
+  "password": "1234",
+  "role": "USER"
+}
+
+<> 2024-11-16T140317.200.json
+
+###
+
 POST http://localhost:8081/api/insurance-policies
 Content-Type: application/json
 Content-Length: 289
@@ -577,221 +1124,6 @@ Accept: */*
 }
 
 <> 2024-11-15T152726.400.json
-
-###
-
-POST http://localhost:8081/api/insurance-policies
-Content-Type: application/json
-Content-Length: 135
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "policyNumber": "123467890",
-  "startDate": "2024-11-11",
-  "endDate": "2025-11-11",
-  "price": 500.0,
-  "insuranceType": "AUTO",
-}
-
-<> 2024-11-15T152719.400.json
-
-###
-
-POST http://localhost:8081/api/insurance-policies
-Content-Type: application/json
-Content-Length: 174
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "policyNumber": "123467890",
-  "userId": 1,
-  "startDate": "2024-11-11",
-  "endDate": "2025-11-11",
-  "price": 500.0,
-  "insuranceType": "AUTO",
-  "policyHolderId": 1
-}
-
-<> 2024-11-15T152709.400.json
-
-###
-
-POST http://localhost:8081/api/insurance-policies
-Content-Type: application/json
-Content-Length: 290
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "policyNumber": "123467890",
-  "userId": 1,
-  "startDate": "2024-11-11",
-  "endDate": "2025-11-11",
-  "price": 500.0,
-  "insuranceType": "AUTO",
-  "policyHolderId": 1,
-  "autoInsuranceId": null,
-  "travelInsuranceId": null,
-  "healthInsuranceId": null,
-  "propertyInsuranceId": null
-}
-
-<> 2024-11-15T152511.400.json
-
-###
-
-POST http://localhost:8081/api/insurance-policies
-Content-Type: application/json
-Content-Length: 290
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "policyNumber": "123467890",
-  "userId": 1,
-  "startDate": "2024-11-15",
-  "endDate": "2025-11-15",
-  "price": 500.0,
-  "insuranceType": "AUTO",
-  "policyHolderId": 1,
-  "autoInsuranceId": null,
-  "travelInsuranceId": null,
-  "healthInsuranceId": null,
-  "propertyInsuranceId": null
-}
-
-<> 2024-11-15T152320.400.json
-
-###
-
-POST http://localhost:8081/api/policy-holders
-Content-Type: application/json
-Content-Length: 224
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "sanyabryndio@gmail.com",
-  "firstName": "asfewwf",
-  "surname": "sefrefsd",
-  "phoneNumber": "0708790790",
-  "birthDate": "2006-03-04",
-  "passportNumber": "0043543243",
-  "address": "Shevchenka 11, Chortkiv"
-}
-
-<> 2024-11-15T151855.200.json
-
-###
-
-POST http://localhost:8081/api/users
-Content-Type: application/json
-Content-Length: 203
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "someuser@gmail.com",
-  "firstName": "Some",
-  "surname": "User",
-  "phoneNumber": "0970828179",
-  "birthDate": "2003-11-06",
-  "username": "qwerty",
-  "password": "1234",
-  "role": "USER"
-}
-
-<> 2024-11-15T151340.200.json
-
-###
-
-POST http://localhost:8081/api/users
-Content-Type: application/json
-Content-Length: 203
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "someuser@gmail.com",
-  "firstName": "Some",
-  "surname": "User",
-  "phoneNumber": "0970828179",
-  "birthDate": "2003-11-06",
-  "username": "qwerty",
-  "password": "1234",
-  "role": "USER"
-}
-
-<> 2024-11-15T150738.200.json
-
-###
-
-POST http://localhost:8081/api/insurance-policies
-Content-Type: application/json
-Content-Length: 132
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "policyNumber": "4353442",
-  "startDate": "2024-11-16",
-  "endDate": "2024-11-26",
-  "price": 650,
-  "insuranceType": "HEALTH"
-}
-
-<> 2024-11-15T145236.500.json
-
-###
-
-POST http://localhost:8081/api/insurance-policies
-Content-Type: application/json
-Content-Length: 132
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "policyNumber": "4353442",
-  "startDate": "2024-11-16",
-  "endDate": "2024-11-26",
-  "price": 650,
-  "insuranceType": "HEALTH"
-}
-
-<> 2024-11-15T145111.500.json
-
-###
-
-POST http://localhost:8081/api/users
-Content-Type: application/json
-Content-Length: 203
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "someuser@gmail.com",
-  "firstName": "Some",
-  "surname": "User",
-  "phoneNumber": "0970828179",
-  "birthDate": "2003-11-06",
-  "username": "qwerty",
-  "password": "1234",
-  "role": "USER"
-}
-
-<> 2024-11-15T144417.200.json
 
 ###
 

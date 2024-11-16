@@ -13,5 +13,5 @@ import java.util.List;
  */
 public record InsurancePolicyDto(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, String policyNumber,
                                  Long userId, LocalDate startDate, LocalDate endDate, double price, InsuranceType insuranceType,
-                                 List<Long> claimIds, Long policyHolderId, Long insuranceId) implements Serializable {
+                                 List<Long> claimIds, Long policyHolderId) implements Serializable {
 }
