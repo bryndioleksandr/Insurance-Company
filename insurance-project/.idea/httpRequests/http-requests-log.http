@@ -1,3 +1,93 @@
+POST http://localhost:8081/api/auto-insurance
+Content-Type: application/json
+Content-Length: 182
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "coverageAmount": 50000,
+  "brand": "Toyota",
+  "model": "Corolla",
+  "year": 2021,
+  "plate": "AB1234AK",
+  "type": "BUS",
+  "insuranceType": "OSAGO",
+  "insurancePolicyId": 2
+}
+
+<> 2024-11-17T155653.200.json
+
+###
+
+POST http://localhost:8081/api/auto-insurance
+Content-Type: application/json
+Content-Length: 182
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "coverageAmount": 50000,
+  "brand": "Toyota",
+  "model": "Corolla",
+  "year": 2021,
+  "plate": "AB1234AK",
+  "type": "BUS",
+  "insuranceType": "OSAGO",
+  "insurancePolicyId": 2
+}
+
+<> 2024-11-17T154214.500.json
+
+###
+
+POST http://localhost:8081/api/auto-insurance
+Content-Type: application/json
+Content-Length: 182
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "coverageAmount": 50000,
+  "brand": "Toyota",
+  "model": "Corolla",
+  "year": 2021,
+  "plate": "AB1234AK",
+  "type": "BUS",
+  "insuranceType": "OSAGO",
+  "insurancePolicyId": 1
+}
+
+<> 2024-11-17T154150.500.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 158
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "policyNumber": "POL1234678",
+  "userId": 1,
+  "startDate": "2024-12-10",
+  "endDate": "2025-12-01",
+  "insuranceType": "VEHICLE",
+  "policyHolderId": 1
+}
+
+<> 2024-11-17T154114.200.json
+
+###
+
 GET http://localhost:8081/api/auto-insurance/1
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
 Accept-Encoding: br, deflate, gzip, x-gzip
@@ -908,92 +998,6 @@ Accept: */*
 }
 
 <> 2024-11-16T143804.200.json
-
-###
-
-POST http://localhost:8081/api/auto-insurance
-Content-Type: application/json
-Content-Length: 177
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "coverageAmount": 250000,
-  "insuranceLongevity": 15,
-  "brand": "bmw",
-  "model": "m5",
-  "year": 2022,
-  "plate": "BO9099CD",
-  "type": "CAR",
-  "insuranceType": "OSAGO"
-}
-
-<> 2024-11-16T143755.500.json
-
-###
-
-POST http://localhost:8081/api/policy-holders
-Content-Type: application/json
-Content-Length: 224
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "sanyabryndio@gmail.com",
-  "firstName": "asfewwf",
-  "surname": "sefrefsd",
-  "phoneNumber": "0708790790",
-  "birthDate": "2006-03-04",
-  "passportNumber": "0043543243",
-  "address": "Shevchenka 11, Chortkiv"
-}
-
-<> 2024-11-16T143746.200.json
-
-###
-
-POST http://localhost:8081/api/users
-Content-Type: application/json
-Content-Length: 203
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "someuser@gmail.com",
-  "firstName": "Some",
-  "surname": "User",
-  "phoneNumber": "0970828179",
-  "birthDate": "2003-11-06",
-  "username": "qwerty",
-  "password": "1234",
-  "role": "USER"
-}
-
-<> 2024-11-16T143736.200.json
-
-###
-
-POST http://localhost:8081/api/insurance-policies
-Content-Type: application/json
-Content-Length: 176
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "policyNumber": "123467890",
-  "userId": 1,
-  "startDate": "2024-11-15",
-  "endDate": "2025-11-15",
-  "price": 500.0,
-  "insuranceType": "VEHICLE",
-  "policyHolderId": 1
-}
-
-<> 2024-11-16T143354.500.json
 
 ###
 
