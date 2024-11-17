@@ -14,5 +14,9 @@ public interface TravelInsuranceMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     TravelInsurance partialUpdate(TravelInsuranceDto travelInsuranceDto, @MappingTarget TravelInsurance travelInsurance);
 
+    @Mapping(source = "coverageArea", target = "coverageArea")
+    @Mapping(source = "destination", target = "destination")
+    @Mapping(source = "travelType", target = "travelType")
+    @Mapping(source = "insurancePolicyId", target = "insurancePolicy.id")
     TravelInsurance toEntity(TravelInsuranceCreationDto travelInsuranceCreationDto);
 }

@@ -16,7 +16,7 @@ public class AutoInsuranceController {
     private final AutoInsuranceService autoInsuranceService;
 
     @GetMapping("{id}")
-    public ResponseEntity<AutoInsuranceDto> getAutoInsuranceById(@PathVariable Long id){
+    public ResponseEntity<AutoInsuranceDto> getAutoInsuranceById(@PathVariable("id") Long id){
         return ResponseEntity.ok(autoInsuranceService.getAutoInsuranceById(id));
     }
 

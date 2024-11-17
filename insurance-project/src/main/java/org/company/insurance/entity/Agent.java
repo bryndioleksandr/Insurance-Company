@@ -26,4 +26,20 @@ public class Agent extends Person{
 
     @OneToMany(mappedBy = "agent")
     private List<ClaimAssessment> claimAssessments;
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public LocalDate getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(LocalDate hireDate) {
+        this.hireDate = hireDate;
+    }
 }

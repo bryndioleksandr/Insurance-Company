@@ -9,6 +9,6 @@ import java.util.Date;
  * DTO for {@link org.company.insurance.entity.ClaimAssessment}
  */
 public record ClaimAssessmentDto(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, Long claimId,
-                                 LocalDate assesmentDate, String notes, Double assessmentAmount,
+                                 LocalDate assessmentDate, String notes, Double assessmentAmount,
                                  Long agentId) implements Serializable {
 }

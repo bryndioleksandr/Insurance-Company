@@ -16,6 +16,22 @@ public class PropertyInsurance extends Insurance {
     private String propertyAddress;
 
     @OneToOne
-    @JoinColumn(name = "policy_id", nullable = false)
+    @JoinColumn(name = "policy_id")
     private InsurancePolicy insurancePolicy;
+
+    public String getPropertyAddress() {
+        return propertyAddress;
+    }
+
+    public void setPropertyAddress(String propertyAddress) {
+        this.propertyAddress = propertyAddress;
+    }
+
+    public InsurancePolicy getInsurancePolicy() {
+        return insurancePolicy;
+    }
+
+    public void setInsurancePolicy(InsurancePolicy insurancePolicy) {
+        this.insurancePolicy = insurancePolicy;
+    }
 }

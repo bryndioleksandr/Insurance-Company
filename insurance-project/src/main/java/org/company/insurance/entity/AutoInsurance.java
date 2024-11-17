@@ -34,7 +34,63 @@ public class AutoInsurance extends Insurance {
     @Column(name = "insurance_type")
     private AutoInsuranceType insuranceType;
 
-    @OneToOne
-    @JoinColumn(name = "policy_id", nullable = false)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "policy_id")
     private InsurancePolicy insurancePolicy;
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getPlate() {
+        return plate;
+    }
+
+    public void setPlate(String plate) {
+        this.plate = plate;
+    }
+
+    public VehicleType getType() {
+        return type;
+    }
+
+    public void setType(VehicleType type) {
+        this.type = type;
+    }
+
+    public AutoInsuranceType getInsuranceType() {
+        return insuranceType;
+    }
+
+    public void setInsuranceType(AutoInsuranceType insuranceType) {
+        this.insuranceType = insuranceType;
+    }
+
+    public InsurancePolicy getInsurancePolicy() {
+        return insurancePolicy;
+    }
+
+    public void setInsurancePolicy(InsurancePolicy insurancePolicy) {
+        this.insurancePolicy = insurancePolicy;
+    }
 }

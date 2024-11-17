@@ -19,7 +19,7 @@ public class ClaimAssessment extends BaseEntity{
     private Claim claim;
 
     @Column(name = "assessment_date")
-    private LocalDate assesmentDate;
+    private LocalDate assessmentDate;
 
     @Column(name = "assessment_notes", length = 1000)
     private String notes;
@@ -30,4 +30,44 @@ public class ClaimAssessment extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "agent_id")
     private Agent agent;
+
+    public Claim getClaim() {
+        return claim;
+    }
+
+    public void setClaim(Claim claim) {
+        this.claim = claim;
+    }
+
+    public LocalDate getAssessmentDate() {
+        return assessmentDate;
+    }
+
+    public void setAssessmentDate(LocalDate assessmentDate) {
+        this.assessmentDate = assessmentDate;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public Double getAssessmentAmount() {
+        return assessmentAmount;
+    }
+
+    public void setAssessmentAmount(Double assessmentAmount) {
+        this.assessmentAmount = assessmentAmount;
+    }
+
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
 }

@@ -16,5 +16,7 @@ public interface PropertyInsuranceMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     PropertyInsurance partialUpdate(PropertyInsuranceDto propertyInsuranceDto, @MappingTarget PropertyInsurance propertyInsurance);
 
+    @Mapping(source = "propertyAddress", target = "propertyAddress")
+    @Mapping(source = "insurancePolicyId", target = "insurancePolicy.id")
     PropertyInsurance toEntity(PropertyInsuranceCreationDto propertyInsuranceCreationDto);
 }

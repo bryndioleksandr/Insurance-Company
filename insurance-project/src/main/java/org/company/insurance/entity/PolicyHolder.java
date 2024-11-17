@@ -25,4 +25,19 @@ public class PolicyHolder extends Person{
 
     @OneToMany(mappedBy = "policyHolder")
     private List<InsurancePolicy> insurancePolicies;
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

@@ -54,4 +54,69 @@ public class InsurancePolicy extends BaseEntity{
 //
 //    @OneToOne(mappedBy = "insurancePolicy", optional = true)
 //    private PropertyInsurance propertyInsurance;
+
+
+    public String getPolicyNumber() {
+        return policyNumber;
+    }
+
+    public void setPolicyNumber(String policyNumber) {
+        this.policyNumber = policyNumber;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public InsuranceType getInsuranceType() {
+        return insuranceType;
+    }
+
+    public void setInsuranceType(InsuranceType insuranceType) {
+        this.insuranceType = insuranceType;
+    }
+
+    public List<Claim> getClaims() {
+        return claims;
+    }
+
+    public void setClaims(List<Claim> claims) {
+        this.claims = claims;
+    }
+
+    public PolicyHolder getPolicyHolder() {
+        return policyHolder;
+    }
+
+    public void setPolicyHolder(PolicyHolder policyHolder) {
+        this.policyHolder = policyHolder;
+    }
 }

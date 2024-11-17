@@ -38,4 +38,62 @@ public class Claim extends BaseEntity{
     @Column(name = "claim_type")
     private ClaimType claimType;
 
+    @OneToOne(mappedBy = "claim", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ClaimAssessment claimAssessment;
+
+    public LocalDate getSubmissionDate() {
+        return submissionDate;
+    }
+
+    public void setSubmissionDate(LocalDate submissionDate) {
+        this.submissionDate = submissionDate;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public InsurancePolicy getInsurancePolicy() {
+        return insurancePolicy;
+    }
+
+    public void setInsurancePolicy(InsurancePolicy insurancePolicy) {
+        this.insurancePolicy = insurancePolicy;
+    }
+
+    public String getIncidentDescription() {
+        return incidentDescription;
+    }
+
+    public void setIncidentDescription(String incidentDescription) {
+        this.incidentDescription = incidentDescription;
+    }
+
+    public ClaimType getClaimType() {
+        return claimType;
+    }
+
+    public void setClaimType(ClaimType claimType) {
+        this.claimType = claimType;
+    }
+
+    public ClaimAssessment getClaimAssessment() {
+        return claimAssessment;
+    }
+
+    public void setClaimAssessment(ClaimAssessment claimAssessment) {
+        this.claimAssessment = claimAssessment;
+    }
 }

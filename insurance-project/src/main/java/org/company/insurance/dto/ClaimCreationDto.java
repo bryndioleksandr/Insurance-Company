@@ -11,5 +11,5 @@ import java.util.Date;
  * DTO for {@link org.company.insurance.entity.Claim}
  */
 public record ClaimCreationDto(LocalDate submissionDate, Double amount, Status status, String incidentDescription,
-                               ClaimType claimType) implements Serializable {
+                               ClaimType claimType, Long insurancePolicyId) implements Serializable {
 }
