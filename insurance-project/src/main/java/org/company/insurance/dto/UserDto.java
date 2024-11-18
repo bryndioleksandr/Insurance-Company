@@ -12,7 +12,7 @@ import java.util.List;
  * DTO for {@link org.company.insurance.entity.User}
  */
 public record UserDto(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, String email, String firstName,
-                      String surname, String phoneNumber, LocalDate birthDate, String username, String password, Role role,
+                      String surname, String phoneNumber, LocalDate birthDate, String password, Role role,
                       List<InsurancePolicyDto1> insurancePolicies) implements Serializable {
     /**
      * DTO for {@link org.company.insurance.entity.InsurancePolicy}

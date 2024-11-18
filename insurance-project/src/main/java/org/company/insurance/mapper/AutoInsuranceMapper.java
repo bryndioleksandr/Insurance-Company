@@ -25,6 +25,7 @@ public interface AutoInsuranceMapper {
     @Mapping(source = "year", target = "year")
     @Mapping(source = "plate", target = "plate")
     @Mapping(source = "type", target = "type")
+    @Mapping(source = "engineCapacity", target = "engineCapacity")
     @Mapping(source = "insuranceType", target = "insuranceType")
     @Mapping(source = "insurancePolicyId", target = "insurancePolicy.id")
     AutoInsurance toEntity(AutoInsuranceCreationDto autoInsuranceCreationDto);

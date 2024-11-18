@@ -13,6 +13,8 @@ import org.company.insurance.enums.VehicleType;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AutoInsurance extends Insurance {
+    @Column(name = "engine_capacity")
+    private double engineCapacity;
 
     @Column(name = "brand")
     private String brand;

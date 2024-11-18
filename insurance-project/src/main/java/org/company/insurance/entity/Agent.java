@@ -1,9 +1,6 @@
 package org.company.insurance.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -17,7 +14,11 @@ import java.util.List;
 @Setter
 @ToString
 
-public class Agent extends Person{
+public class Agent extends BaseEntity{
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User userId;
+
     @Column(name = "hire_date")
     private LocalDate hireDate;
 

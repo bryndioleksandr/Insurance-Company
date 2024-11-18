@@ -16,9 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 
 public class User extends Person{
-    @Column(name = "username")
-    private String username;
-
     @Column(name = "password")
     private String password;
 
@@ -29,13 +26,6 @@ public class User extends Person{
     @OneToMany(mappedBy = "user")
     private List<InsurancePolicy> insurancePolicies;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getPassword() {
         return password;

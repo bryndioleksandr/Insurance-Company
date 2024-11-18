@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * DTO for {@link org.company.insurance.entity.AutoInsurance}
  */
-public record AutoInsuranceCreationDto(double coverageAmount, int insuranceLongevity, String brand, String model,
+public record AutoInsuranceCreationDto(double coverageAmount, double engineCapacity, int insuranceLongevity, String brand, String model,
                                        int year, String plate, VehicleType type,
                                        AutoInsuranceType insuranceType, Long insurancePolicyId) implements Serializable {
 }
