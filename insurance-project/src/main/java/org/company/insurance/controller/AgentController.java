@@ -15,7 +15,7 @@ public class AgentController {
     private final AgentService agentService;
 
     @GetMapping("{id}")
-    public ResponseEntity<AgentDto> getAgentById(@PathVariable Long id){
+    public ResponseEntity<AgentDto> getAgentById(@PathVariable("id") Long id){
         return ResponseEntity.ok(agentService.getAgentById(id));
     }
 

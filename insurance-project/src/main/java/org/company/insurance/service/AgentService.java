@@ -3,6 +3,8 @@ import lombok.AllArgsConstructor;
 import org.company.insurance.dto.AgentCreationDto;
 import org.company.insurance.dto.AgentDto;
 import org.company.insurance.entity.Agent;
+import org.company.insurance.exception.AgentAlreadyExistsException;
+import org.company.insurance.exception.AgentNotFoundException;
 import org.company.insurance.repository.AgentRepository;
 import org.company.insurance.mapper.AgentMapper;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,7 @@ public class AgentService {
 
 
     public AgentDto getAgentById(Long id) {
-        return agentMapper.toDto(agentRepository.findById(id).orElse(null));
+        return agentMapper.toDto(agentRepository.findById(id).orElseThrow(() -> new AgentNotFoundException("Agent with id " + id + " not found")));
     }
 
     public AgentDto createAgent(AgentCreationDto agentDto) {

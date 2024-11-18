@@ -1,3 +1,14 @@
+GET http://localhost:8081/api/agents/1
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+content-length: 0
+
+<> 2024-11-18T144107.500.json
+
+###
+
 POST http://localhost:8081/api/auto-insurance
 Content-Type: application/json
 Content-Length: 182
@@ -977,27 +988,6 @@ Accept: */*
 }
 
 <> 2024-11-16T143907.500.json
-
-###
-
-POST http://localhost:8081/api/insurance-policies
-Content-Type: application/json
-Content-Length: 176
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "policyNumber": "123467890",
-  "userId": 1,
-  "startDate": "2024-11-15",
-  "endDate": "2025-11-15",
-  "price": 500.0,
-  "insuranceType": "VEHICLE",
-  "policyHolderId": 1
-}
-
-<> 2024-11-16T143804.200.json
 
 ###
 
