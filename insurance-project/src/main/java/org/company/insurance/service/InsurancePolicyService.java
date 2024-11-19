@@ -5,9 +5,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.company.insurance.dto.InsurancePolicyCreationDto;
 import org.company.insurance.dto.InsurancePolicyDto;
-import org.company.insurance.entity.AutoInsurance;
-import org.company.insurance.entity.HealthInsurance;
-import org.company.insurance.entity.InsurancePolicy;
+import org.company.insurance.entity.*;
 import org.company.insurance.enums.InsuranceStatus;
 import org.company.insurance.mapper.InsurancePolicyMapper;
 import org.company.insurance.repository.*;
@@ -22,6 +20,8 @@ import java.util.List;
 public class InsurancePolicyService {
     private InsurancePolicyRepository insurancePolicyService;
     private InsurancePolicyMapper insurancePolicyMapper;
+    private UserRepository userRepository;
+    private PolicyHolderRepository policyHolderRepository;
 
 //    private InsuranceStatus determineInsuranceStatus(InsurancePolicy policy) {
 //        LocalDate endDate = policy.getEndDate();
@@ -57,6 +57,20 @@ public class InsurancePolicyService {
         InsurancePolicy insurancePolicy = insurancePolicyMapper.toEntity(insurancePolicyDto);
 
         insurancePolicy.setPolicyNumber(generateRandomPolicyNumber());
+
+        User user = userRepository.findById(insurancePolicyDto.userId())
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        PolicyHolder policyHolder = policyHolderRepository.findByUser(user)
+                .orElseGet(() -> {
+                    PolicyHolder newPolicyHolder = new PolicyHolder();
+                    newPolicyHolder.setUserId(user);
+                    newPolicyHolder.setPassportNumber(insurancePolicyDto.passportNumber());
+                    newPolicyHolder.setAddress(insurancePolicyDto.address());
+                    return policyHolderRepository.save(newPolicyHolder);
+                });
+
+        insurancePolicy.setPolicyHolder(policyHolder);
 
         insurancePolicy = insurancePolicyService.save(insurancePolicy);
 

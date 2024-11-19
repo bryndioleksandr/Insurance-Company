@@ -26,5 +26,10 @@ public record UserCreationDto(
                               LocalDate birthDate,
                               @NotBlank
                               String password,
-                              Role role) implements Serializable {
+                              Role role,
+                              @Past
+                              LocalDate hireDate,
+                              @Size(max = 255)
+                              String position
+                              ) implements Serializable {
 }

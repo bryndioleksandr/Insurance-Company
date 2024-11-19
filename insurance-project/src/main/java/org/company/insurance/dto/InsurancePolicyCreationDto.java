@@ -37,6 +37,8 @@ public record InsurancePolicyCreationDto(
                                           InsuranceType insuranceType,
 
                                           @NotNull(message = "Policy holder ID cannot be null")
-                                          Long policyHolderId) implements Serializable {
+                                          Long policyHolderId,
+                                          @Pattern(regexp = "^\\d{9}$") String passportNumber,
+                                          String address) implements Serializable {
 
 }
