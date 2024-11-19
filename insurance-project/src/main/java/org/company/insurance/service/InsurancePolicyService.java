@@ -23,26 +23,27 @@ public class InsurancePolicyService {
     private InsurancePolicyRepository insurancePolicyService;
     private InsurancePolicyMapper insurancePolicyMapper;
 
-    private InsuranceStatus determineInsuranceStatus(InsurancePolicy policy) {
-        LocalDate endDate = policy.getEndDate();
-        if (endDate != null && LocalDate.now().isAfter(endDate)) {
-            return InsuranceStatus.EXPIRED;
-        }
-        return InsuranceStatus.ACTIVE;
-    }
-
-    @PostConstruct
-    public void checkAndUpdateInsuranceStatusOnStartup() {
-        List<InsurancePolicy> policies = insurancePolicyService.findAll();
-
-        for (InsurancePolicy policy : policies) {
-            InsuranceStatus status = determineInsuranceStatus(policy);
-            if (status != policy.getStatus()) {
-                policy.setStatus(status);
-                insurancePolicyService.updateStatusById(status, policy.getId());
-            }
-        }
-    }
+//    private InsuranceStatus determineInsuranceStatus(InsurancePolicy policy) {
+//        LocalDate endDate = policy.getEndDate();
+//        if (endDate != null && LocalDate.now().isAfter(endDate)) {
+//            return InsuranceStatus.EXPIRED;
+//        }
+//        return InsuranceStatus.ACTIVE;
+//    }
+//
+//    @Transactional
+//    @PostConstruct
+//    public void checkAndUpdateInsuranceStatusOnStartup() {
+//        List<InsurancePolicy> policies = insurancePolicyService.findAll();
+//
+//        for (InsurancePolicy policy : policies) {
+//            InsuranceStatus status = determineInsuranceStatus(policy);
+//            if (status != policy.getStatus()) {
+//                policy.setStatus(status);
+//                insurancePolicyService.updateStatusById(status, policy.getId());
+//            }
+//        }
+//    }
 
     public InsurancePolicyDto getInsurancePolicyById(Long id) {
         return insurancePolicyMapper.toDto(insurancePolicyService.findById(id).orElse(null));

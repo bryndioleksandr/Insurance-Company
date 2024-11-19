@@ -15,7 +15,6 @@ import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UserMapper {
-    @Mapping(target = "username", source = "username")
     @Mapping(target = "password", source = "password")
     @Mapping(target = "role", source = "role")
     User toEntity(UserDto userDto);

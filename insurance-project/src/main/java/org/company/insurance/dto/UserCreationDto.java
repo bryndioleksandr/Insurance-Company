@@ -22,7 +22,7 @@ public record UserCreationDto(
                               @NotBlank @Size(max = 21)
                               @Pattern(regexp = "^\\+\\d{1,4}\\d{7,15}$", message = "Phone number must be in the format +<country code><phone number>")
                               String phoneNumber,
-                              @Past @NotBlank
+                              @Past
                               LocalDate birthDate,
                               @NotBlank
                               String password,

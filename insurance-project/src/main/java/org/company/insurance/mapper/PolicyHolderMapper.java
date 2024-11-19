@@ -16,5 +16,6 @@ public interface PolicyHolderMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     PolicyHolder partialUpdate(PolicyHolderDto policyHolderDto, @MappingTarget PolicyHolder policyHolder);
 
+    @Mapping(source = "userId", target = "userId.id")
     PolicyHolder toEntity(PolicyHolderCreationDto policyHolderCreationDto);
 }

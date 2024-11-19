@@ -17,6 +17,7 @@ public interface AgentMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Agent partialUpdate(AgentDto agentDto, @MappingTarget Agent agent);
 
+    @Mapping(source = "userId", target = "userId.id")
     Agent toEntity(AgentCreationDto agentCreationDto);
 
 }

@@ -22,6 +22,6 @@ import java.util.Date;
 public record ClaimAssessmentCreationDto(Long claimId,
                                          @PastOrPresent LocalDate assessmentDate,
                                          @NotBlank @Size(max = 512) String notes,
-                                         @NotBlank Double assessmentAmount,
+                                         Double assessmentAmount,
                                          Long agentId) implements Serializable {
 }

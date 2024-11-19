@@ -22,7 +22,7 @@ public record AgentCreationDto(LocalDateTime createdAt, LocalDateTime updatedAt,
 //                               String phoneNumber,
 //                               LocalDate birthDate,
                                Long userId,
-                               @Past @NotBlank
+                               @Past
                                LocalDate hireDate,
                                @NotBlank @Size(max = 255)
                                String position) implements Serializable {
