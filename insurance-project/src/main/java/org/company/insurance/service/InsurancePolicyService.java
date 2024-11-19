@@ -1,18 +1,13 @@
 package org.company.insurance.service;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.company.insurance.dto.InsurancePolicyCreationDto;
 import org.company.insurance.dto.InsurancePolicyDto;
 import org.company.insurance.entity.*;
-import org.company.insurance.enums.InsuranceStatus;
 import org.company.insurance.mapper.InsurancePolicyMapper;
 import org.company.insurance.repository.*;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @AllArgsConstructor
 @Service
@@ -61,7 +56,7 @@ public class InsurancePolicyService {
         User user = userRepository.findById(insurancePolicyDto.userId())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        PolicyHolder policyHolder = policyHolderRepository.findByUser(user)
+        PolicyHolder policyHolder = policyHolderRepository.findByUserId(user)
                 .orElseGet(() -> {
                     PolicyHolder newPolicyHolder = new PolicyHolder();
                     newPolicyHolder.setUserId(user);
