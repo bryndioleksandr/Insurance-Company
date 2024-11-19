@@ -1,5 +1,9 @@
 package org.company.insurance.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.company.insurance.enums.ClaimType;
 import org.company.insurance.enums.Status;
 
@@ -10,6 +14,10 @@ import java.util.Date;
 /**
  * DTO for {@link org.company.insurance.entity.Claim}
  */
-public record ClaimCreationDto(LocalDate submissionDate, Double amount, Status status, String incidentDescription,
-                               ClaimType claimType, Long insurancePolicyId) implements Serializable {
+public record ClaimCreationDto(LocalDate submissionDate,
+                               @NotBlank @Min(20) @Max(500000) double amount,
+                               @NotBlank @Size(max = 512)
+                               String incidentDescription,
+                               @NotBlank ClaimType claimType,
+                               Long insurancePolicyId) implements Serializable {
 }

@@ -20,7 +20,8 @@ public class AgentService {
 
 
     public AgentDto getAgentById(Long id) {
-        return agentMapper.toDto(agentRepository.findById(id).orElseThrow(() -> new AgentNotFoundException("Agent with id " + id + " not found")));
+        return agentMapper.toDto(agentRepository.findById(id)
+                .orElseThrow(() -> new AgentNotFoundException("Agent with id " + id + " not found")));
     }
 
     public AgentDto createAgent(AgentCreationDto agentDto) {
@@ -32,10 +33,16 @@ public class AgentService {
     }
 
     public AgentDto updateAgent(AgentDto agentDto) {
-        return agentMapper.toDto(agentRepository.save(agentMapper.toEntity(agentDto)));
+        if (!agentRepository.existsById(agentDto.id())) {
+            throw new AgentNotFoundException("Agent with id " + agentDto.id() + " not found");
+        }
+            return agentMapper.toDto(agentRepository.save(agentMapper.toEntity(agentDto)));
     }
 
     public void deleteAgentById(Long id) {
+        if (!agentRepository.existsById(id)) {
+            throw new AgentNotFoundException("Agent with id " + id + " not found");
+        }
         agentRepository.deleteById(id);
     }
 

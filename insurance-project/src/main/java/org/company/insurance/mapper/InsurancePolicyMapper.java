@@ -20,6 +20,7 @@ public interface InsurancePolicyMapper {
 
     @Mapping(source = "policyHolderId", target = "policyHolder.id")
     @Mapping(source = "userId", target = "user.id")
+    @Mapping(source = "status", target = "status")
     InsurancePolicy toEntity(InsurancePolicyCreationDto insurancePolicyCreationDto);
 
 

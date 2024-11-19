@@ -28,6 +28,14 @@ public class Agent extends BaseEntity{
     @OneToMany(mappedBy = "agent")
     private List<ClaimAssessment> claimAssessments;
 
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
     public String getPosition() {
         return position;
     }

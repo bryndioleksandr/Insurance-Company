@@ -3,6 +3,7 @@ package org.company.insurance.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.company.insurance.enums.AutoInsuranceType;
+import org.company.insurance.enums.InsuranceStatus;
 import org.company.insurance.enums.VehicleType;
 
 @Entity
@@ -32,6 +33,8 @@ public class AutoInsurance extends Insurance {
     @Column(name = "type")
     private VehicleType type;
 
+
+
     @Enumerated(EnumType.STRING)
     @Column(name = "insurance_type")
     private AutoInsuranceType insuranceType;
@@ -39,6 +42,14 @@ public class AutoInsurance extends Insurance {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "policy_id")
     private InsurancePolicy insurancePolicy;
+
+    public double getEngineCapacity() {
+        return engineCapacity;
+    }
+
+    public void setEngineCapacity(double engineCapacity) {
+        this.engineCapacity = engineCapacity;
+    }
 
     public String getBrand() {
         return brand;

@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 
 public class User extends Person{
+
     @Column(name = "password")
     private String password;
 
@@ -25,7 +26,6 @@ public class User extends Person{
 
     @OneToMany(mappedBy = "user")
     private List<InsurancePolicy> insurancePolicies;
-
 
     public String getPassword() {
         return password;

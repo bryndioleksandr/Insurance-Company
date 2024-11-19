@@ -1,9 +1,6 @@
 package org.company.insurance.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
@@ -25,6 +22,19 @@ public class PolicyHolder extends Person{
 
     @OneToMany(mappedBy = "policyHolder")
     private List<InsurancePolicy> insurancePolicies;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User userId;
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
     public String getPassportNumber() {
         return passportNumber;
     }

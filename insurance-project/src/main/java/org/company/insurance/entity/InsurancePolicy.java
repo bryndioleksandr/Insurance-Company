@@ -2,6 +2,7 @@ package org.company.insurance.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.company.insurance.enums.InsuranceStatus;
 import org.company.insurance.enums.InsuranceType;
 
 import java.time.LocalDate;
@@ -33,6 +34,10 @@ public class InsurancePolicy extends BaseEntity{
     private double price;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private InsuranceStatus status;
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "policy_type")
     private InsuranceType insuranceType;
 
@@ -55,6 +60,13 @@ public class InsurancePolicy extends BaseEntity{
 //    @OneToOne(mappedBy = "insurancePolicy", optional = true)
 //    private PropertyInsurance propertyInsurance;
 
+    public InsuranceStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(InsuranceStatus status) {
+        this.status = status;
+    }
 
     public String getPolicyNumber() {
         return policyNumber;

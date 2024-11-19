@@ -7,6 +7,6 @@ import java.io.Serializable;
 /**
  * DTO for {@link org.company.insurance.entity.PropertyInsurance}
  */
-public record PropertyInsuranceCreationDto(double coverageAmount, int insuranceLongevity,
+public record PropertyInsuranceCreationDto(double coverageAmount,
                                            @NotBlank String propertyAddress, Long insurancePolicyId) implements Serializable {
 }
