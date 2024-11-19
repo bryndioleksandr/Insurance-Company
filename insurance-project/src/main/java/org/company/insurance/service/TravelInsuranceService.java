@@ -15,6 +15,9 @@ import org.company.insurance.repository.InsurancePolicyRepository;
 import org.company.insurance.repository.TravelInsuranceRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 @Service
 @AllArgsConstructor
 public class TravelInsuranceService {
@@ -24,6 +27,13 @@ public class TravelInsuranceService {
     private final InsurancePolicyRepository insurancePolicyRepository;
 
     private double calculateTravelInsurancePrice(TravelInsurance insurance) {
+        Long currentInsurancePolicyId = insurance.getInsurancePolicy().getId();
+        LocalDate startDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getStartDate();
+        LocalDate endDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getEndDate();
+
+        long daysDifference = ChronoUnit.DAYS.between(startDate, endDate);
+        double longevityMultiplier = daysDifference / 365.0;
+
         double basePrice = 100;
 
         double typeMultiplier = switch (insurance.getTravelType()) {
@@ -38,7 +48,7 @@ public class TravelInsuranceService {
             case WORLDWIDE -> 1.5;
         };
 
-        return basePrice * typeMultiplier * areaMultiplier * insurance.getInsuranceLongevity();
+        return basePrice * typeMultiplier * areaMultiplier * longevityMultiplier;
     }
 
     private double calculateCoverageAmount(TravelInsurance insurance) {

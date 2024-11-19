@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.company.insurance.dto.UserCreationDto;
 import org.company.insurance.dto.UserDto;
+import org.company.insurance.entity.User;
 import org.company.insurance.mapper.UserMapper;
 import org.company.insurance.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class UserService {
     }
 
     public UserDto createUser(UserCreationDto userDto) {
+        User user = userMapper.toEntity(userDto);
+
         return userMapper.toDto(userRepository.save(userMapper.toEntity(userDto)));
     }
 

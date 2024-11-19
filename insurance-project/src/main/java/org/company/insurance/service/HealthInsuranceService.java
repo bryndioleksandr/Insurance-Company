@@ -16,6 +16,7 @@ import org.company.insurance.repository.InsurancePolicyRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @AllArgsConstructor
 @Service
@@ -39,7 +40,7 @@ public class HealthInsuranceService {
 
         InsurancePolicy insurancePolicy = healthInsurance.getInsurancePolicy();
         if (insurancePolicy != null) {
-            double updatedPrice = calculateHealthInsuranceCost(healthInsurance.getInsuranceType(), (LocalDate.now().getYear() - insurancePolicy.getUser().getBirthDate().getYear()));
+            double updatedPrice = calculateHealthInsuranceCost(healthInsurance, (LocalDate.now().getYear() - insurancePolicy.getUser().getBirthDate().getYear()));
 
             insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
             insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
@@ -50,7 +51,14 @@ public class HealthInsuranceService {
         // return healthInsuranceMapper.toDto(healthInsuranceRepository.save(healthInsuranceMapper.toEntity(healthInsuranceDto)));
     }
 
-    private double calculateHealthInsuranceCost(HealthInsuranceType serviceType, int age) {
+    private double calculateHealthInsuranceCost(HealthInsurance healthInsurance, int age) {
+        Long currentInsurancePolicyId = healthInsurance.getInsurancePolicy().getId();
+        LocalDate startDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getStartDate();
+        LocalDate endDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getEndDate();
+        long daysDifference = ChronoUnit.DAYS.between(startDate, endDate);
+        double longevityMultiplier = daysDifference / 365.0;
+
+        HealthInsuranceType serviceType = healthInsurance.getInsuranceType();
         double basePrice = 300;
         double ageMultiplier = (age > 60) ? 1.5 : 1.0;
 
@@ -62,7 +70,7 @@ public class HealthInsuranceService {
             case MENTAL -> 1.3;
         };
 
-        return basePrice * serviceMultiplier * ageMultiplier;
+        return basePrice * serviceMultiplier * ageMultiplier * longevityMultiplier;
     }
 
     private double calculateHealthInsuranceCoverage(HealthInsuranceType insuranceType) {

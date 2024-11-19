@@ -17,6 +17,7 @@ import org.company.insurance.repository.PropertyInsuranceRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Service
 @AllArgsConstructor
@@ -25,9 +26,17 @@ public class PropertyInsuranceService {
     private final PropertyInsuranceMapper propertyInsuranceMapper;
     private final InsurancePolicyRepository insurancePolicyRepository;
 
-    private double calculatePropertyInsurancePrice(double houseSize) {
+    private double calculatePropertyInsurancePrice(PropertyInsurance propertyInsurance) {
+        Long currentInsurancePolicyId = propertyInsurance.getInsurancePolicy().getId();
+        LocalDate startDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getStartDate();
+        LocalDate endDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getEndDate();
+
+        long daysDifference = ChronoUnit.DAYS.between(startDate, endDate);
+        double longevityMultiplier = daysDifference / 365.0;
+
+        double houseSize = propertyInsurance.getHouseSize();
         double basePricePerCubicMeter = 25.0;
-        return basePricePerCubicMeter * houseSize;
+        return basePricePerCubicMeter * houseSize * longevityMultiplier;
     }
 
     private double calculateCoverageAmount(double houseSize) {
@@ -50,7 +59,7 @@ public class PropertyInsuranceService {
 
         InsurancePolicy insurancePolicy = propertyInsurance.getInsurancePolicy();
         if (insurancePolicy != null) {
-            double updatedPrice = calculatePropertyInsurancePrice(propertyInsurance.getHouseSize());
+            double updatedPrice = calculatePropertyInsurancePrice(propertyInsurance);
 
             insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
             insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
