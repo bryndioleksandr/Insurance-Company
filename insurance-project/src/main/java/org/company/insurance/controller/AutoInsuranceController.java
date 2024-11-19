@@ -25,4 +25,10 @@ public class AutoInsuranceController {
         return ResponseEntity.ok(autoInsuranceService.createAutoInsurance(autoInsuranceDto));
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteAutoInsuranceById(@PathVariable("id") Long id){
+        autoInsuranceService.deleteAutoInsuranceById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

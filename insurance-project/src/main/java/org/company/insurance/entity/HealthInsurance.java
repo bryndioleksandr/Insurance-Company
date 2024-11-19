@@ -2,6 +2,7 @@ package org.company.insurance.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.company.insurance.enums.HealthInsuranceType;
 
 @Entity
 @Table(name = "health_insurances")
@@ -19,6 +20,10 @@ public class HealthInsurance extends Insurance {
     @JoinColumn(name = "policy_id")
     private InsurancePolicy insurancePolicy;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "insurance_type")
+    private HealthInsuranceType insuranceType;
+
     public String getMedicalHistory() {
         return medicalHistory;
     }
@@ -33,5 +38,13 @@ public class HealthInsurance extends Insurance {
 
     public void setInsurancePolicy(InsurancePolicy insurancePolicy) {
         this.insurancePolicy = insurancePolicy;
+    }
+
+    public HealthInsuranceType getInsuranceType() {
+        return insuranceType;
+    }
+
+    public void setInsuranceType(HealthInsuranceType insuranceType) {
+        this.insuranceType = insuranceType;
     }
 }

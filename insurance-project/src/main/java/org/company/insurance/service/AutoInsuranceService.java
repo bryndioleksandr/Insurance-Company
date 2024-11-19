@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.company.insurance.mapper.AutoInsuranceMapper;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -61,7 +62,7 @@ public AutoInsuranceDto createAutoInsurance(AutoInsuranceCreationDto autoInsuran
         Long currentInsurancePolicyId = autoInsurance.getInsurancePolicy().getId();
         LocalDate startDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getStartDate();
         LocalDate endDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getEndDate();
-        int daysDifference = endDate.getDayOfYear() - startDate.getDayOfYear();
+        long daysDifference = ChronoUnit.DAYS.between(startDate, endDate);
         double basePrice = 500;
         int currentYear = LocalDate.now().getYear();
         int carAge = currentYear - autoInsurance.getYear();
@@ -91,6 +92,11 @@ public AutoInsuranceDto createAutoInsurance(AutoInsuranceCreationDto autoInsuran
         };
 
         double longevityMultiplier = daysDifference / 365.0;
+        System.out.println("Days diff is " + daysDifference);
+        System.out.println(basePrice);
+        System.out.println(ageMultiplier);
+        System.out.println(typeMultiplier);
+        System.out.println(capacityMultiplier);
 
         return basePrice * ageMultiplier * typeMultiplier * capacityMultiplier * longevityMultiplier;
     }

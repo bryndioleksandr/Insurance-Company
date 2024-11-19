@@ -7,17 +7,18 @@
     <list default="true" id="63f9a081-d918-4168-8f21-a8aac09d1e61" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/AgentCreationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/AgentCreationDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/AutoInsuranceCreationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/AutoInsuranceCreationDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/ClaimAssessmentCreationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/ClaimAssessmentCreationDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/ClaimCreationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/ClaimCreationDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/PolicyHolderCreationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/PolicyHolderCreationDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/UserCreationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/UserCreationDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/mapper/AgentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/mapper/AgentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/mapper/PolicyHolderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/mapper/PolicyHolderMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/AutoInsuranceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/AutoInsuranceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/InsurancePolicyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/InsurancePolicyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/AutoInsuranceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/AutoInsuranceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/PropertyInsuranceCreationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/PropertyInsuranceCreationDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/HealthInsurance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/HealthInsurance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/PropertyInsurance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/PropertyInsurance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/mapper/PropertyInsuranceMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/mapper/PropertyInsuranceMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/HealthInsuranceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/HealthInsuranceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/PropertyInsuranceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/PropertyInsuranceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/TravelInsuranceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/TravelInsuranceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/AutoInsuranceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/AutoInsuranceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/HealthInsuranceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/HealthInsuranceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/PropertyInsuranceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/PropertyInsuranceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/TravelInsuranceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/TravelInsuranceService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +142,7 @@
       <workItem from="1731929670382" duration="6174000" />
       <workItem from="1731935935351" duration="785000" />
       <workItem from="1731936736109" duration="11603000" />
-      <workItem from="1732017547807" duration="2452000" />
+      <workItem from="1732017547807" duration="7225000" />
     </task>
     <servers />
   </component>
