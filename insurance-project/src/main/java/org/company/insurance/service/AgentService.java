@@ -105,7 +105,7 @@ public class AgentService {
             specification = specification.and((root, query, criteriaBuilder) ->
                     criteriaBuilder.like(root.get("id"), "%" + id + "%"));
         }
-        
+
         Page<Agent> agents = agentRepository.findAll(specification, pageable);
         return agents.map(agentMapper::toDto);
     }

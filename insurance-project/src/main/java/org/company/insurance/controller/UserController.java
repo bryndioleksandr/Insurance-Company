@@ -21,12 +21,12 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id){
+    public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserCreationDto userCreationDto){
+    public ResponseEntity<UserDto> createUser(@RequestBody UserCreationDto userCreationDto) {
         return ResponseEntity.ok(userService.createUser(userCreationDto));
     }
 
@@ -44,7 +44,7 @@ public class UserController {
     @GetMapping
     public ResponseEntity<?> getAllUsers(Pageable pageable) {
         Page<UserDto> userDtos = userService.getAllUsers(pageable);
-        if(userDtos.isEmpty()){
+        if (userDtos.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return new ResponseEntity<>(userDtos, HttpStatus.OK);
@@ -56,21 +56,22 @@ public class UserController {
             @RequestParam String order,
             @PageableDefault Pageable pageable) {
         Page<UserDto> userDtos = userService.getSortedUsers(sortBy, order, pageable);
-        if(userDtos.isEmpty()){
+        if (userDtos.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return new ResponseEntity<>(userDtos, HttpStatus.OK);
     }
 
     @GetMapping("/filtered")
-    public ResponseEntity<?> getFilteredUsers (@RequestParam(name = "id", required = false) Long id,
-                                               @RequestParam(name = "birthDate", required = false) LocalDate birthDate,
-                                               @RequestParam(name = "phoneNumber", required = false) String phoneNumber,
-                                               @RequestParam(name = "firstName", required = false) String firstName,
-                                               @RequestParam(name = "surname", required = false) String surname,
-                                               @RequestParam(name = "email", required = false) String email,
-                                               @RequestParam(name = "role", required = false) String role,
-                                               @PageableDefault Pageable pageable) {
+    public ResponseEntity<?> getFilteredUsers(
+            @RequestParam(name = "id", required = false) Long id,
+            @RequestParam(name = "birthDate", required = false) LocalDate birthDate,
+            @RequestParam(name = "phoneNumber", required = false) String phoneNumber,
+            @RequestParam(name = "firstName", required = false) String firstName,
+            @RequestParam(name = "surname", required = false) String surname,
+            @RequestParam(name = "email", required = false) String email,
+            @RequestParam(name = "role", required = false) String role,
+            @PageableDefault Pageable pageable) {
         Page<UserDto> userDtos = userService.getFilteredUsers(id, birthDate, phoneNumber, firstName, surname, email, role, pageable);
 
         if (userDtos.isEmpty()) {
