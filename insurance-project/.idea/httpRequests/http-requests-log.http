@@ -1,3 +1,14 @@
+GET http://localhost:8081/api/agents
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+content-length: 0
+
+<> 2024-11-21T011736.200.json
+
+###
+
 GET http://localhost:8081/api/agents/1
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
 Accept-Encoding: br, deflate, gzip, x-gzip
@@ -924,28 +935,6 @@ Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
 }
 
 <> 2024-11-19T140558.500.json
-
-###
-
-POST http://localhost:8081/api/users
-Content-Type: application/json
-Content-Length: 191
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
-
-{
-  "email": "user@example.com",
-  "firstName": "John",
-  "surname": "Doe",
-  "phoneNumber": "+1234567890",
-  "birthDate": "1990-01-01",
-  "password": "SecurePassword123!",
-  "role": "USER"
-}
-
-<> 2024-11-19T140417.500.json
 
 ###
 
