@@ -32,9 +32,6 @@ public class AutoInsurance extends Insurance {
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
     private VehicleType type;
-
-
-
     @Enumerated(EnumType.STRING)
     @Column(name = "insurance_type")
     private AutoInsuranceType insuranceType;

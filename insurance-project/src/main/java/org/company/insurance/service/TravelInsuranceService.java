@@ -1,12 +1,15 @@
 package org.company.insurance.service;
 
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.company.insurance.dto.TravelInsuranceCreationDto;
 import org.company.insurance.dto.TravelInsuranceDto;
+import org.company.insurance.dto.UserDto;
 import org.company.insurance.entity.InsurancePolicy;
 import org.company.insurance.entity.PropertyInsurance;
 import org.company.insurance.entity.TravelInsurance;
+import org.company.insurance.entity.User;
 import org.company.insurance.enums.InsuranceStatus;
 import org.company.insurance.exception.PropertyInsuranceAlreadyExistsException;
 import org.company.insurance.exception.TravelInsuranceAlreadyExistsException;
@@ -14,6 +17,11 @@ import org.company.insurance.exception.TravelInsuranceNotFoundException;
 import org.company.insurance.mapper.TravelInsuranceMapper;
 import org.company.insurance.repository.InsurancePolicyRepository;
 import org.company.insurance.repository.TravelInsuranceRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -93,5 +101,47 @@ public class TravelInsuranceService {
 
     public void deleteTravelInsuranceById(Long id) {
         travelInsuranceRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Page<TravelInsuranceDto> getAllTravels(Pageable pageable) {
+        return travelInsuranceRepository.findAll(pageable).map(travelInsuranceMapper::toDto);
+    }
+
+    @Transactional
+    public Page<TravelInsuranceDto> getSortedTravels(String sortBy, String order, Pageable pageable) {
+        Sort sort = order.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
+        Page<TravelInsurance> travelsPage = travelInsuranceRepository.findAll(sortedPageable);
+        return travelsPage.map(travelInsuranceMapper::toDto);
+    }
+
+    @Transactional
+    public Page<TravelInsuranceDto> getFilteredTravels(Long id, String travelType, String coverageArea, String destination, Pageable pageable) {
+        Specification<TravelInsurance> specification = Specification.where(null);
+
+        if (id != null) {
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(root.get("id"), "%" + id + "%"));
+        }
+        if(travelType != null) {
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("travelType")), "%" + travelType.toLowerCase() + "%"));
+        }
+        if (coverageArea != null) {
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(root.get("coverageArea"), "%" + coverageArea.toLowerCase() + "%"));
+        }
+        if(coverageArea != null) {
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("coverageArea")), "%" + coverageArea.toLowerCase() + "%"));
+        }
+        if(destination != null) {
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("destination")), "%" + destination.toLowerCase() + "%"));
+        }
+
+        Page<TravelInsurance> travels = travelInsuranceRepository.findAll(specification, pageable);
+        return travels.map(travelInsuranceMapper::toDto);
     }
 }

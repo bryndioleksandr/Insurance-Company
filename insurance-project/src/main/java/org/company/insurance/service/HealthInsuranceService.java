@@ -1,11 +1,15 @@
 package org.company.insurance.service;
 
+import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.company.insurance.dto.HealthInsuranceCreationDto;
+import org.company.insurance.dto.HealthInsuranceDto;
 import org.company.insurance.dto.HealthInsuranceDto;
 import org.company.insurance.entity.AutoInsurance;
 import org.company.insurance.entity.HealthInsurance;
 import org.company.insurance.entity.InsurancePolicy;
+import org.company.insurance.entity.HealthInsurance;
 import org.company.insurance.enums.HealthInsuranceType;
 import org.company.insurance.enums.InsuranceStatus;
 import org.company.insurance.exception.AutoInsuranceAlreadyExistsException;
@@ -14,6 +18,11 @@ import org.company.insurance.exception.HealthInsuranceNotFoundException;
 import org.company.insurance.mapper.HealthInsuranceMapper;
 import org.company.insurance.repository.HealthInsuranceRepository;
 import org.company.insurance.repository.InsurancePolicyRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -90,5 +99,43 @@ public class HealthInsuranceService {
 
     public void deleteHealthInsuranceById(Long id) {
         healthInsuranceRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Page<HealthInsuranceDto> getAllHealth(Pageable pageable) {
+        return healthInsuranceRepository.findAll(pageable).map(healthInsuranceMapper::toDto);
+    }
+
+    @Transactional
+    public Page<HealthInsuranceDto> getSortedHealth(String sortBy, String order, Pageable pageable) {
+        Sort sort = order.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
+        Page<HealthInsurance> healthPage = healthInsuranceRepository.findAll(sortedPageable);
+        return healthPage.map(healthInsuranceMapper::toDto);
+    }
+
+    @Transactional
+    public Page<HealthInsuranceDto> getFilteredHealth(Long id, String medicalHistory, Long policyId, String insuranceType, Pageable pageable) {
+        Specification<HealthInsurance> specification = Specification.where(null);
+
+        if (id != null) {
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(root.get("id"), "%" + id + "%"));
+        }
+        if(medicalHistory != null) {
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("medicalHistory")), "%" + medicalHistory.toLowerCase() + "%"));
+        }
+        if (policyId != null) {
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(root.get("policyId"), "%" + policyId + "%"));
+        }
+        if(insuranceType != null) {
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("insuranceType")), "%" + insuranceType.toLowerCase() + "%"));
+        }
+
+        Page<HealthInsurance> health = healthInsuranceRepository.findAll(specification, pageable);
+        return health.map(healthInsuranceMapper::toDto);
     }
 }

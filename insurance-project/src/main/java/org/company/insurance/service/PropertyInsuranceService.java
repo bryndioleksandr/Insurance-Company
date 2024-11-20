@@ -1,12 +1,13 @@
 package org.company.insurance.service;
 
 
+import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.company.insurance.dto.PropertyInsuranceCreationDto;
 import org.company.insurance.dto.PropertyInsuranceDto;
-import org.company.insurance.entity.HealthInsurance;
-import org.company.insurance.entity.InsurancePolicy;
-import org.company.insurance.entity.PropertyInsurance;
+import org.company.insurance.dto.PropertyInsuranceDto;
+import org.company.insurance.entity.*;
 import org.company.insurance.enums.InsuranceStatus;
 import org.company.insurance.enums.PropertyInsuranceType;
 import org.company.insurance.exception.HealthInsuranceAlreadyExistsException;
@@ -15,6 +16,11 @@ import org.company.insurance.exception.PropertyInsuranceNotFoundException;
 import org.company.insurance.mapper.PropertyInsuranceMapper;
 import org.company.insurance.repository.InsurancePolicyRepository;
 import org.company.insurance.repository.PropertyInsuranceRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -78,5 +84,43 @@ public class PropertyInsuranceService {
 
     public void deletePropertyInsuranceById(Long id) {
         propertyInsuranceRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Page<PropertyInsuranceDto> getAllProperty(Pageable pageable) {
+        return propertyInsuranceRepository.findAll(pageable).map(propertyInsuranceMapper::toDto);
+    }
+
+    @Transactional
+    public Page<PropertyInsuranceDto> getSortedProperty(String sortBy, String order, Pageable pageable) {
+        Sort sort = order.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
+        Page<PropertyInsurance> travelsPage = propertyInsuranceRepository.findAll(sortedPageable);
+        return travelsPage.map(propertyInsuranceMapper::toDto);
+    }
+
+    @Transactional
+    public Page<PropertyInsuranceDto> getFilteredProperty(Long id, String propertyAddress, double houseSize, String insuranceType, Pageable pageable) {
+        Specification<PropertyInsurance> specification = Specification.where(null);
+
+        if (id != null) {
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(root.get("id"), "%" + id + "%"));
+        }
+        if(propertyAddress != null) {
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("propertyAddress")), "%" + propertyAddress.toLowerCase() + "%"));
+        }
+        if (houseSize != 0) {
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(root.get("houseSize"), "%" + houseSize + "%"));
+        }
+        if(insuranceType != null) {
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("insuranceType")), "%" + insuranceType.toLowerCase() + "%"));
+        }
+
+        Page<PropertyInsurance> property = propertyInsuranceRepository.findAll(specification, pageable);
+        return property.map(propertyInsuranceMapper::toDto);
     }
 }

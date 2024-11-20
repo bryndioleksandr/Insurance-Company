@@ -1,4 +1,7 @@
 package org.company.insurance.service;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.company.insurance.dto.AgentCreationDto;
@@ -17,6 +20,7 @@ import org.company.insurance.repository.AgentRepository;
 import org.company.insurance.mapper.AgentMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,43 +86,26 @@ public class AgentService {
 //    }
 
     @Transactional
-    public Page<AgentDto> getFilteredAgents(Agent agent, Pageable pageable) {
+    public Page<AgentDto> getFilteredAgents(Long id, Long userId, LocalDate hireDate, String position, Pageable pageable) {
         Specification<Agent> specification = Specification.where(null);
-        User user = userRepository.findById(agent.getUserId().getId()).orElseThrow(() -> new AgentNotFoundException("User with id " + agent.getUserId().getId() + " not found"));
 
-        if (agent.getHireDate() != null) {
+        if (hireDate != null) {
             specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("hireDate")), "%" + agent.getHireDate() + "%"));
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("hireDate")), "%" + hireDate + "%"));
         }
-        if (agent.getPosition() != null && !agent.getPosition().isEmpty()) {
+        if (position != null) {
             specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("position")), "%" + agent.getPosition().toLowerCase() + "%"));
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("position")), "%" + position.toLowerCase() + "%"));
         }
-        if (agent.getId() != null) {
+        if (userId != null) {
             specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(root.get("id"), "%" + agent.getId() + "%"));
+                    criteriaBuilder.like(root.get("userId"), "%" + userId + "%"));
         }
-        if (user.getPhoneNumber() != null) {
+        if (id != null) {
             specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(root.get("id"), "%" + user.getPhoneNumber() + "%"));
+                    criteriaBuilder.like(root.get("id"), "%" + id + "%"));
         }
-        if(user.getFirstName() != null && !user.getFirstName().isEmpty()) {
-            specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("firstName")), "%" + user.getFirstName().toLowerCase() + "%"));
-        }
-        if(user.getSurname() != null && !user.getSurname().isEmpty()) {
-            specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("surname")), "%" + user.getSurname().toLowerCase() + "%"));
-        }
-        if(user.getEmail() != null && !user.getEmail().isEmpty()) {
-            specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("email")), "%" + user.getEmail().toLowerCase() + "%"));
-        }
-        if(user.getRole() != null) {
-            specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("role")), "%" + user.getRole().toString().toLowerCase() + "%"));
-        }
-
+        
         Page<Agent> agents = agentRepository.findAll(specification, pageable);
         return agents.map(agentMapper::toDto);
     }
