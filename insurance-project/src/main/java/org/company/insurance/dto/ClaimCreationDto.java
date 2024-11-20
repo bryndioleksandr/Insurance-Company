@@ -19,5 +19,6 @@ public record ClaimCreationDto(LocalDate submissionDate,
                                @NotBlank @Size(max = 512)
                                String incidentDescription,
                                @NotBlank ClaimType claimType,
+                               Status status,
                                Long insurancePolicyId) implements Serializable {
 }

@@ -13,7 +13,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class PolicyHolder extends Person{
+public class PolicyHolder extends BaseEntity{
     @Column(name = "passport_number")
     private String passportNumber;
 
