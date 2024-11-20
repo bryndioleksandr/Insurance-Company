@@ -18,6 +18,6 @@ public interface PropertyInsuranceMapper {
 
     @Mapping(source = "propertyAddress", target = "propertyAddress")
     @Mapping(source = "insurancePolicyId", target = "insurancePolicy.id")
-    @Mapping(source = "houseSize", target = "houseSize")
+    //@Mapping(source = "houseSize", target = "houseSize")
     PropertyInsurance toEntity(PropertyInsuranceCreationDto propertyInsuranceCreationDto);
 }

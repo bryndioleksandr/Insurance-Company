@@ -1,3 +1,388 @@
+GET http://localhost:8081/api/agents/1
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+content-length: 0
+
+<> 2024-11-20T143029.200.json
+
+###
+
+GET http://localhost:8081/api/users/filtered?page=0&size=10&firstName=Oleksandr
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+content-length: 0
+
+<> 2024-11-20T142953.200.json
+
+###
+
+GET http://localhost:8081/api/users/filtered?page=0&size=10&firstName=Oleksandr
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+content-length: 0
+
+<> 2024-11-20T142537.500.json
+
+###
+
+GET http://localhost:8081/api/users?page=0&size=5&sort=firstName,desc
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+content-length: 0
+
+<> 2024-11-20T142259.200.json
+
+###
+
+GET http://localhost:8081/api/users/2
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+content-length: 0
+
+<> 2024-11-20T142207.200.json
+
+###
+
+GET http://localhost:8081/api/users
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+content-length: 0
+
+<> 2024-11-20T142047.200.json
+
+###
+
+GET http://localhost:8081/api/users/1
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+content-length: 0
+
+<> 2024-11-20T142020.500.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "email": "some@gmail.com",
+  "firstName": "Some",
+  "surname": "Buddy",
+  "phoneNumber": "+380680972382",
+  "birthDate": "2004-11-06",
+  "password": "safepassword1234",
+  "role": "USER"
+}
+
+<> 2024-11-20T142001-1.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "email": "some@gmail.com",
+  "firstName": "Some",
+  "surname": "Buddy",
+  "phoneNumber": "+380680972382",
+  "birthDate": "2004-11-06",
+  "password": "safepassword1234",
+  "role": "USER"
+}
+
+<> 2024-11-20T142001.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "email": "some@gmail.com",
+  "firstName": "Some",
+  "surname": "Buddy",
+  "phoneNumber": "+380680972382",
+  "birthDate": "2004-11-06",
+  "password": "safepassword1234",
+  "role": "USER"
+}
+
+<> 2024-11-20T142000.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "email": "some@gmail.com",
+  "firstName": "Some",
+  "surname": "Buddy",
+  "phoneNumber": "+380680972382",
+  "birthDate": "2004-11-06",
+  "password": "safepassword1234",
+  "role": "USER"
+}
+
+<> 2024-11-20T141959-1.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "email": "some@gmail.com",
+  "firstName": "Some",
+  "surname": "Buddy",
+  "phoneNumber": "+380680972382",
+  "birthDate": "2004-11-06",
+  "password": "safepassword1234",
+  "role": "USER"
+}
+
+<> 2024-11-20T141959.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "email": "some@gmail.com",
+  "firstName": "Some",
+  "surname": "Buddy",
+  "phoneNumber": "+380680972382",
+  "birthDate": "2004-11-06",
+  "password": "safepassword1234",
+  "role": "USER"
+}
+
+<> 2024-11-20T141958.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "email": "some@gmail.com",
+  "firstName": "Some",
+  "surname": "Buddy",
+  "phoneNumber": "+380680972382",
+  "birthDate": "2004-11-06",
+  "password": "safepassword1234",
+  "role": "USER"
+}
+
+<> 2024-11-20T141957.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "email": "some@gmail.com",
+  "firstName": "Some",
+  "surname": "Buddy",
+  "phoneNumber": "+380680972382",
+  "birthDate": "2004-11-06",
+  "password": "safepassword1234",
+  "role": "USER"
+}
+
+<> 2024-11-20T141956.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "email": "some@gmail.com",
+  "firstName": "Some",
+  "surname": "Buddy",
+  "phoneNumber": "+380680972382",
+  "birthDate": "2004-11-06",
+  "password": "safepassword1234",
+  "role": "USER"
+}
+
+<> 2024-11-20T141937.200.json
+
+###
+
+GET http://localhost:8081/send-test-email
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+content-length: 0
+
+<> 2024-11-20T141811.404.json
+
+###
+
+GET http://localhost:8081/api/users/1
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+content-length: 0
+
+<> 2024-11-20T141801.404.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "email": "some@gmail.com",
+  "firstName": "Some",
+  "surname": "Buddy",
+  "phoneNumber": "+380680972382",
+  "birthDate": "2004-11-06",
+  "password": "safepassword1234",
+  "role": "USER"
+}
+
+<> 2024-11-20T141712.404.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "email": "some@gmail.com",
+  "firstName": "Some",
+  "surname": "Buddy",
+  "phoneNumber": "+380680972382",
+  "birthDate": "2004-11-06",
+  "password": "safepassword1234",
+  "role": "USER"
+}
+
+<> 2024-11-20T141651.404.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "email": "some@gmail.com",
+  "firstName": "Some",
+  "surname": "Buddy",
+  "phoneNumber": "+380680972382",
+  "birthDate": "2004-11-06",
+  "password": "safepassword1234",
+  "role": "USER"
+}
+
+<> 2024-11-20T141640.404.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "email": "some@gmail.com",
+  "firstName": "Some",
+  "surname": "Buddy",
+  "phoneNumber": "+380680972382",
+  "birthDate": "2004-11-06",
+  "password": "safepassword1234",
+  "role": "USER"
+}
+
+<> 2024-11-20T141304.500.json
+
+###
+
 POST http://localhost:8081/api/claims
 Content-Type: application/json
 Content-Length: 123
@@ -561,402 +946,6 @@ Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
 }
 
 <> 2024-11-19T140417.500.json
-
-###
-
-GET http://localhost:8081/send-test-email
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
-content-length: 0
-
-<> 2024-11-19T140250.200.txt
-
-###
-
-GET http://localhost:8081/api/agents/1
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
-content-length: 0
-
-<> 2024-11-18T144107.500.json
-
-###
-
-POST http://localhost:8081/api/auto-insurance
-Content-Type: application/json
-Content-Length: 182
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
-
-{
-  "coverageAmount": 50000,
-  "brand": "Toyota",
-  "model": "Corolla",
-  "year": 2021,
-  "plate": "AB1234AK",
-  "type": "BUS",
-  "insuranceType": "OSAGO",
-  "insurancePolicyId": 2
-}
-
-<> 2024-11-17T155653.200.json
-
-###
-
-POST http://localhost:8081/api/auto-insurance
-Content-Type: application/json
-Content-Length: 182
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
-
-{
-  "coverageAmount": 50000,
-  "brand": "Toyota",
-  "model": "Corolla",
-  "year": 2021,
-  "plate": "AB1234AK",
-  "type": "BUS",
-  "insuranceType": "OSAGO",
-  "insurancePolicyId": 2
-}
-
-<> 2024-11-17T154214.500.json
-
-###
-
-POST http://localhost:8081/api/auto-insurance
-Content-Type: application/json
-Content-Length: 182
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
-
-{
-  "coverageAmount": 50000,
-  "brand": "Toyota",
-  "model": "Corolla",
-  "year": 2021,
-  "plate": "AB1234AK",
-  "type": "BUS",
-  "insuranceType": "OSAGO",
-  "insurancePolicyId": 1
-}
-
-<> 2024-11-17T154150.500.json
-
-###
-
-POST http://localhost:8081/api/insurance-policies
-Content-Type: application/json
-Content-Length: 158
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
-
-{
-  "policyNumber": "POL1234678",
-  "userId": 1,
-  "startDate": "2024-12-10",
-  "endDate": "2025-12-01",
-  "insuranceType": "VEHICLE",
-  "policyHolderId": 1
-}
-
-<> 2024-11-17T154114.200.json
-
-###
-
-GET http://localhost:8081/api/auto-insurance/1
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
-content-length: 0
-
-<> 2024-11-17T151946.200.json
-
-###
-
-GET http://localhost:8081/api/auto-insurance/1
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
-content-length: 0
-
-<> 2024-11-17T151442.200.json
-
-###
-
-GET http://localhost:8081/api/auto-insurance/1
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
-content-length: 0
-
-<> 2024-11-17T150749.200.json
-
-###
-
-GET http://localhost:8081/api/auto-insurance/1
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
-content-length: 0
-
-<> 2024-11-17T150142.500.json
-
-###
-
-POST http://localhost:8081/api/users
-Content-Type: application/json
-Content-Length: 221
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=F5CF59C571A0F86701927D1E77C3CB0E
-
-{
-  "email": "admin@example.com",
-  "firstName": "John",
-  "surname": "Doe",
-  "phoneNumber": "+1234567890",
-  "birthDate": "1990-01-01",
-  "username": "admin_jdoe",
-  "password": "SecurePassword123!",
-  "role": "ADMIN"
-}
-
-###
-
-POST http://localhost:8081/api/users
-Content-Type: application/json
-Content-Length: 221
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=F5CF59C571A0F86701927D1E77C3CB0E
-
-{
-  "email": "admin@example.com",
-  "firstName": "John",
-  "surname": "Doe",
-  "phoneNumber": "+1234567890",
-  "birthDate": "1990-01-01",
-  "username": "admin_jdoe",
-  "password": "SecurePassword123!",
-  "role": "ADMIN"
-}
-
-###
-
-POST http://localhost:8081/api/users
-Content-Type: application/json
-Content-Length: 221
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=F5CF59C571A0F86701927D1E77C3CB0E
-
-{
-  "email": "admin@example.com",
-  "firstName": "John",
-  "surname": "Doe",
-  "phoneNumber": "+1234567890",
-  "birthDate": "1990-01-01",
-  "username": "admin_jdoe",
-  "password": "SecurePassword123!",
-  "role": "ADMIN"
-}
-
-###
-
-POST http://localhost:8081/api/policy-holders
-Content-Type: application/json
-Content-Length: 224
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=F5CF59C571A0F86701927D1E77C3CB0E
-
-{
-  "email": "holder@example.com",
-  "firstName": "Alice",
-  "surname": "Smith",
-  "phoneNumber": "+380501234567",
-  "birthDate": "1985-03-15",
-  "passportNumber": "AB1234567",
-  "address": "123 Main Street, Kyiv, Ukraine"
-}
-
-###
-
-POST http://localhost:8081/api/insurance-policies
-Content-Type: application/json
-Content-Length: 179
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=F5CF59C571A0F86701927D1E77C3CB0E
-
-{
-  "policyNumber": "POL12345678",
-  "userId": 1,
-  "startDate": "2024-01-01",
-  "endDate": "2025-01-01",
-  "price": 1200.50,
-  "insuranceType": "VEHICLE",
-  "policyHolderId": 1
-}
-
-###
-
-POST http://localhost:8081/api/policy-holders
-Content-Type: application/json
-Content-Length: 224
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=F5CF59C571A0F86701927D1E77C3CB0E
-
-{
-  "email": "holder@example.com",
-  "firstName": "Alice",
-  "surname": "Smith",
-  "phoneNumber": "+380501234567",
-  "birthDate": "1985-03-15",
-  "passportNumber": "AB1234567",
-  "address": "123 Main Street, Kyiv, Ukraine"
-}
-
-###
-
-POST http://localhost:8081/api/users
-Content-Type: application/json
-Content-Length: 221
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "admin@example.com",
-  "firstName": "John",
-  "surname": "Doe",
-  "phoneNumber": "+1234567890",
-  "birthDate": "1990-01-01",
-  "username": "admin_jdoe",
-  "password": "SecurePassword123!",
-  "role": "ADMIN"
-}
-
-###
-
-POST http://localhost:8081/api/claims
-Content-Type: application/json
-Content-Length: 193
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "submissionDate": "2024-11-17",
-  "amount": 200000,
-  "status": "PENDING",
-  "incidentDescription": "something happened unfortunately",
-  "claimType": "ACCIDENT",
-  "insurancePolicyId": 1
-}
-
-<> 2024-11-17T134846.200.json
-
-###
-
-POST http://localhost:8081/api/auto-insurance
-Content-Type: application/json
-Content-Length: 210
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "coverageAmount": 50000,
-  "insuranceLongevity": 12,
-  "brand": "Toyota",
-  "model": "Corolla",
-  "year": 2021,
-  "plate": "AB1234AK",
-  "type": "CAR",
-  "insuranceType": "OSAGO",
-  "insurancePolicyId": 1
-}
-
-<> 2024-11-17T134705.200.json
-
-###
-
-POST http://localhost:8081/api/auto-insurance
-Content-Type: application/json
-Content-Length: 212
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "coverageAmount": 50000,
-  "insuranceLongevity": 12,
-  "brand": "Toyota",
-  "model": "Corolla",
-  "year": 2021,
-  "plate": "AB1234AK",
-  "type": "CAR",
-  "insuranceType": "OSAGO",
-  "insurancePolicyId": 105
-}
-
-<> 2024-11-17T134653.500.json
-
-###
-
-POST http://localhost:8081/api/insurance-policies
-Content-Type: application/json
-Content-Length: 179
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "policyNumber": "POL12345678",
-  "userId": 1,
-  "startDate": "2024-01-01",
-  "endDate": "2025-01-01",
-  "price": 1200.50,
-  "insuranceType": "VEHICLE",
-  "policyHolderId": 1
-}
-
-<> 2024-11-17T134514.200.json
-
-###
-
-GET http://localhost:8081/api/agents/1
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-content-length: 0
-
-<> 2024-11-17T134314.500.json
 
 ###
 

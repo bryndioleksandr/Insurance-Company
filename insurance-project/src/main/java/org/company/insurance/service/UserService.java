@@ -85,36 +85,36 @@ public class UserService {
 //    }
 
     @Transactional
-    public Page<UserDto> getFilteredUsers(User user, Pageable pageable) {
+    public Page<UserDto> getFilteredUsers(Long id, LocalDate birthDate, String phoneNumber, String firstName, String surname, String email, String role, Pageable pageable) {
         Specification<User> specification = Specification.where(null);
 
-        if (user.getId() != null) {
+        if (id != null) {
             specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(root.get("id"), "%" + user.getId() + "%"));
+                    criteriaBuilder.like(root.get("id"), "%" + id + "%"));
         }
-        if(user.getBirthDate() != null) {
+        if(birthDate != null) {
             specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("birthDate")), "%" + user.getBirthDate() + "%"));
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("birthDate")), "%" + birthDate + "%"));
         }
-        if (user.getPhoneNumber() != null) {
+        if (phoneNumber != null) {
             specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(root.get("id"), "%" + user.getPhoneNumber() + "%"));
+                    criteriaBuilder.like(root.get("phoneNumber"), "%" + phoneNumber + "%"));
         }
-        if(user.getFirstName() != null && !user.getFirstName().isEmpty()) {
+        if(firstName != null && !firstName.isEmpty()) {
             specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("firstName")), "%" + user.getFirstName().toLowerCase() + "%"));
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("firstName")), "%" + firstName.toLowerCase() + "%"));
         }
-        if(user.getSurname() != null && !user.getSurname().isEmpty()) {
+        if(surname != null && !surname.isEmpty()) {
             specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("surname")), "%" + user.getSurname().toLowerCase() + "%"));
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("surname")), "%" + surname.toLowerCase() + "%"));
         }
-        if(user.getEmail() != null && !user.getEmail().isEmpty()) {
+        if(email != null && !email.isEmpty()) {
             specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("email")), "%" + user.getEmail().toLowerCase() + "%"));
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("email")), "%" + email.toLowerCase() + "%"));
         }
-        if(user.getRole() != null) {
+        if(role != null) {
             specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("role")), "%" + user.getRole().toString().toLowerCase() + "%"));
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("role")), "%" + role.toLowerCase() + "%"));
         }
 
         Page<User> users = userRepository.findAll(specification, pageable);
