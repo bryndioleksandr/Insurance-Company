@@ -14,6 +14,8 @@ import org.company.insurance.mapper.ClaimMapper;
 import org.company.insurance.repository.ClaimRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @Service
 public class ClaimService {
@@ -28,9 +30,11 @@ public class ClaimService {
         Claim claim = claimMapper.toEntity(claimDto);
 
         claim.setStatus(Status.PENDING);
+        claim.setSubmissionDate(LocalDate.now());
 
         claim = claimRepository.save(claim);
 
+        claim.setSubmissionDate(LocalDate.now());
         claim.setStatus(Status.PENDING);
         return claimMapper.toDto(claim);
        // return claimMapper.toDto(claimRepository.save(claimMapper.toEntity(claimDto)));

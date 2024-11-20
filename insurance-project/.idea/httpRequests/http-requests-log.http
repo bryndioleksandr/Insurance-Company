@@ -1,3 +1,113 @@
+POST http://localhost:8081/api/claims
+Content-Type: application/json
+Content-Length: 123
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "amount": 150000,
+  "incidentDescription": "Damaged car so hard",
+  "claimType": "ACCIDENT",
+  "insurancePolicyId": 1
+}
+
+<> 2024-11-20T122409.200.json
+
+###
+
+POST http://localhost:8081/api/auto-insurance
+Content-Type: application/json
+Content-Length: 190
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "engineCapacity": "1800",
+  "brand": "Honda",
+  "model": "Civic",
+  "year": 2012,
+  "plate": "BO9099CB",
+  "type": "CAR",
+  "insuranceType": "THEFT_VANDALISM",
+  "insurancePolicyId": 1
+}
+
+<> 2024-11-20T122150.200.json
+
+###
+
+POST http://localhost:8081/api/insurance-policies
+Content-Type: application/json
+Content-Length: 200
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "userId": 2,
+  "startDate": "2024-11-21",
+  "endDate": "2024-12-25",
+  "status": "INACTIVE",
+  "insuranceType": "VEHICLE",
+  "passportNumber": "001232131",
+  "address": "Some unknown address 11"
+}
+
+<> 2024-11-20T122017.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "email": "some@gmail.com",
+  "firstName": "Some",
+  "surname": "Buddy",
+  "phoneNumber": "+380680972382",
+  "birthDate": "2004-11-06",
+  "password": "safepassword1234",
+  "role": "USER"
+}
+
+<> 2024-11-20T121641.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 261
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=1FFD6E13E9269005DFEEDDE54379D975
+
+{
+  "email": "agent@gmail.com",
+  "firstName": "Oleksandr",
+  "surname": "Bryndio",
+  "phoneNumber": "+380680970382",
+  "birthDate": "2006-03-04",
+  "password": "safepassword1234",
+  "role": "AGENT",
+  "hireDate": "2024-11-20",
+  "position": "Senior Adjuster"
+}
+
+<> 2024-11-20T121551.200.json
+
+###
+
 POST http://localhost:8081/api/auto-insurance
 Content-Type: application/json
 Content-Length: 183
@@ -847,106 +957,6 @@ Accept: */*
 content-length: 0
 
 <> 2024-11-17T134314.500.json
-
-###
-
-POST http://localhost:8081/api/agents
-Content-Type: application/json
-Content-Length: 210
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "agent.john.doe@example.com",
-  "firstName": "John",
-  "surname": "Doe",
-  "phoneNumber": "+380631234567",
-  "birthDate": "1990-07-20",
-  "hireDate": "2020-05-15",
-  "position": "Claims Adjuster"
-}
-
-<> 2024-11-17T134224.200.json
-
-###
-
-POST http://localhost:8081/api/policy-holders
-Content-Type: application/json
-Content-Length: 224
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "holder@example.com",
-  "firstName": "Alice",
-  "surname": "Smith",
-  "phoneNumber": "+380501234567",
-  "birthDate": "1985-03-15",
-  "passportNumber": "AB1234567",
-  "address": "123 Main Street, Kyiv, Ukraine"
-}
-
-<> 2024-11-17T134146.200.json
-
-###
-
-POST http://localhost:8081/api/users
-Content-Type: application/json
-Content-Length: 221
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "admin@example.com",
-  "firstName": "John",
-  "surname": "Doe",
-  "phoneNumber": "+1234567890",
-  "birthDate": "1990-01-01",
-  "username": "admin_jdoe",
-  "password": "SecurePassword123!",
-  "role": "ADMIN"
-}
-
-<> 2024-11-17T134113.200.json
-
-###
-
-POST http://localhost:8081/api/health-insurances
-Content-Type: application/json
-Content-Length: 113
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "coverageAmount": 20000,
-  "insuranceLongevity": 500,
-  "medicalHistory": "GYUYU",
-  "insurancePolicyId": 2
-}
-
-<> 2024-11-17T003755.500.json
-
-###
-
-POST http://localhost:8081/api/health-insurances
-Content-Type: application/json
-Content-Length: 113
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "coverageAmount": 20000,
-  "insuranceLongevity": 500,
-  "medicalHistory": "GYUYU",
-  "insurancePolicyId": 1
-}
-
-<> 2024-11-17T003539.200.json
 
 ###
 
