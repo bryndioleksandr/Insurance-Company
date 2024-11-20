@@ -23,4 +23,10 @@ public class HealthInsuranceController {
     public ResponseEntity<HealthInsuranceDto> createHealthInsurance(@RequestBody HealthInsuranceCreationDto healthInsuranceDto){
         return ResponseEntity.ok(healthInsuranceService.createHealthInsurance(healthInsuranceDto));
     }
+
+//    @DeleteMapping("{id}")
+//    public ResponseEntity<Void> deleteHealthInsuranceById(@PathVariable Long id){
+//        healthInsuranceService.deleteHealthInsuranceById(id);
+//        return ResponseEntity.noContent().build();
+//    }
 }

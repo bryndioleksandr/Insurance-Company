@@ -10,6 +10,7 @@ import org.company.insurance.entity.InsurancePolicy;
 import org.company.insurance.enums.InsuranceStatus;
 import org.company.insurance.enums.Status;
 import org.company.insurance.exception.AutoInsuranceAlreadyExistsException;
+import org.company.insurance.exception.ClaimNotFoundException;
 import org.company.insurance.mapper.ClaimMapper;
 import org.company.insurance.repository.ClaimRepository;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,8 @@ public class ClaimService {
     private ClaimMapper claimMapper;
 
     public ClaimDto getClaimById(Long id) {
-        return claimMapper.toDto(claimRepository.findById(id).orElse(null));
+
+        return claimMapper.toDto(claimRepository.findById(id).orElseThrow(() -> new ClaimNotFoundException("Claim with id " + id + " not found")));
     }
 
     public ClaimDto createClaim(ClaimCreationDto claimDto) {

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.company.insurance.service.AutoInsuranceService;
 
 @RestController
-@RequestMapping("/api/auto-insurance")
+@RequestMapping("/api/auto-insurances")
 @AllArgsConstructor
 public class AutoInsuranceController {
     private final AutoInsuranceService autoInsuranceService;
@@ -25,10 +25,10 @@ public class AutoInsuranceController {
         return ResponseEntity.ok(autoInsuranceService.createAutoInsurance(autoInsuranceDto));
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteAutoInsuranceById(@PathVariable("id") Long id){
-        autoInsuranceService.deleteAutoInsuranceById(id);
-        return ResponseEntity.noContent().build();
-    }
+//    @DeleteMapping("{id}")
+//    public ResponseEntity<Void> deleteAutoInsuranceById(@PathVariable("id") Long id){
+//        autoInsuranceService.deleteAutoInsuranceById(id);
+//        return ResponseEntity.noContent().build();
+//    }
 
 }

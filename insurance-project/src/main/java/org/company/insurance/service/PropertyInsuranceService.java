@@ -11,6 +11,7 @@ import org.company.insurance.enums.InsuranceStatus;
 import org.company.insurance.enums.PropertyInsuranceType;
 import org.company.insurance.exception.HealthInsuranceAlreadyExistsException;
 import org.company.insurance.exception.PropertyInsuranceAlreadyExistsException;
+import org.company.insurance.exception.PropertyInsuranceNotFoundException;
 import org.company.insurance.mapper.PropertyInsuranceMapper;
 import org.company.insurance.repository.InsurancePolicyRepository;
 import org.company.insurance.repository.PropertyInsuranceRepository;
@@ -45,7 +46,7 @@ public class PropertyInsuranceService {
     }
 
     public PropertyInsuranceDto getPropertyInsuranceById(Long id) {
-        return propertyInsuranceMapper.toDto(propertyInsuranceRepository.findById(id).orElse(null));
+        return propertyInsuranceMapper.toDto(propertyInsuranceRepository.findById(id).orElseThrow(() -> new PropertyInsuranceNotFoundException("Property insurance with id " + id + " not found")));
     }
 
     public PropertyInsuranceDto createPropertyInsurance(PropertyInsuranceCreationDto propertyInsuranceDto) {

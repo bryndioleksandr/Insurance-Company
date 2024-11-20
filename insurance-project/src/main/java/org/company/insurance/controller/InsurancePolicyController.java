@@ -26,4 +26,10 @@ public class InsurancePolicyController {
         return ResponseEntity.ok(insurancePolicyService.createInsurancePolicy(insurancePolicy));
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteInsurancePolicyById(@PathVariable Long id){
+        insurancePolicyService.deleteInsurancePolicyById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

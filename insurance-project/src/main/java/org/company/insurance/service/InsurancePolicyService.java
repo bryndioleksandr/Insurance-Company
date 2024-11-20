@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.company.insurance.dto.InsurancePolicyCreationDto;
 import org.company.insurance.dto.InsurancePolicyDto;
 import org.company.insurance.entity.*;
+import org.company.insurance.exception.HealthInsuranceNotFoundException;
 import org.company.insurance.mapper.InsurancePolicyMapper;
 import org.company.insurance.repository.*;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class InsurancePolicyService {
 //    }
 
     public InsurancePolicyDto getInsurancePolicyById(Long id) {
-        return insurancePolicyMapper.toDto(insurancePolicyService.findById(id).orElse(null));
+        return insurancePolicyMapper.toDto(insurancePolicyService.findById(id).orElseThrow(() -> new HealthInsuranceNotFoundException("Health insurance policy with id " + id + " not found")));
     }
 
     private String generateRandomPolicyNumber() {

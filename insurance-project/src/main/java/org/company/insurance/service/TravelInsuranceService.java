@@ -10,6 +10,7 @@ import org.company.insurance.entity.TravelInsurance;
 import org.company.insurance.enums.InsuranceStatus;
 import org.company.insurance.exception.PropertyInsuranceAlreadyExistsException;
 import org.company.insurance.exception.TravelInsuranceAlreadyExistsException;
+import org.company.insurance.exception.TravelInsuranceNotFoundException;
 import org.company.insurance.mapper.TravelInsuranceMapper;
 import org.company.insurance.repository.InsurancePolicyRepository;
 import org.company.insurance.repository.TravelInsuranceRepository;
@@ -60,7 +61,7 @@ public class TravelInsuranceService {
     }
 
     public TravelInsuranceDto getTravelInsuranceById(Long id) {
-        return travelInsuranceMapper.toDto(travelInsuranceRepository.findById(id).orElse(null));
+        return travelInsuranceMapper.toDto(travelInsuranceRepository.findById(id).orElseThrow(() -> new TravelInsuranceNotFoundException("Travel insurance with id " + id + " not found")));
     }
 
     public TravelInsuranceDto createTravelInsurance(TravelInsuranceCreationDto travelInsuranceDto) {

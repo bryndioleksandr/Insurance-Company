@@ -24,4 +24,11 @@ public class ClaimAssessmentController {
     public ResponseEntity<ClaimAssessmentDto> createClaimAssessment(@RequestBody ClaimAssessmentCreationDto claimAssessmentDto){
         return ResponseEntity.ok(claimAssessmentService.createClaimAssessment(claimAssessmentDto));
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteClaimAssessment(@PathVariable Long id){
+        claimAssessmentService.deleteClaimAssessmentById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

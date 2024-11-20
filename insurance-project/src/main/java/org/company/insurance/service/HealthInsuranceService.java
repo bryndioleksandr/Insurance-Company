@@ -10,6 +10,7 @@ import org.company.insurance.enums.HealthInsuranceType;
 import org.company.insurance.enums.InsuranceStatus;
 import org.company.insurance.exception.AutoInsuranceAlreadyExistsException;
 import org.company.insurance.exception.HealthInsuranceAlreadyExistsException;
+import org.company.insurance.exception.HealthInsuranceNotFoundException;
 import org.company.insurance.mapper.HealthInsuranceMapper;
 import org.company.insurance.repository.HealthInsuranceRepository;
 import org.company.insurance.repository.InsurancePolicyRepository;
@@ -26,7 +27,7 @@ public class HealthInsuranceService {
     private final InsurancePolicyRepository insurancePolicyRepository;
 
     public HealthInsuranceDto getHealthInsuranceById(Long id) {
-        return healthInsuranceMapper.toDto(healthInsuranceRepository.findById(id).orElse(null));
+        return healthInsuranceMapper.toDto(healthInsuranceRepository.findById(id).orElseThrow(() -> new HealthInsuranceNotFoundException("Health insurance with id " + id + " not found")));
     }
 
     public HealthInsuranceDto createHealthInsurance(HealthInsuranceCreationDto healthInsuranceDto) {

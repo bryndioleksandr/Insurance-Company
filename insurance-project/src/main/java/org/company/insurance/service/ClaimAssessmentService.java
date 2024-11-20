@@ -4,6 +4,7 @@ import org.company.insurance.dto.ClaimAssessmentDto;
 import org.company.insurance.entity.Claim;
 import org.company.insurance.entity.ClaimAssessment;
 import org.company.insurance.enums.Status;
+import org.company.insurance.exception.ClaimAssessmentNotFoundException;
 import org.company.insurance.mapper.ClaimAssessmentMapper;
 import org.company.insurance.repository.ClaimAssessmentRepository;
 
@@ -19,7 +20,7 @@ public class ClaimAssessmentService {
     private ClaimAssessmentMapper claimAssessmentMapper;
 
     public ClaimAssessmentDto getClaimAssessmentById(Long id) {
-        return claimAssessmentMapper.toDto(claimAssessmentRepository.findById(id).orElse(null));
+        return claimAssessmentMapper.toDto(claimAssessmentRepository.findById(id).orElseThrow(() -> new ClaimAssessmentNotFoundException("Claim assessment with id " + id + " not found")));
     }
 
     public ClaimAssessmentDto createClaimAssessment(ClaimAssessmentCreationDto claimAssessmentDto) {

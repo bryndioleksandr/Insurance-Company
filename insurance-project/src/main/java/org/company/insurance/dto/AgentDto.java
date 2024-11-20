@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * DTO for {@link org.company.insurance.entity.Agent}
  */
-public record AgentDto(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, String email, String firstName,
-                       String surname, String phoneNumber, LocalDate birthDate, LocalDate hireDate, String position,
-                       List<Long> claimAssessmentIds) implements Serializable {
+public record AgentDto(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDate hireDate, String position,
+                       UserDto userDto) implements Serializable {
 }

@@ -9,6 +9,7 @@ import org.company.insurance.entity.InsurancePolicy;
 import org.company.insurance.enums.AutoInsuranceType;
 import org.company.insurance.enums.InsuranceStatus;
 import org.company.insurance.exception.AutoInsuranceAlreadyExistsException;
+import org.company.insurance.exception.AutoInsuranceNotFoundException;
 import org.company.insurance.repository.AutoInsuranceRepository;
 import org.company.insurance.repository.InsurancePolicyRepository;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class AutoInsuranceService {
     private AutoInsuranceMapper autoInsuranceMapper;
 
     public AutoInsuranceDto getAutoInsuranceById(Long id) {
-        return autoInsuranceMapper.toDto(autoInsuranceRepository.findById(id).orElse(null));
+        return autoInsuranceMapper.toDto(autoInsuranceRepository.findById(id).orElseThrow(() -> new AutoInsuranceNotFoundException("Auto insurance with id " + id + " not found")));
     }
 
 //    public AutoInsuranceDto createAutoInsurance(AutoInsuranceCreationDto autoInsuranceDto) {

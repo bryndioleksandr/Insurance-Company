@@ -23,4 +23,10 @@ public class ClaimController {
     public ResponseEntity<ClaimDto> createClaim(@RequestBody ClaimCreationDto claimCreationDto){
         return ResponseEntity.ok(claimService.createClaim(claimCreationDto));
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteClaim(@PathVariable Long id){
+        claimService.deleteClaimById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
