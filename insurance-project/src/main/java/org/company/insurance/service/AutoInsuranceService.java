@@ -16,6 +16,9 @@ import org.company.insurance.exception.AutoInsuranceAlreadyExistsException;
 import org.company.insurance.exception.AutoInsuranceNotFoundException;
 import org.company.insurance.repository.AutoInsuranceRepository;
 import org.company.insurance.repository.InsurancePolicyRepository;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,11 +34,14 @@ import java.util.Optional;
 @AllArgsConstructor
 @Service
 @Transactional
+@CacheConfig(cacheResolver = "multiLevelCacheResolver")
 public class AutoInsuranceService {
     private AutoInsuranceRepository autoInsuranceRepository;
     private final InsurancePolicyRepository insurancePolicyRepository;
     private AutoInsuranceMapper autoInsuranceMapper;
 
+    @Transactional
+    @Cacheable
     public AutoInsuranceDto getAutoInsuranceById(Long id) {
         return autoInsuranceMapper.toDto(autoInsuranceRepository.findById(id).orElseThrow(() -> new AutoInsuranceNotFoundException("Auto insurance with id " + id + " not found")));
     }
@@ -125,11 +131,14 @@ public AutoInsuranceDto createAutoInsurance(AutoInsuranceCreationDto autoInsuran
         return autoInsuranceMapper.toDto(autoInsuranceRepository.save(autoInsuranceMapper.toEntity(autoInsuranceDto)));
     }
 
+    @Transactional
+    @CacheEvict
     public void deleteAutoInsuranceById(Long id) {
         autoInsuranceRepository.deleteById(id);
     }
 
     @Transactional
+    @Cacheable
     public Page<AutoInsuranceDto> getAllAutoInsurances(Pageable pageable) {
         return autoInsuranceRepository.findAll(pageable).map(autoInsuranceMapper::toDto);
     }

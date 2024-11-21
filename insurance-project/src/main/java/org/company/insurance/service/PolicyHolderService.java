@@ -12,6 +12,8 @@ import org.company.insurance.entity.User;
 import org.company.insurance.exception.PolicyHolderNotFoundException;
 import org.company.insurance.mapper.PolicyHolderMapper;
 import org.company.insurance.repository.PolicyHolderRepository;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,27 +24,34 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Service
 @Transactional
+@CacheConfig(cacheResolver = "multiLevelCacheResolver")
 public class PolicyHolderService {
     private PolicyHolderRepository policyHolderRepository;
     private PolicyHolderMapper policyHolderMapper;
 
+    @Transactional
+    @Cacheable
     public PolicyHolderDto getPolicyHolderById(Long id) {
         return policyHolderMapper.toDto(policyHolderRepository.findById(id).orElseThrow(() -> new PolicyHolderNotFoundException("Policy holder with id " + id + " not found")));
     }
 
+    @Transactional
     public PolicyHolderDto createPolicyHolder(PolicyHolderCreationDto policyHolderDto) {
         return policyHolderMapper.toDto(policyHolderRepository.save(policyHolderMapper.toEntity(policyHolderDto)));
     }
 
+    @Transactional
     public PolicyHolderDto updatePolicyHolder(PolicyHolderDto policyHolderDto) {
         return policyHolderMapper.toDto(policyHolderRepository.save(policyHolderMapper.toEntity(policyHolderDto)));
     }
 
+    @Transactional
     public void deletePolicyHolderById(Long id) {
         policyHolderRepository.deleteById(id);
     }
-    
+
     @Transactional
+    @Cacheable
     public Page<PolicyHolderDto> getAllHolders(Pageable pageable) {
         return policyHolderRepository.findAll(pageable).map(policyHolderMapper::toDto);
     }

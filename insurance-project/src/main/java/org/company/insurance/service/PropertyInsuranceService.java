@@ -16,6 +16,9 @@ import org.company.insurance.exception.PropertyInsuranceNotFoundException;
 import org.company.insurance.mapper.PropertyInsuranceMapper;
 import org.company.insurance.repository.InsurancePolicyRepository;
 import org.company.insurance.repository.PropertyInsuranceRepository;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +31,8 @@ import java.time.temporal.ChronoUnit;
 
 @Service
 @AllArgsConstructor
+@Transactional
+@CacheConfig(cacheResolver = "multiLevelCacheResolver")
 public class PropertyInsuranceService {
     private final PropertyInsuranceRepository propertyInsuranceRepository;
     private final PropertyInsuranceMapper propertyInsuranceMapper;
@@ -51,10 +56,13 @@ public class PropertyInsuranceService {
         return coverageAmount.getAmount();
     }
 
+    @Transactional
+    @Cacheable
     public PropertyInsuranceDto getPropertyInsuranceById(Long id) {
         return propertyInsuranceMapper.toDto(propertyInsuranceRepository.findById(id).orElseThrow(() -> new PropertyInsuranceNotFoundException("Property insurance with id " + id + " not found")));
     }
 
+    @Transactional
     public PropertyInsuranceDto createPropertyInsurance(PropertyInsuranceCreationDto propertyInsuranceDto) {
         PropertyInsurance propertyInsurance = propertyInsuranceMapper.toEntity(propertyInsuranceDto);
 
@@ -78,15 +86,19 @@ public class PropertyInsuranceService {
         // return propertyInsuranceMapper.toDto(propertyInsuranceRepository.save(propertyInsuranceMapper.toEntity(propertyInsuranceDto)));
     }
 
+    @Transactional
     public PropertyInsuranceDto updatePropertyInsurance(PropertyInsuranceDto propertyInsuranceDto) {
         return propertyInsuranceMapper.toDto(propertyInsuranceRepository.save(propertyInsuranceMapper.toEntity(propertyInsuranceDto)));
     }
 
+    @Transactional
+    @CacheEvict
     public void deletePropertyInsuranceById(Long id) {
         propertyInsuranceRepository.deleteById(id);
     }
 
     @Transactional
+    @Cacheable
     public Page<PropertyInsuranceDto> getAllProperty(Pageable pageable) {
         return propertyInsuranceRepository.findAll(pageable).map(propertyInsuranceMapper::toDto);
     }

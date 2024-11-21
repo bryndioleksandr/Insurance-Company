@@ -17,6 +17,9 @@ import org.company.insurance.exception.TravelInsuranceNotFoundException;
 import org.company.insurance.mapper.TravelInsuranceMapper;
 import org.company.insurance.repository.InsurancePolicyRepository;
 import org.company.insurance.repository.TravelInsuranceRepository;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +32,8 @@ import java.time.temporal.ChronoUnit;
 
 @Service
 @AllArgsConstructor
+@Transactional
+@CacheConfig(cacheResolver = "multiLevelCacheResolver")
 public class TravelInsuranceService {
     private final TravelInsuranceRepository travelInsuranceRepository;
     private final TravelInsuranceMapper travelInsuranceMapper;
@@ -68,10 +73,13 @@ public class TravelInsuranceService {
         };
     }
 
+    @Transactional
+    @Cacheable
     public TravelInsuranceDto getTravelInsuranceById(Long id) {
         return travelInsuranceMapper.toDto(travelInsuranceRepository.findById(id).orElseThrow(() -> new TravelInsuranceNotFoundException("Travel insurance with id " + id + " not found")));
     }
 
+    @Transactional
     public TravelInsuranceDto createTravelInsurance(TravelInsuranceCreationDto travelInsuranceDto) {
         TravelInsurance travelInsurance = travelInsuranceMapper.toEntity(travelInsuranceDto);
 
@@ -95,15 +103,19 @@ public class TravelInsuranceService {
         // return travelInsuranceMapper.toDto(travelInsuranceRepository.save(travelInsuranceMapper.toEntity(travelInsuranceDto)));
     }
 
+    @Transactional
     public TravelInsuranceDto updateTravelInsurance(TravelInsuranceDto travelInsuranceDto) {
         return travelInsuranceMapper.toDto(travelInsuranceRepository.save(travelInsuranceMapper.toEntity(travelInsuranceDto)));
     }
 
+    @Transactional
+    @CacheEvict
     public void deleteTravelInsuranceById(Long id) {
         travelInsuranceRepository.deleteById(id);
     }
 
     @Transactional
+    @Cacheable
     public Page<TravelInsuranceDto> getAllTravels(Pageable pageable) {
         return travelInsuranceRepository.findAll(pageable).map(travelInsuranceMapper::toDto);
     }

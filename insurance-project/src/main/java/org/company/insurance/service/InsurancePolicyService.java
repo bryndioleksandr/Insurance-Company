@@ -12,6 +12,9 @@ import org.company.insurance.enums.InsuranceType;
 import org.company.insurance.exception.HealthInsuranceNotFoundException;
 import org.company.insurance.mapper.InsurancePolicyMapper;
 import org.company.insurance.repository.*;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +28,7 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 @Transactional
+@CacheConfig(cacheResolver = "multiLevelCacheResolver")
 public class InsurancePolicyService {
     private InsurancePolicyRepository insurancePolicyRepository;
     private InsurancePolicyMapper insurancePolicyMapper;
@@ -53,6 +57,8 @@ public class InsurancePolicyService {
 //        }
 //    }
 
+    @Transactional
+    @Cacheable
     public InsurancePolicyDto getInsurancePolicyById(Long id) {
         return insurancePolicyMapper.toDto(insurancePolicyRepository.findById(id).orElseThrow(() -> new HealthInsuranceNotFoundException("Health insurance policy with id " + id + " not found")));
     }
@@ -61,6 +67,7 @@ public class InsurancePolicyService {
         return String.format("%08d", (int) (Math.random() * 100000000));
     }
 
+    @Transactional
     public InsurancePolicyDto createInsurancePolicy(InsurancePolicyCreationDto insurancePolicyDto) {
         InsurancePolicy insurancePolicy = insurancePolicyMapper.toEntity(insurancePolicyDto);
 
@@ -85,15 +92,19 @@ public class InsurancePolicyService {
         return insurancePolicyMapper.toDto(insurancePolicy);
     }
 
+    @Transactional
     public InsurancePolicyDto updateInsurancePolicy(InsurancePolicyDto insurancePolicyDto) {
         return insurancePolicyMapper.toDto(insurancePolicyRepository.save(insurancePolicyMapper.toEntity(insurancePolicyDto)));
     }
 
+    @Transactional
+    @CacheEvict
     public void deleteInsurancePolicyById(Long id) {
         insurancePolicyRepository.deleteById(id);
     }
 
     @Transactional
+    @Cacheable
     public Page<InsurancePolicyDto> getAllInsurances(Pageable pageable) {
         return insurancePolicyRepository.findAll(pageable).map(insurancePolicyMapper::toDto);
     }

@@ -18,6 +18,9 @@ import org.company.insurance.exception.HealthInsuranceNotFoundException;
 import org.company.insurance.mapper.HealthInsuranceMapper;
 import org.company.insurance.repository.HealthInsuranceRepository;
 import org.company.insurance.repository.InsurancePolicyRepository;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,15 +33,19 @@ import java.time.temporal.ChronoUnit;
 
 @AllArgsConstructor
 @Service
+@CacheConfig(cacheResolver = "multiLevelCacheResolver")
 public class HealthInsuranceService {
     private HealthInsuranceRepository healthInsuranceRepository;
     private HealthInsuranceMapper healthInsuranceMapper;
     private final InsurancePolicyRepository insurancePolicyRepository;
 
+    @Transactional
+    @Cacheable
     public HealthInsuranceDto getHealthInsuranceById(Long id) {
         return healthInsuranceMapper.toDto(healthInsuranceRepository.findById(id).orElseThrow(() -> new HealthInsuranceNotFoundException("Health insurance with id " + id + " not found")));
     }
 
+    @Transactional
     public HealthInsuranceDto createHealthInsurance(HealthInsuranceCreationDto healthInsuranceDto) {
         HealthInsurance healthInsurance = healthInsuranceMapper.toEntity(healthInsuranceDto);
 
@@ -93,15 +100,19 @@ public class HealthInsuranceService {
         };
     }
 
+    @Transactional
     public HealthInsuranceDto updateHealthInsurance(HealthInsuranceDto healthInsuranceDto) {
         return healthInsuranceMapper.toDto(healthInsuranceRepository.save(healthInsuranceMapper.toEntity(healthInsuranceDto)));
     }
 
+    @Transactional
+    @CacheEvict
     public void deleteHealthInsuranceById(Long id) {
         healthInsuranceRepository.deleteById(id);
     }
 
     @Transactional
+    @Cacheable
     public Page<HealthInsuranceDto> getAllHealth(Pageable pageable) {
         return healthInsuranceRepository.findAll(pageable).map(healthInsuranceMapper::toDto);
     }

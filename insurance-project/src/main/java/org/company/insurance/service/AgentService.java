@@ -10,6 +10,9 @@ import org.company.insurance.entity.Agent;
 import org.company.insurance.entity.User;
 import org.company.insurance.exception.AgentAlreadyExistsException;
 import org.company.insurance.repository.UserRepository;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,12 +29,14 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
+@CacheConfig(cacheResolver = "multiLevelCacheResolver")
 public class AgentService {
     private AgentRepository agentRepository;
     private AgentMapper agentMapper;
     private UserRepository userRepository;
 
     @Transactional
+    @Cacheable
     public AgentDto getAgentById(Long id) {
         return agentMapper.toDto(agentRepository.findById(id)
                 .orElseThrow(() -> new AgentNotFoundException("Agent with id " + id + " not found")));
@@ -53,6 +58,7 @@ public class AgentService {
             return agentMapper.toDto(agentRepository.save(agentMapper.toEntity(agentDto)));
     }
 
+    @CacheEvict
     public void deleteAgentById(Long id) {
         if (!agentRepository.existsById(id)) {
             throw new AgentNotFoundException("Agent with id " + id + " not found");
@@ -61,6 +67,7 @@ public class AgentService {
     }
 
     @Transactional
+    @Cacheable
     public Page<AgentDto> getAllAgents(Pageable pageable) {
         return agentRepository.findAll(pageable).map(agentMapper::toDto);
     }

@@ -14,6 +14,9 @@ import org.company.insurance.exception.UserNotFoundException;
 import org.company.insurance.mapper.UserMapper;
 import org.company.insurance.repository.AgentRepository;
 import org.company.insurance.repository.UserRepository;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,16 +29,20 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Service
 @Transactional
+@CacheConfig(cacheResolver = "multiLevelCacheResolver")
 public class UserService {
     private UserRepository userRepository;
     private UserMapper userMapper;
     private AgentRepository agentRepository;
 
+    @Transactional
+    @Cacheable
     public UserDto getUserById(Long id) {
 
         return userMapper.toDto(userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found")));
     }
 
+    @Transactional
     public UserDto createUser(UserCreationDto userDto) {
         User user = userMapper.toEntity(userDto);
 
@@ -51,15 +58,19 @@ public class UserService {
         return userMapper.toDto(savedUser);
     }
 
+    @Transactional
     public UserDto updateUser(UserDto userDto) {
         return userMapper.toDto(userRepository.save(userMapper.toEntity(userDto)));
     }
 
+    @Transactional
+    @CacheEvict
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
 
     @Transactional
+    @Cacheable
     public Page<UserDto> getAllUsers(Pageable pageable) {
         return userRepository.findAll(pageable).map(userMapper::toDto);
     }

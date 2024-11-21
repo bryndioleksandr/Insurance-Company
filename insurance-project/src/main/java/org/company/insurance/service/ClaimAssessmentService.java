@@ -16,6 +16,8 @@ import org.company.insurance.mapper.ClaimAssessmentMapper;
 import org.company.insurance.repository.ClaimAssessmentRepository;
 
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,10 +29,13 @@ import java.time.LocalDate;
 
 @AllArgsConstructor
 @Service
+@CacheConfig(cacheResolver = "multiLevelCacheResolver")
 public class ClaimAssessmentService {
     private ClaimAssessmentRepository claimAssessmentRepository;
     private ClaimAssessmentMapper claimAssessmentMapper;
 
+    @Transactional
+    @Cacheable
     public ClaimAssessmentDto getClaimAssessmentById(Long id) {
         return claimAssessmentMapper.toDto(claimAssessmentRepository.findById(id).orElseThrow(() -> new ClaimAssessmentNotFoundException("Claim assessment with id " + id + " not found")));
     }
@@ -55,6 +60,7 @@ public class ClaimAssessmentService {
     }
 
     @Transactional
+    @Cacheable
     public Page<ClaimAssessmentDto> getAllClaimAssessments(Pageable pageable) {
         return claimAssessmentRepository.findAll(pageable).map(claimAssessmentMapper::toDto);
     }

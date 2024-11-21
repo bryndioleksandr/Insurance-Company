@@ -18,6 +18,9 @@ import org.company.insurance.exception.AutoInsuranceAlreadyExistsException;
 import org.company.insurance.exception.ClaimNotFoundException;
 import org.company.insurance.mapper.ClaimMapper;
 import org.company.insurance.repository.ClaimRepository;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,15 +32,19 @@ import java.time.LocalDate;
 
 @AllArgsConstructor
 @Service
+@CacheConfig(cacheResolver = "multiLevelCacheResolver")
 public class ClaimService {
     private ClaimRepository claimRepository;
     private ClaimMapper claimMapper;
 
+    @Transactional
+    @Cacheable
     public ClaimDto getClaimById(Long id) {
 
         return claimMapper.toDto(claimRepository.findById(id).orElseThrow(() -> new ClaimNotFoundException("Claim with id " + id + " not found")));
     }
 
+    @Transactional
     public ClaimDto createClaim(ClaimCreationDto claimDto) {
         Claim claim = claimMapper.toEntity(claimDto);
 
@@ -52,15 +59,19 @@ public class ClaimService {
        // return claimMapper.toDto(claimRepository.save(claimMapper.toEntity(claimDto)));
     }
 
+    @Transactional
     public ClaimDto updateClaim(ClaimDto claimDto) {
         return claimMapper.toDto(claimRepository.save(claimMapper.toEntity(claimDto)));
     }
 
+    @Transactional
+    @CacheEvict
     public void deleteClaimById(Long id) {
         claimRepository.deleteById(id);
     }
 
     @Transactional
+    @Cacheable
     public Page<ClaimDto> getAllClaims(Pageable pageable) {
         return claimRepository.findAll(pageable).map(claimMapper::toDto);
     }
