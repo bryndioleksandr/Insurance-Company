@@ -23,6 +23,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -54,6 +56,9 @@ public class UserService {
         if(userRepository.existsByPhoneNumber(phoneNumber)) {
             throw new UserAlreadyExistsException("User with phone number " + phoneNumber + " already exists");
         }
+        if(userRepository.existsByUsername(userDto.username())) {
+            throw new UserAlreadyExistsException("User with username " + userDto.username() + " already exists");
+        }
         User savedUser = userRepository.save(user);
         if (user.getRole() == Role.AGENT) {
             Agent agent = new Agent();
@@ -64,6 +69,34 @@ public class UserService {
         }
 
         return userMapper.toDto(savedUser);
+    }
+
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("User with username " + username + " not found"));
+    }
+
+    public User getCurrentUser() {
+        var username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return getByUsername(username);
+    }
+
+    @Deprecated
+    public void getAdmin() {
+        var user = getCurrentUser();
+        user.setRole(Role.ADMIN);
+        userRepository.save(user);
+    }
+
+    @Deprecated
+    public void getAgent() {
+        var user = getCurrentUser();
+        user.setRole(Role.AGENT);
+        userRepository.save(user);
+    }
+
+    public UserDetailsService userDetailsService() {
+        return this::getByUsername;
     }
 
     @Transactional

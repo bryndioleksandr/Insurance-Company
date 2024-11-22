@@ -1,11 +1,19 @@
 package org.company.insurance.config;
 
-import io.swagger.v3.oas.models.info.Info;
-import org.springdoc.core.models.GroupedOpenApi;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@OpenAPIDefinition(
+        info = @Info(
+                title = "API Documentation",
+                version = "1.0",
+                description = "Documentation for my project"
+        )
+)
 public class SwaggerConfig {
 
     @Bean
@@ -14,14 +22,5 @@ public class SwaggerConfig {
                 .group("public")
                 .pathsToMatch("/api/**")
                 .build();
-    }
-
-    @Bean
-    public io.swagger.v3.oas.models.OpenAPI customOpenAPI() {
-        return new io.swagger.v3.oas.models.OpenAPI()
-                .info(new Info()
-                        .title("API Documentation")
-                        .version("1.0")
-                        .description("Документація для мого проекту"));
     }
 }

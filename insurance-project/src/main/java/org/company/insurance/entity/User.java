@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Builder
 @Table(name = "users")
 @Getter
 @Setter
@@ -19,7 +20,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class User extends Person implements UserDetails {
+public class User extends Person implements UserDetails{
+
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -40,9 +44,12 @@ public class User extends Person implements UserDetails {
         return password;
     }
 
-    @Override
     public String getUsername() {
-        return "";
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override

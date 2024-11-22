@@ -17,6 +17,7 @@ public record UserCreationDto(
                               @NotBlank
                               @Size(max = 255)
                               String email,
+                              String username,
                               @NotBlank @Size(max = 255) String firstName,
                               @NotBlank @Size(max = 255) String surname,
                               @NotBlank @Size(max = 21)
