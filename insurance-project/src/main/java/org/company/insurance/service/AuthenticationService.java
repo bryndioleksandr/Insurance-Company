@@ -20,12 +20,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final UserMapper userMapper;
 
-    /**
-     * Регистрация пользователя
-     *
-     * @param request данные пользователя
-     * @return токен
-     */
+
     public JwtAuthenticationResponse signUp(SignUpRequest request) {
         var user = org.company.insurance.entity.User.builder()
                 .username(request.getUsername())
@@ -40,12 +35,7 @@ public class AuthenticationService {
         var jwt = jwtService.generateToken(user);
         return new JwtAuthenticationResponse(jwt);
     }
-    /**
-     * Аутентификация пользователя
-     *
-     * @param request данные пользователя
-     * @return токен
-     */
+
     public JwtAuthenticationResponse signIn(SignInRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getUsername(),
