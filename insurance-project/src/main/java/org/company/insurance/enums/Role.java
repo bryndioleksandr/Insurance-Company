@@ -1,7 +1,7 @@
 package org.company.insurance.enums;
 
 public enum Role {
-    ADMIN,
-    USER,
-    AGENT
+    ROLE_ADMIN,
+    ROLE_USER,
+    ROLE_AGENT
 }

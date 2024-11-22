@@ -60,7 +60,7 @@ public class UserService {
             throw new UserAlreadyExistsException("User with username " + userDto.username() + " already exists");
         }
         User savedUser = userRepository.save(user);
-        if (user.getRole() == Role.AGENT) {
+        if (user.getRole() == Role.ROLE_AGENT) {
             Agent agent = new Agent();
             agent.setUserId(savedUser);
             agent.setHireDate(userDto.hireDate());
@@ -84,14 +84,14 @@ public class UserService {
     @Deprecated
     public void getAdmin() {
         var user = getCurrentUser();
-        user.setRole(Role.ADMIN);
+        user.setRole(Role.ROLE_ADMIN);
         userRepository.save(user);
     }
 
     @Deprecated
     public void getAgent() {
         var user = getCurrentUser();
-        user.setRole(Role.AGENT);
+        user.setRole(Role.ROLE_AGENT);
         userRepository.save(user);
     }
 

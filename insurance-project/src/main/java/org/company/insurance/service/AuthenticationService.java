@@ -26,7 +26,7 @@ public class AuthenticationService {
                 .username(request.getUsername())
                 //.email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
+                .role(Role.ROLE_ADMIN)
                 .build();
 
         UserCreationDto userDto = userMapper.toCrDto(user);

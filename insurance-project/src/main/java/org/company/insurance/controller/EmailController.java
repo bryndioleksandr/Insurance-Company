@@ -20,14 +20,14 @@ public class EmailController {
     }
 
     @GetMapping("/send-test-email")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String sendTestEmail() {
         emailService.sendTestEmail();
         return "Test email sent!";
     }
     @GetMapping("/admin")
     @Operation(summary = "Доступен только авторизованным пользователям с ролью ADMIN")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String exampleAdmin() {
         return "Hello, admin!";
     }
