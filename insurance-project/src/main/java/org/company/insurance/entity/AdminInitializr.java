@@ -42,10 +42,6 @@ public class AdminInitializr {
 
     @PostConstruct
     public void initializeAdmin() {
-        System.out.println("Admin username: " + adminUsername);
-        System.out.println("Admin password: " + adminPassword);
-        System.out.println("Admin email: " + adminEmail);
-        System.out.println("Admin phone: " + phoneNumber);
         String firstName = "Oleksandr";
         String surname = "Bryndio";
         LocalDate birthDate = LocalDate.of(2006, 3, 4);
