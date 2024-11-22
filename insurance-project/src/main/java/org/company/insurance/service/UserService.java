@@ -10,6 +10,7 @@ import org.company.insurance.entity.Agent;
 import org.company.insurance.entity.User;
 import org.company.insurance.enums.Role;
 import org.company.insurance.exception.AgentNotFoundException;
+import org.company.insurance.exception.UserAlreadyExistsException;
 import org.company.insurance.exception.UserNotFoundException;
 import org.company.insurance.mapper.UserMapper;
 import org.company.insurance.repository.AgentRepository;
@@ -44,8 +45,15 @@ public class UserService {
 
     @Transactional
     public UserDto createUser(UserCreationDto userDto) {
+        String email = userDto.email();
+        String phoneNumber = userDto.phoneNumber();
         User user = userMapper.toEntity(userDto);
-
+        if(userRepository.existsByEmail(email)) {
+            throw new UserAlreadyExistsException("User with email " + email + " already exists");
+        }
+        if(userRepository.existsByPhoneNumber(phoneNumber)) {
+            throw new UserAlreadyExistsException("User with phone number " + phoneNumber + " already exists");
+        }
         User savedUser = userRepository.save(user);
         if (user.getRole() == Role.AGENT) {
             Agent agent = new Agent();
