@@ -12,6 +12,7 @@ import org.company.insurance.enums.Role;
 import org.company.insurance.exception.AgentNotFoundException;
 import org.company.insurance.exception.UserAlreadyExistsException;
 import org.company.insurance.exception.UserNotFoundException;
+import org.company.insurance.mapper.AgentMapper;
 import org.company.insurance.mapper.UserMapper;
 import org.company.insurance.repository.AgentRepository;
 import org.company.insurance.repository.UserRepository;
@@ -28,6 +29,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @AllArgsConstructor
 @Service
@@ -60,13 +62,13 @@ public class UserService {
             throw new UserAlreadyExistsException("User with username " + userDto.username() + " already exists");
         }
         User savedUser = userRepository.save(user);
-        if (user.getRole() == Role.ROLE_AGENT) {
-            Agent agent = new Agent();
-            agent.setUserId(savedUser);
-            agent.setHireDate(userDto.hireDate());
-            agent.setPosition(userDto.position());
-            agentRepository.save(agent);
-        }
+//        if (user.getRole() == Role.ROLE_AGENT) {
+//            Agent agent = new Agent();
+//            agent.setUserId(savedUser);
+//            agent.setHireDate(userDto.hireDate());
+//            agent.setPosition(userDto.position());
+//            agentRepository.save(agent);
+//        }
 
         return userMapper.toDto(savedUser);
     }
@@ -76,13 +78,31 @@ public class UserService {
         return userMapper.toDto(userRepository.save(userMapper.toEntity(userDto)));
     }
 
-//    @Transactional
-//    public UserDto updateUserDetails(UserDto userDto) {
-//        User existingUser = getCurrentUser();
-//        userMapper.partialUpdate(userDto, existingUser);
-//
-//        User updatedUser = userRepository.save(existingUser);
-//
+    @Transactional
+    public UserDto assignAgentToUser(String username, LocalDate hireDate, String position) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("User with username " + username + " not found"));
+        user.setRole(Role.ROLE_AGENT);
+        Agent agent = new Agent();
+        agent.setPosition(position);
+        agent.setHireDate(hireDate);
+        agent.setUserId(user);
+        agentRepository.save(agent);
+        userRepository.save(user);
+        return userMapper.toDto(user);
+    }
+
+
+
+
+
+    @Transactional
+    public UserDto updateUserDetails(UserDto userDto) {
+        User existingUser = getCurrentUser();
+        userMapper.partialUpdate(userDto, existingUser);
+
+        User updatedUser = userRepository.save(existingUser);
+
 //        if (updatedUser.getRole() == Role.ROLE_AGENT) {
 //            Agent agent = agentRepository.findByUserId(updatedUser)
 //                    .orElse(new Agent());
@@ -93,9 +113,9 @@ public class UserService {
 //
 //            agentRepository.save(agent);
 //        }
-//
-//        return userMapper.toDto(updatedUser);
-//    }
+
+        return userMapper.toDto(updatedUser);
+    }
 
 
     public User getByUsername(String username) {

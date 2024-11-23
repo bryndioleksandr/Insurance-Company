@@ -25,12 +25,11 @@ public record UserCreationDto(
                               String phoneNumber,
                               @Past
                               LocalDate birthDate,
-                              @NotBlank
                               String password,
-                              Role role,
-                              @Past
-                              LocalDate hireDate,
-                              @Size(max = 255)
-                              String position
+                              Role role
+//                              @Past
+//                              LocalDate hireDate,
+//                              @Size(max = 255)
+//                              String position
                               ) implements Serializable {
 }

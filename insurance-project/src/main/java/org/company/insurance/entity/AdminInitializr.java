@@ -57,9 +57,9 @@ public class AdminInitializr {
                     phoneNumber,
                     birthDate,
                     passwordEncoder.encode(adminPassword),
-                    Role.valueOf(role),
-                    hireDate,
-                    position
+                    Role.valueOf(role)
+//                    hireDate,
+//                    position
             );
             userService.createUser(adminDto);
             System.out.println("Initial admin user created: " + adminUsername);

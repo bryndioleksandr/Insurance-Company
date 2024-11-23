@@ -8,7 +8,7 @@ import org.mapstruct.*;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UserMapper {
     //@Mapping "username", source = "username")
-    @Mapping(target = "password", source = "password")
+    //@Mapping(target = "password", source = "password")
     @Mapping(target = "role", source = "role")
     User toEntity(UserDto userDto);
 

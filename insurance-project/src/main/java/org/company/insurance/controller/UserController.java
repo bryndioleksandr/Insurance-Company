@@ -44,6 +44,23 @@ public class UserController {
 //        return ResponseEntity.ok(userService.updateUserDetails(userDto));
 //    }
 
+    @PutMapping("/update")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
+    public UserDto updateUserDetails(@RequestBody  UserDto userDto) {
+        return userService.updateUserDetails(userDto);
+    }
+
+
+    @PutMapping("/assign-agent/{username}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public UserDto assignAgentToUser(
+            @PathVariable("username") String username,
+            @RequestParam(name = "hireDate", required = false) LocalDate hireDate,
+            @RequestParam(name = "position") String position) {
+        return userService.assignAgentToUser(username, hireDate, position);
+    }
+
+
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteUserById(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
