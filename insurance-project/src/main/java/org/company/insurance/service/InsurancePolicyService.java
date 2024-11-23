@@ -92,6 +92,9 @@ public class InsurancePolicyService {
 //                AutoInsurance autoInsurance = new AutoInsurance();
 //                autoInsurance.set
 //        }
+
+        // I have insurancePolicy id, then I can create subclass and set immediately here insurancePolicy id to it.
+        // Then after this I can add additional info to subclass by another endpoint.
         PolicyHolder policyHolder = policyHolderRepository.findByUserId(user)
                 .orElseGet(() -> {
                     PolicyHolder newPolicyHolder = new PolicyHolder();
