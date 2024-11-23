@@ -15,7 +15,6 @@ import java.util.Date;
 public record InsurancePolicyCreationDto(
                                           String policyNumber,
 
-                                          @NotNull(message = "User ID cannot be null")
                                           Long userId,
 
                                           @NotNull(message = "Start date cannot be null")

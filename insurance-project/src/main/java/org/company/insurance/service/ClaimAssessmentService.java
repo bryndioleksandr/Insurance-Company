@@ -10,9 +10,11 @@ import org.company.insurance.dto.ClaimDto;
 import org.company.insurance.entity.Agent;
 import org.company.insurance.entity.Claim;
 import org.company.insurance.entity.ClaimAssessment;
+import org.company.insurance.entity.User;
 import org.company.insurance.enums.Status;
 import org.company.insurance.exception.ClaimAssessmentNotFoundException;
 import org.company.insurance.mapper.ClaimAssessmentMapper;
+import org.company.insurance.repository.AgentRepository;
 import org.company.insurance.repository.ClaimAssessmentRepository;
 
 import lombok.AllArgsConstructor;
@@ -33,6 +35,8 @@ import java.time.LocalDate;
 public class ClaimAssessmentService {
     private ClaimAssessmentRepository claimAssessmentRepository;
     private ClaimAssessmentMapper claimAssessmentMapper;
+    private UserService userService;
+    private AgentRepository agentRepository;
 
     @Transactional
     @Cacheable
@@ -43,6 +47,7 @@ public class ClaimAssessmentService {
     public ClaimAssessmentDto createClaimAssessment(ClaimAssessmentCreationDto claimAssessmentDto) {
         ClaimAssessment claimAssessment = claimAssessmentMapper.toEntity(claimAssessmentDto);
 
+        claimAssessment.setAgent(agentRepository.findByUserId(userService.getCurrentUser()));
         claimAssessment.setAssessmentDate(LocalDate.now());
         claimAssessment = claimAssessmentRepository.save(claimAssessment);
 

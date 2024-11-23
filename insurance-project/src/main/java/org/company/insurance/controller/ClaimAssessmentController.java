@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -29,6 +30,7 @@ public class ClaimAssessmentController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_AGENT')")
     public ResponseEntity<ClaimAssessmentDto> createClaimAssessment(@RequestBody ClaimAssessmentCreationDto claimAssessmentDto){
         return ResponseEntity.ok(claimAssessmentService.createClaimAssessment(claimAssessmentDto));
     }

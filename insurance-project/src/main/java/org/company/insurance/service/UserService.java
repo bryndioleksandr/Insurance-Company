@@ -123,6 +123,7 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("User with username " + username + " not found"));
     }
 
+
     public User getCurrentUser() {
         var username = SecurityContextHolder.getContext().getAuthentication().getName();
         return getByUsername(username);

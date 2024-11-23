@@ -25,6 +25,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.company.insurance.enums.InsuranceType.VEHICLE;
+
 @AllArgsConstructor
 @Service
 @Transactional
@@ -34,6 +36,11 @@ public class InsurancePolicyService {
     private InsurancePolicyMapper insurancePolicyMapper;
     private UserRepository userRepository;
     private PolicyHolderRepository policyHolderRepository;
+    private UserService userService;
+    private AutoInsuranceService autoInsuranceService;
+    private TravelInsuranceService travelInsuranceService;
+    private PropertyInsuranceService propertyInsuranceService;
+    private HealthInsuranceService healthInsuranceService;
 
 //    private InsuranceStatus determineInsuranceStatus(InsurancePolicy policy) {
 //        LocalDate endDate = policy.getEndDate();
@@ -70,12 +77,21 @@ public class InsurancePolicyService {
     @Transactional
     public InsurancePolicyDto createInsurancePolicy(InsurancePolicyCreationDto insurancePolicyDto) {
         InsurancePolicy insurancePolicy = insurancePolicyMapper.toEntity(insurancePolicyDto);
+        User user = userService.getCurrentUser();
 
         insurancePolicy.setPolicyNumber(generateRandomPolicyNumber());
+        insurancePolicy.setUser(user);
+//        User user = userRepository.findById(insurancePolicyDto.userId())
+//                .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        User user = userRepository.findById(insurancePolicyDto.userId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
-
+        // Trying to create subtype of insurance right after creating insurance policy.
+        // But idk how to receive id of this subclass.
+//        String insuranceType = insurancePolicyDto.insuranceType().toString();
+//        switch(insuranceType){
+//            case "VEHICLE":
+//                AutoInsurance autoInsurance = new AutoInsurance();
+//                autoInsurance.set
+//        }
         PolicyHolder policyHolder = policyHolderRepository.findByUserId(user)
                 .orElseGet(() -> {
                     PolicyHolder newPolicyHolder = new PolicyHolder();

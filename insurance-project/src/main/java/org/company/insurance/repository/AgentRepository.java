@@ -17,5 +17,5 @@ public interface AgentRepository extends JpaRepository<Agent, Long>, JpaSpecific
     @EntityGraph(attributePaths = {"userId"})
     Optional<Agent> findById(Long id);
 
-    Optional<Agent> findByUserId(User userId);
+    Agent findByUserId(User userId);
 }
