@@ -71,6 +71,33 @@ public class UserService {
         return userMapper.toDto(savedUser);
     }
 
+    @Transactional
+    public UserDto updateUser(UserDto userDto) {
+        return userMapper.toDto(userRepository.save(userMapper.toEntity(userDto)));
+    }
+
+//    @Transactional
+//    public UserDto updateUserDetails(UserDto userDto) {
+//        User existingUser = getCurrentUser();
+//        userMapper.partialUpdate(userDto, existingUser);
+//
+//        User updatedUser = userRepository.save(existingUser);
+//
+//        if (updatedUser.getRole() == Role.ROLE_AGENT) {
+//            Agent agent = agentRepository.findByUserId(updatedUser)
+//                    .orElse(new Agent());
+//
+//            agent.setUserId(updatedUser);
+//            agent.setHireDate(userDto.hireDate());
+//            agent.setPosition(userDto.position());
+//
+//            agentRepository.save(agent);
+//        }
+//
+//        return userMapper.toDto(updatedUser);
+//    }
+
+
     public User getByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("User with username " + username + " not found"));
@@ -99,10 +126,6 @@ public class UserService {
         return this::getByUsername;
     }
 
-    @Transactional
-    public UserDto updateUser(UserDto userDto) {
-        return userMapper.toDto(userRepository.save(userMapper.toEntity(userDto)));
-    }
 
     @Transactional
     @CacheEvict

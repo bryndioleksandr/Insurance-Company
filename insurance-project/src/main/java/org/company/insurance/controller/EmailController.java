@@ -20,7 +20,7 @@ public class EmailController {
     }
 
     @GetMapping("/send-test-email")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_AGENT')")
     public String sendTestEmail() {
         emailService.sendTestEmail();
         return "Test email sent!";

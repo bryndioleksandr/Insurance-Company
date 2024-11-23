@@ -1,6 +1,7 @@
 package org.company.insurance.repository;
 
 import org.company.insurance.entity.Agent;
+import org.company.insurance.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -15,4 +16,6 @@ public interface AgentRepository extends JpaRepository<Agent, Long>, JpaSpecific
 
     @EntityGraph(attributePaths = {"userId"})
     Optional<Agent> findById(Long id);
+
+    Optional<Agent> findByUserId(User userId);
 }

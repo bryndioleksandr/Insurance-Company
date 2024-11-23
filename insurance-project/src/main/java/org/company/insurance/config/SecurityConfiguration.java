@@ -55,6 +55,7 @@ public class SecurityConfiguration {
                                 "/webjars/**",
                                 "/api-docs/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/users/**").hasAnyRole("USER", "AGENT", "ADMIN")
                         .requestMatchers("/agent/**").hasRole("AGENT")
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
