@@ -5,13 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63f9a081-d918-4168-8f21-a8aac09d1e61" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/AgentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/AgentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/AutoInsuranceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/AutoInsuranceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/ClaimAssessmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/ClaimAssessmentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/ClaimController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/ClaimController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/InsurancePolicyCreationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/InsurancePolicyCreationDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/AgentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/AgentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/ClaimAssessmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/ClaimAssessmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/InsurancePolicyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/InsurancePolicyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/HealthInsuranceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/HealthInsuranceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/InsurancePolicyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/InsurancePolicyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/PolicyHolderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/PolicyHolderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/PropertyInsuranceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/PropertyInsuranceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/TravelInsuranceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/TravelInsuranceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/AgentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/AgentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/AutoInsuranceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/AutoInsuranceService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,6 +149,7 @@
       <workItem from="1732310742559" duration="222000" />
       <workItem from="1732311102617" duration="1859000" />
       <workItem from="1732350087576" duration="9475000" />
+      <workItem from="1732400317943" duration="2247000" />
     </task>
     <servers />
   </component>

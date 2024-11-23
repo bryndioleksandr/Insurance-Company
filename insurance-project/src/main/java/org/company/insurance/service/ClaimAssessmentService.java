@@ -18,6 +18,8 @@ import org.company.insurance.repository.AgentRepository;
 import org.company.insurance.repository.ClaimAssessmentRepository;
 
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -33,6 +35,8 @@ import java.time.LocalDate;
 @Service
 @CacheConfig(cacheResolver = "multiLevelCacheResolver")
 public class ClaimAssessmentService {
+    private static final Logger logger = LoggerFactory.getLogger(ClaimAssessmentService.class);
+
     private ClaimAssessmentRepository claimAssessmentRepository;
     private ClaimAssessmentMapper claimAssessmentMapper;
     private UserService userService;
@@ -41,45 +45,65 @@ public class ClaimAssessmentService {
     @Transactional
     @Cacheable
     public ClaimAssessmentDto getClaimAssessmentById(Long id) {
-        return claimAssessmentMapper.toDto(claimAssessmentRepository.findById(id).orElseThrow(() -> new ClaimAssessmentNotFoundException("Claim assessment with id " + id + " not found")));
+        logger.info("Fetching claim assessment with id: {}", id);
+        ClaimAssessment claimAssessment = claimAssessmentRepository.findById(id)
+                .orElseThrow(() -> {
+                    logger.error("Claim assessment with id {} not found", id);
+                    return new ClaimAssessmentNotFoundException("Claim assessment with id " + id + " not found");
+                });
+        return claimAssessmentMapper.toDto(claimAssessment);
     }
 
     public ClaimAssessmentDto createClaimAssessment(ClaimAssessmentCreationDto claimAssessmentDto) {
+        logger.info("Creating claim assessment with details: {}", claimAssessmentDto);
         ClaimAssessment claimAssessment = claimAssessmentMapper.toEntity(claimAssessmentDto);
 
         claimAssessment.setAgent(agentRepository.findByUserId(userService.getCurrentUser()));
         claimAssessment.setAssessmentDate(LocalDate.now());
         claimAssessment = claimAssessmentRepository.save(claimAssessment);
 
-        claimAssessment.setAssessmentDate(LocalDate.now());
+        logger.info("Claim assessment created with id: {}", claimAssessment.getId());
         return claimAssessmentMapper.toDto(claimAssessment);
-        //return claimAssessmentMapper.toDto(claimAssessmentRepository.save(claimAssessmentMapper.toEntity(claimAssessmentDto)));
     }
 
     public ClaimAssessmentDto updateClaimAssessment(ClaimAssessmentDto claimAssessmentDto) {
-        return claimAssessmentMapper.toDto(claimAssessmentRepository.save(claimAssessmentMapper.toEntity(claimAssessmentDto)));
+        logger.info("Updating claim assessment with id: {}", claimAssessmentDto.id());
+        ClaimAssessment claimAssessment = claimAssessmentMapper.toEntity(claimAssessmentDto);
+        claimAssessment = claimAssessmentRepository.save(claimAssessment);
+
+        logger.info("Claim assessment updated with id: {}", claimAssessment.getId());
+        return claimAssessmentMapper.toDto(claimAssessment);
     }
 
     public void deleteClaimAssessmentById(Long id) {
+        logger.info("Deleting claim assessment with id: {}", id);
         claimAssessmentRepository.deleteById(id);
+        logger.info("Claim assessment with id: {} deleted", id);
     }
 
     @Transactional
     @Cacheable
     public Page<ClaimAssessmentDto> getAllClaimAssessments(Pageable pageable) {
-        return claimAssessmentRepository.findAll(pageable).map(claimAssessmentMapper::toDto);
+        logger.info("Fetching all claim assessments with pagination: {}", pageable);
+        Page<ClaimAssessment> claimAssessmentPage = claimAssessmentRepository.findAll(pageable);
+        logger.info("Fetched {} claim assessments", claimAssessmentPage.getTotalElements());
+        return claimAssessmentPage.map(claimAssessmentMapper::toDto);
     }
 
     @Transactional
     public Page<ClaimAssessmentDto> getSortedClaimAssessments(String sortBy, String order, Pageable pageable) {
+        logger.info("Fetching sorted claim assessments by: {} in order: {}", sortBy, order);
         Sort sort = order.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
         Page<ClaimAssessment> claimAssessmentPage = claimAssessmentRepository.findAll(sortedPageable);
+        logger.info("Fetched {} sorted claim assessments", claimAssessmentPage.getTotalElements());
         return claimAssessmentPage.map(claimAssessmentMapper::toDto);
     }
 
     @Transactional
     public Page<ClaimAssessmentDto> getFilteredClaimAssessments(Long id, LocalDate assessmentDate, String notes, double assessmentAmount, Long agent, Pageable pageable) {
+        logger.info("Fetching filtered claim assessments with filters: id = {}, assessmentDate = {}, notes = {}, assessmentAmount = {}, agent = {}", id, assessmentDate, notes, assessmentAmount, agent);
+
         Specification<ClaimAssessment> specification = Specification.where(null);
 
         if (id != null) {
@@ -102,7 +126,9 @@ public class ClaimAssessmentService {
             specification = specification.and((root, query, criteriaBuilder) ->
                     criteriaBuilder.like(root.get("agent"), "%" + agent + "%"));
         }
-        Page<ClaimAssessment> claimAssessment = claimAssessmentRepository.findAll(specification, pageable);
-        return claimAssessment.map(claimAssessmentMapper::toDto);
+
+        Page<ClaimAssessment> claimAssessmentPage = claimAssessmentRepository.findAll(specification, pageable);
+        logger.info("Fetched {} filtered claim assessments", claimAssessmentPage.getTotalElements());
+        return claimAssessmentPage.map(claimAssessmentMapper::toDto);
     }
 }

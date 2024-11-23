@@ -16,6 +16,8 @@ import org.company.insurance.exception.AutoInsuranceAlreadyExistsException;
 import org.company.insurance.exception.AutoInsuranceNotFoundException;
 import org.company.insurance.repository.AutoInsuranceRepository;
 import org.company.insurance.repository.InsurancePolicyRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -40,41 +42,48 @@ public class AutoInsuranceService {
     private final InsurancePolicyRepository insurancePolicyRepository;
     private AutoInsuranceMapper autoInsuranceMapper;
 
+    private static final Logger logger = LoggerFactory.getLogger(AutoInsuranceService.class);
+
     @Transactional
     @Cacheable
     public AutoInsuranceDto getAutoInsuranceById(Long id) {
-        return autoInsuranceMapper.toDto(autoInsuranceRepository.findById(id).orElseThrow(() -> new AutoInsuranceNotFoundException("Auto insurance with id " + id + " not found")));
+        logger.info("Fetching auto insurance by ID: {}", id);
+        AutoInsurance autoInsurance = autoInsuranceRepository.findById(id).orElseThrow(() -> {
+            logger.error("Auto insurance with id {} not found", id);
+            return new AutoInsuranceNotFoundException("Auto insurance with id " + id + " not found");
+        });
+        logger.info("Found auto insurance: {}", autoInsurance);
+        return autoInsuranceMapper.toDto(autoInsurance);
     }
 
-//    public AutoInsuranceDto createAutoInsurance(AutoInsuranceCreationDto autoInsuranceDto) {
-//        return autoInsuranceMapper.toDto(autoInsuranceRepository.save(autoInsuranceMapper.toEntity(autoInsuranceDto)));
-//        AutoInsurance autoInsurance = autoInsuranceMapper.toEntity(autoInsuranceDto);
-//        InsurancePolicy insurancePolicy = autoInsurance.getInsurancePolicy();
-//
-//
-//    }
-public AutoInsuranceDto createAutoInsurance(AutoInsuranceCreationDto autoInsuranceDto) {
-    AutoInsurance autoInsurance = autoInsuranceMapper.toEntity(autoInsuranceDto);
+    public AutoInsuranceDto createAutoInsurance(AutoInsuranceCreationDto autoInsuranceDto) {
+        logger.info("Creating auto insurance for policy ID: {}", autoInsuranceDto.insurancePolicyId());
 
-    if(autoInsuranceRepository.existsByInsurancePolicyId(autoInsuranceDto.insurancePolicyId())){
-        throw new AutoInsuranceAlreadyExistsException("Auto insurance for policy with id " + autoInsuranceDto.insurancePolicyId() + " already exists");
+        AutoInsurance autoInsurance = autoInsuranceMapper.toEntity(autoInsuranceDto);
+
+        if (autoInsuranceRepository.existsByInsurancePolicyId(autoInsuranceDto.insurancePolicyId())) {
+            logger.error("Auto insurance for policy with id {} already exists", autoInsuranceDto.insurancePolicyId());
+            throw new AutoInsuranceAlreadyExistsException("Auto insurance for policy with id " + autoInsuranceDto.insurancePolicyId() + " already exists");
+        }
+
+        autoInsurance.setCoverageAmount(calculateCoverageAmount(autoInsurance.getInsuranceType()));
+        autoInsurance = autoInsuranceRepository.save(autoInsurance);
+        logger.info("Auto insurance created: {}", autoInsurance);
+
+        InsurancePolicy insurancePolicy = autoInsurance.getInsurancePolicy();
+        if (insurancePolicy != null) {
+            logger.info("Updating price and status for insurance policy ID: {}", insurancePolicy.getId());
+            double updatedPrice = calculatePriceBasedOnAutoInsurance(autoInsurance);
+            insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
+            insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
+        }
+
+        return autoInsuranceMapper.toDto(autoInsurance);
     }
-    autoInsurance.setCoverageAmount(calculateCoverageAmount(autoInsurance.getInsuranceType()));
-    autoInsurance = autoInsuranceRepository.save(autoInsurance);
-
-    InsurancePolicy insurancePolicy = autoInsurance.getInsurancePolicy();
-    if (insurancePolicy != null) {
-        double updatedPrice = calculatePriceBasedOnAutoInsurance(autoInsurance);
-
-        insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
-        insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
-    }
-
-    autoInsurance.setCoverageAmount(calculateCoverageAmount(autoInsurance.getInsuranceType()));
-    return autoInsuranceMapper.toDto(autoInsurance);
-}
 
     private double calculatePriceBasedOnAutoInsurance(AutoInsurance autoInsurance) {
+        logger.info("Calculating price based on auto insurance: {}", autoInsurance);
+
         Long currentInsurancePolicyId = autoInsurance.getInsurancePolicy().getId();
         LocalDate startDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getStartDate();
         LocalDate endDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getEndDate();
@@ -108,90 +117,99 @@ public AutoInsuranceDto createAutoInsurance(AutoInsuranceCreationDto autoInsuran
         };
 
         double longevityMultiplier = daysDifference / 365.0;
-        System.out.println("Days diff is " + daysDifference);
-        System.out.println(basePrice);
-        System.out.println(ageMultiplier);
-        System.out.println(typeMultiplier);
-        System.out.println(capacityMultiplier);
+        logger.debug("Days diff is {}, Base price is {}, Age multiplier is {}, Type multiplier is {}, Capacity multiplier is {}",
+                daysDifference, basePrice, ageMultiplier, typeMultiplier, capacityMultiplier);
 
-        return basePrice * ageMultiplier * typeMultiplier * capacityMultiplier * longevityMultiplier;
+        double price = basePrice * ageMultiplier * typeMultiplier * capacityMultiplier * longevityMultiplier;
+        logger.debug("Calculated price: {}", price);
+        return price;
     }
 
     private double calculateCoverageAmount(AutoInsuranceType type) {
-        return switch (type) {
+        logger.info("Calculating coverage amount for insurance type: {}", type);
+        double coverageAmount = switch (type) {
             case OSAGO -> 50000.0;
             case KASKO -> 100000.0;
             case CIVIL_LIABILITY -> 30000.0;
             case THEFT_VANDALISM -> 70000.0;
             case ALL_INCLUSIVE -> 200000.0;
         };
+        logger.debug("Calculated coverage amount: {}", coverageAmount);
+        return coverageAmount;
     }
 
     public AutoInsuranceDto updateAutoInsurance(AutoInsuranceDto autoInsuranceDto) {
-        return autoInsuranceMapper.toDto(autoInsuranceRepository.save(autoInsuranceMapper.toEntity(autoInsuranceDto)));
+        logger.info("Updating auto insurance: {}", autoInsuranceDto);
+        AutoInsurance autoInsurance = autoInsuranceRepository.save(autoInsuranceMapper.toEntity(autoInsuranceDto));
+        logger.info("Auto insurance updated: {}", autoInsurance);
+        return autoInsuranceMapper.toDto(autoInsurance);
     }
 
     @Transactional
     @CacheEvict
     public void deleteAutoInsuranceById(Long id) {
+        logger.info("Deleting auto insurance with ID: {}", id);
         autoInsuranceRepository.deleteById(id);
+        logger.info("Auto insurance with ID {} deleted successfully", id);
     }
 
     @Transactional
     @Cacheable
     public Page<AutoInsuranceDto> getAllAutoInsurances(Pageable pageable) {
-        return autoInsuranceRepository.findAll(pageable).map(autoInsuranceMapper::toDto);
+        logger.info("Fetching all auto insurances with pagination: {}", pageable);
+        Page<AutoInsurance> autoInsurancePage = autoInsuranceRepository.findAll(pageable);
+        logger.info("Fetched {} auto insurances", autoInsurancePage.getTotalElements());
+        return autoInsurancePage.map(autoInsuranceMapper::toDto);
     }
 
     @Transactional
     public Page<AutoInsuranceDto> getSortedAutoInsurances(String sortBy, String order, Pageable pageable) {
+        logger.info("Fetching sorted auto insurances by {} in {} order", sortBy, order);
         Sort sort = order.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
         Page<AutoInsurance> autoInsurancePage = autoInsuranceRepository.findAll(sortedPageable);
+        logger.info("Fetched {} sorted auto insurances", autoInsurancePage.getTotalElements());
         return autoInsurancePage.map(autoInsuranceMapper::toDto);
     }
 
     @Transactional
     public Page<AutoInsuranceDto> getFilteredAutoInsurances(Long id, double engineCapacity, String brand, String model, int year, String plate, String type, String insuranceType, Long insurancePolicy, Pageable pageable) {
+        logger.info("Fetching filtered auto insurances with parameters: id={}, engineCapacity={}, brand={}, model={}, year={}, plate={}, type={}, insuranceType={}, insurancePolicy={}",
+                id, engineCapacity, brand, model, year, plate, type, insuranceType, insurancePolicy);
+
         Specification<AutoInsurance> specification = Specification.where(null);
 
         if (id != null) {
-            specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(root.get("id"), "%" + id + "%"));
+            specification = specification.and((root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("id"), "%" + id + "%"));
         }
-        if(brand != null) {
-            specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("brand")), "%" + brand.toLowerCase() + "%"));
+        if (brand != null) {
+            specification = specification.and((root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("brand")), "%" + brand.toLowerCase() + "%"));
         }
-        if(model != null) {
-            specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("model")), "%" + model.toLowerCase() + "%"));
+        if (model != null) {
+            specification = specification.and((root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("model")), "%" + model.toLowerCase() + "%"));
         }
         if (engineCapacity != 0) {
-            specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(root.get("engineCapacity"), "%" + engineCapacity + "%"));
+            specification = specification.and((root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("engineCapacity"), "%" + engineCapacity + "%"));
         }
         if (year != 0) {
-            specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(root.get("year"), "%" + year + "%"));
+            specification = specification.and((root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("year"), "%" + year + "%"));
         }
-        if(plate != null) {
-            specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("plate")), "%" + plate.toLowerCase() + "%"));
+        if (plate != null) {
+            specification = specification.and((root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("plate")), "%" + plate.toLowerCase() + "%"));
         }
-        if(type != null) {
-            specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("type")), "%" + type.toLowerCase() + "%"));
+        if (type != null) {
+            specification = specification.and((root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("type")), "%" + type.toLowerCase() + "%"));
         }
-        if(insuranceType != null) {
-            specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("insuranceType")), "%" + insuranceType.toLowerCase() + "%"));
+        if (insuranceType != null) {
+            specification = specification.and((root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("insuranceType")), "%" + insuranceType.toLowerCase() + "%"));
         }
         if (insurancePolicy != null) {
-            specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(root.get("insurancePolicy"), "%" + insurancePolicy + "%"));
+            specification = specification.and((root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("insurancePolicy").get("id"), insurancePolicy));
         }
-        Page<AutoInsurance> autoInsurance = autoInsuranceRepository.findAll(specification, pageable);
-        return autoInsurance.map(autoInsuranceMapper::toDto);
+
+        logger.info("Filtering by specification: {}", specification);
+        Page<AutoInsurance> autoInsurancePage = autoInsuranceRepository.findAll(specification, pageable);
+        logger.info("Fetched {} filtered auto insurances", autoInsurancePage.getTotalElements());
+        return autoInsurancePage.map(autoInsuranceMapper::toDto);
     }
 }
