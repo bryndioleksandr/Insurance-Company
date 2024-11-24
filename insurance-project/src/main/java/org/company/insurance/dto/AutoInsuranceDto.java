@@ -17,6 +17,7 @@ public record AutoInsuranceDto(
         int insuranceLongevity,
         Long insurancePolicyId,
         String brand,
+        int year,
         double engineCapacity,
         String model,
         String plate,

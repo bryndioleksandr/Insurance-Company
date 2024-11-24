@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.company.insurance.dto.UserCreationDto;
 import org.company.insurance.dto.UserDto;
@@ -81,7 +82,7 @@ public class UserController {
                     @ApiResponse(responseCode = "404", description = "User not found")
             }
     )
-    public UserDto updateUserDetails(@RequestBody  UserDto userDto) {
+    public UserDto updateUserDetails(@Valid @RequestBody  UserDto userDto) {
         return userService.updateUserDetails(userDto);
     }
 

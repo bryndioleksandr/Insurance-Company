@@ -91,7 +91,6 @@ public class AutoInsuranceService {
                     logger.error("Auto insurance with policy ID {} not found", policyId);
                     return new AutoInsuranceNotFoundException("Auto insurance with policy ID " + policyId + " not found");
                 });
-        existingAutoInsurance.setCoverageAmount(calculateCoverageAmount(existingAutoInsurance.getInsuranceType()));
 
         autoInsuranceMapper.partialUpdate(autoInsuranceDto, existingAutoInsurance);
         existingAutoInsurance.setCoverageAmount(calculateCoverageAmount(existingAutoInsurance.getInsuranceType()));

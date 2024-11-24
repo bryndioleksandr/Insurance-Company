@@ -25,7 +25,6 @@ public record InsurancePolicyCreationDto(
                                           @FutureOrPresent(message = "End date must be in the future or present")
                                           LocalDate endDate,
 
-                                          @NotNull(message = "Price cannot be null")
                                           @Positive(message = "Price must be a positive number")
                                           double price,
 

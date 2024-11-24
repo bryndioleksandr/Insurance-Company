@@ -92,13 +92,22 @@ public class UserService {
         return userMapper.toDto(user);
     }
 
-
-
-
-
+    
     @Transactional
     public UserDto updateUserDetails(UserDto userDto) {
         User existingUser = getCurrentUser();
+        if(userRepository.existsByEmail(userDto.email())) {
+            throw new UserAlreadyExistsException("User with email " + userDto.email() + " already exists");
+        }
+        if(userRepository.existsByPhoneNumber(userDto.phoneNumber())) {
+            throw new UserAlreadyExistsException("User with phone number " + userDto.phoneNumber() + " already exists");
+        }
+        if(userRepository.existsByUsername(userDto.username())) {
+            throw new UserAlreadyExistsException("User with username " + userDto.username() + " already exists");
+        }
+        if(userDto.role() != null || userDto.role() != existingUser.getRole()) {
+            throw new RuntimeException("Role cannot be changed");
+        }
         userMapper.partialUpdate(userDto, existingUser);
 
         User updatedUser = userRepository.save(existingUser);
