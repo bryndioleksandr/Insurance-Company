@@ -7,16 +7,16 @@ import org.company.insurance.dto.TravelInsuranceCreationDto;
 import org.company.insurance.dto.TravelInsuranceDto;
 import org.company.insurance.dto.UserDto;
 import org.company.insurance.entity.InsurancePolicy;
-import org.company.insurance.entity.PropertyInsurance;
 import org.company.insurance.entity.TravelInsurance;
 import org.company.insurance.entity.User;
 import org.company.insurance.enums.InsuranceStatus;
-import org.company.insurance.exception.PropertyInsuranceAlreadyExistsException;
 import org.company.insurance.exception.TravelInsuranceAlreadyExistsException;
 import org.company.insurance.exception.TravelInsuranceNotFoundException;
 import org.company.insurance.mapper.TravelInsuranceMapper;
 import org.company.insurance.repository.InsurancePolicyRepository;
 import org.company.insurance.repository.TravelInsuranceRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -39,6 +39,8 @@ public class TravelInsuranceService {
     private final TravelInsuranceMapper travelInsuranceMapper;
 
     private final InsurancePolicyRepository insurancePolicyRepository;
+    private static final Logger logger = LoggerFactory.getLogger(TravelInsuranceService.class);
+    
 
     private double calculateTravelInsurancePrice(TravelInsurance insurance) {
         Long currentInsurancePolicyId = insurance.getInsurancePolicy().getId();
@@ -101,6 +103,36 @@ public class TravelInsuranceService {
         return travelInsuranceMapper.toDto(travelInsurance);
 
         // return travelInsuranceMapper.toDto(travelInsuranceRepository.save(travelInsuranceMapper.toEntity(travelInsuranceDto)));
+    }
+
+    @Transactional
+    public TravelInsuranceDto updateTravelInsuranceByPolicyId(Long policyId, TravelInsuranceDto travelInsuranceDto) {
+        logger.info("Updating travel insurance for policy ID: {}", policyId);
+
+        TravelInsurance existingTravelInsurance = travelInsuranceRepository.findByInsurancePolicyId(policyId)
+                .orElseThrow(() -> {
+                    logger.error("Travel insurance with policy ID {} not found", policyId);
+                    return new TravelInsuranceNotFoundException("Travel insurance with policy ID " + policyId + " not found");
+                });
+
+        travelInsuranceMapper.partialUpdate(travelInsuranceDto, existingTravelInsurance);
+        existingTravelInsurance.setCoverageAmount(calculateCoverageAmount(existingTravelInsurance));
+
+        TravelInsurance updatedTravelInsurance = travelInsuranceRepository.save(existingTravelInsurance);
+
+        logger.info("Travel insurance updated successfully: {}", updatedTravelInsurance);
+
+        InsurancePolicy insurancePolicy = updatedTravelInsurance.getInsurancePolicy();
+        if (insurancePolicy != null) {
+            logger.info("Updating price and status for insurance policy ID: {}", insurancePolicy.getId());
+            double updatedPrice = calculateTravelInsurancePrice(updatedTravelInsurance);
+            insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
+            insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
+        } else {
+            logger.warn("No insurance policy found for updated travel insurance ID: {}", updatedTravelInsurance.getId());
+        }
+        return travelInsuranceMapper.toDto(updatedTravelInsurance);
+
     }
 
     @Transactional

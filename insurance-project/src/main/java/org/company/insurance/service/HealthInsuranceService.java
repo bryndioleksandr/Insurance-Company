@@ -3,21 +3,23 @@ package org.company.insurance.service;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.company.insurance.dto.HealthInsuranceDto;
 import org.company.insurance.dto.HealthInsuranceCreationDto;
 import org.company.insurance.dto.HealthInsuranceDto;
 import org.company.insurance.dto.HealthInsuranceDto;
-import org.company.insurance.entity.AutoInsurance;
-import org.company.insurance.entity.HealthInsurance;
-import org.company.insurance.entity.InsurancePolicy;
+import org.company.insurance.entity.*;
 import org.company.insurance.entity.HealthInsurance;
 import org.company.insurance.enums.HealthInsuranceType;
 import org.company.insurance.enums.InsuranceStatus;
-import org.company.insurance.exception.AutoInsuranceAlreadyExistsException;
+import org.company.insurance.exception.HealthInsuranceAlreadyExistsException;
+import org.company.insurance.exception.HealthInsuranceNotFoundException;
 import org.company.insurance.exception.HealthInsuranceAlreadyExistsException;
 import org.company.insurance.exception.HealthInsuranceNotFoundException;
 import org.company.insurance.mapper.HealthInsuranceMapper;
 import org.company.insurance.repository.HealthInsuranceRepository;
 import org.company.insurance.repository.InsurancePolicyRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -38,6 +40,8 @@ public class HealthInsuranceService {
     private HealthInsuranceRepository healthInsuranceRepository;
     private HealthInsuranceMapper healthInsuranceMapper;
     private final InsurancePolicyRepository insurancePolicyRepository;
+    private static final Logger logger = LoggerFactory.getLogger(HealthInsuranceService.class);
+    
 
     @Transactional
     @Cacheable
@@ -68,6 +72,37 @@ public class HealthInsuranceService {
         // return healthInsuranceMapper.toDto(healthInsuranceRepository.save(healthInsuranceMapper.toEntity(healthInsuranceDto)));
     }
 
+    @Transactional
+    public HealthInsuranceDto updateHealthInsuranceByPolicyId(Long policyId, HealthInsuranceDto healthInsuranceDto) {
+        logger.info("Updating health insurance for policy ID: {}", policyId);
+
+        HealthInsurance existingHealthInsurance = healthInsuranceRepository.findByInsurancePolicyId(policyId)
+                .orElseThrow(() -> {
+                    logger.error("Health insurance with policy ID {} not found", policyId);
+                    return new HealthInsuranceNotFoundException("Health insurance with policy ID " + policyId + " not found");
+                });
+
+        healthInsuranceMapper.partialUpdate(healthInsuranceDto, existingHealthInsurance);
+        existingHealthInsurance.setCoverageAmount(calculateHealthInsuranceCoverage(existingHealthInsurance.getInsuranceType()));
+
+        HealthInsurance updatedHealthInsurance = healthInsuranceRepository.save(existingHealthInsurance);
+
+        logger.info("Health insurance updated successfully: {}", updatedHealthInsurance);
+
+        InsurancePolicy insurancePolicy = updatedHealthInsurance.getInsurancePolicy();
+        if (insurancePolicy != null) {
+            logger.info("Updating price and status for insurance policy ID: {}", insurancePolicy.getId());
+            double updatedPrice = calculateHealthInsuranceCost(updatedHealthInsurance, (LocalDate.now().getYear() - insurancePolicy.getUser().getBirthDate().getYear()));
+            insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
+            insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
+        }
+        else {
+            logger.warn("No insurance policy found for updated health insurance ID: {}", updatedHealthInsurance.getId());
+        }
+
+        return healthInsuranceMapper.toDto(updatedHealthInsurance);
+    }
+    
     private double calculateHealthInsuranceCost(HealthInsurance healthInsurance, int age) {
         Long currentInsurancePolicyId = healthInsurance.getInsurancePolicy().getId();
         LocalDate startDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getStartDate();

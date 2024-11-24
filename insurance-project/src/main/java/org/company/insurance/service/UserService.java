@@ -92,7 +92,7 @@ public class UserService {
         return userMapper.toDto(user);
     }
 
-    
+
     @Transactional
     public UserDto updateUserDetails(UserDto userDto) {
         User existingUser = getCurrentUser();

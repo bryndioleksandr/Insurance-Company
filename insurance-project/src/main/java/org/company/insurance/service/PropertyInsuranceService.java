@@ -10,12 +10,14 @@ import org.company.insurance.dto.PropertyInsuranceDto;
 import org.company.insurance.entity.*;
 import org.company.insurance.enums.InsuranceStatus;
 import org.company.insurance.enums.PropertyInsuranceType;
-import org.company.insurance.exception.HealthInsuranceAlreadyExistsException;
+
 import org.company.insurance.exception.PropertyInsuranceAlreadyExistsException;
 import org.company.insurance.exception.PropertyInsuranceNotFoundException;
 import org.company.insurance.mapper.PropertyInsuranceMapper;
 import org.company.insurance.repository.InsurancePolicyRepository;
 import org.company.insurance.repository.PropertyInsuranceRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -37,6 +39,8 @@ public class PropertyInsuranceService {
     private final PropertyInsuranceRepository propertyInsuranceRepository;
     private final PropertyInsuranceMapper propertyInsuranceMapper;
     private final InsurancePolicyRepository insurancePolicyRepository;
+    private static final Logger logger = LoggerFactory.getLogger(PropertyInsuranceService.class);
+    
 
     private double calculatePropertyInsurancePrice(PropertyInsurance propertyInsurance) {
         Long currentInsurancePolicyId = propertyInsurance.getInsurancePolicy().getId();
@@ -84,6 +88,36 @@ public class PropertyInsuranceService {
         return propertyInsuranceMapper.toDto(propertyInsurance);
 
         // return propertyInsuranceMapper.toDto(propertyInsuranceRepository.save(propertyInsuranceMapper.toEntity(propertyInsuranceDto)));
+    }
+
+    @Transactional
+    public PropertyInsuranceDto updatePropertyInsuranceByPolicyId(Long policyId, PropertyInsuranceDto propertyInsuranceDto) {
+        logger.info("Updating property insurance for policy ID: {}", policyId);
+
+        PropertyInsurance existingPropertyInsurance = propertyInsuranceRepository.findByInsurancePolicyId(policyId)
+                .orElseThrow(() -> {
+                    logger.error("Property insurance with policy ID {} not found", policyId);
+                    return new PropertyInsuranceNotFoundException("Property insurance with policy ID " + policyId + " not found");
+                });
+
+        propertyInsuranceMapper.partialUpdate(propertyInsuranceDto, existingPropertyInsurance);
+        existingPropertyInsurance.setCoverageAmount(calculateCoverageAmount(existingPropertyInsurance.getHouseSize()));
+
+        PropertyInsurance updatedPropertyInsurance = propertyInsuranceRepository.save(existingPropertyInsurance);
+
+        logger.info("Property insurance updated successfully: {}", updatedPropertyInsurance);
+
+        InsurancePolicy insurancePolicy = updatedPropertyInsurance.getInsurancePolicy();
+        if (insurancePolicy != null) {
+            logger.info("Updating price and status for insurance policy ID: {}", insurancePolicy.getId());
+            double updatedPrice = calculatePropertyInsurancePrice(updatedPropertyInsurance);
+            insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
+            insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
+        } else {
+            logger.warn("No insurance policy found for updated property insurance ID: {}", updatedPropertyInsurance.getId());
+        }
+        return propertyInsuranceMapper.toDto(updatedPropertyInsurance);
+
     }
 
     @Transactional
