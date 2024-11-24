@@ -78,7 +78,40 @@ public class AutoInsuranceService {
             insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
         }
 
+
         return autoInsuranceMapper.toDto(autoInsurance);
+    }
+
+    @Transactional
+    public AutoInsuranceDto updateAutoInsuranceByPolicyId(Long policyId, AutoInsuranceDto autoInsuranceDto) {
+        logger.info("Updating auto insurance for policy ID: {}", policyId);
+
+        AutoInsurance existingAutoInsurance = autoInsuranceRepository.findByInsurancePolicyId(policyId)
+                .orElseThrow(() -> {
+                    logger.error("Auto insurance with policy ID {} not found", policyId);
+                    return new AutoInsuranceNotFoundException("Auto insurance with policy ID " + policyId + " not found");
+                });
+        existingAutoInsurance.setCoverageAmount(calculateCoverageAmount(existingAutoInsurance.getInsuranceType()));
+
+        autoInsuranceMapper.partialUpdate(autoInsuranceDto, existingAutoInsurance);
+        existingAutoInsurance.setCoverageAmount(calculateCoverageAmount(existingAutoInsurance.getInsuranceType()));
+
+        AutoInsurance updatedAutoInsurance = autoInsuranceRepository.save(existingAutoInsurance);
+
+        logger.info("Auto insurance updated successfully: {}", updatedAutoInsurance);
+
+        InsurancePolicy insurancePolicy = updatedAutoInsurance.getInsurancePolicy();
+        if (insurancePolicy != null) {
+            logger.info("Updating price and status for insurance policy ID: {}", insurancePolicy.getId());
+            double updatedPrice = calculatePriceBasedOnAutoInsurance(updatedAutoInsurance);
+            insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
+            insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
+        }
+        else {
+            logger.warn("No insurance policy found for updated auto insurance ID: {}", updatedAutoInsurance.getId());
+        }
+
+        return autoInsuranceMapper.toDto(updatedAutoInsurance);
     }
 
     private double calculatePriceBasedOnAutoInsurance(AutoInsurance autoInsurance) {

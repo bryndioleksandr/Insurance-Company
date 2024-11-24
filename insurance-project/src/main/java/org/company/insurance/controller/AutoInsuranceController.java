@@ -10,11 +10,13 @@ import lombok.Getter;
 import org.company.insurance.dto.AutoInsuranceCreationDto;
 import org.company.insurance.dto.AutoInsuranceDto;
 import org.company.insurance.dto.AutoInsuranceDto;
+import org.company.insurance.exception.AutoInsuranceNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.company.insurance.service.AutoInsuranceService;
 
@@ -54,6 +56,22 @@ public class AutoInsuranceController {
         return ResponseEntity.ok(autoInsuranceService.createAutoInsurance(autoInsuranceDto));
     }
 
+//    @Operation(
+//            summary = "Update an existing auto insurance",
+//            description = "Updates the auto insurance details with the provided data",
+//            responses = {
+//                    @ApiResponse(responseCode = "200", description = "Auto insurance updated successfully",
+//                            content = @Content(mediaType = "application/json",
+//                                    schema = @Schema(implementation = AutoInsuranceDto.class))),
+//                    @ApiResponse(responseCode = "400", description = "Invalid input"),
+//                    @ApiResponse(responseCode = "404", description = "Auto insurance not found")
+//            }
+//    )
+//    @PutMapping
+//    public ResponseEntity<AutoInsuranceDto> updateAutoInsurance(@RequestBody AutoInsuranceDto autoInsuranceDto) {
+//        return ResponseEntity.ok(autoInsuranceService.updateAutoInsurance(autoInsuranceDto));
+//    }
+
     @Operation(
             summary = "Update an existing auto insurance",
             description = "Updates the auto insurance details with the provided data",
@@ -65,9 +83,19 @@ public class AutoInsuranceController {
                     @ApiResponse(responseCode = "404", description = "Auto insurance not found")
             }
     )
-    @PutMapping
-    public ResponseEntity<AutoInsuranceDto> updateAutoInsurance(@RequestBody AutoInsuranceDto autoInsuranceDto) {
-        return ResponseEntity.ok(autoInsuranceService.updateAutoInsurance(autoInsuranceDto));
+    @PutMapping("/{policyId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+    public ResponseEntity<AutoInsuranceDto> updateAutoInsuranceByPolicyId(
+            @PathVariable("policyId") Long policyId,
+            @RequestBody AutoInsuranceDto autoInsuranceDto) {
+        try {
+            AutoInsuranceDto updatedAutoInsurance = autoInsuranceService.updateAutoInsuranceByPolicyId(policyId, autoInsuranceDto);
+            return ResponseEntity.ok(updatedAutoInsurance);
+        } catch (AutoInsuranceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @Operation(

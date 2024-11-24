@@ -32,6 +32,10 @@ import static org.company.insurance.enums.InsuranceType.VEHICLE;
 @Transactional
 @CacheConfig(cacheResolver = "multiLevelCacheResolver")
 public class InsurancePolicyService {
+    private final AutoInsuranceRepository autoInsuranceRepository;
+    private final TravelInsuranceRepository travelInsuranceRepository;
+    private final PropertyInsuranceRepository propertyInsuranceRepository;
+    private final HealthInsuranceRepository healthInsuranceRepository;
     private InsurancePolicyRepository insurancePolicyRepository;
     private InsurancePolicyMapper insurancePolicyMapper;
     private UserRepository userRepository;
@@ -81,20 +85,13 @@ public class InsurancePolicyService {
 
         insurancePolicy.setPolicyNumber(generateRandomPolicyNumber());
         insurancePolicy.setUser(user);
+        insurancePolicy.setStatus(InsuranceStatus.INACTIVE);
+
 //        User user = userRepository.findById(insurancePolicyDto.userId())
 //                .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        // Trying to create subtype of insurance right after creating insurance policy.
-        // But idk how to receive id of this subclass.
-//        String insuranceType = insurancePolicyDto.insuranceType().toString();
-//        switch(insuranceType){
-//            case "VEHICLE":
-//                AutoInsurance autoInsurance = new AutoInsurance();
-//                autoInsurance.set
-//        }
+        String insuranceType = insurancePolicyDto.insuranceType().toString();
 
-        // I have insurancePolicy id, then I can create subclass and set immediately here insurancePolicy id to it.
-        // Then after this I can add additional info to subclass by another endpoint.
         PolicyHolder policyHolder = policyHolderRepository.findByUserId(user)
                 .orElseGet(() -> {
                     PolicyHolder newPolicyHolder = new PolicyHolder();
@@ -107,6 +104,29 @@ public class InsurancePolicyService {
         insurancePolicy.setPolicyHolder(policyHolder);
 
         insurancePolicy = insurancePolicyRepository.save(insurancePolicy);
+
+        switch (insuranceType) {
+            case "VEHICLE" -> {
+                AutoInsurance autoInsurance = new AutoInsurance();
+                autoInsurance.setInsurancePolicy(insurancePolicy);
+                autoInsuranceRepository.save(autoInsurance);
+            }
+            case "TRAVEL" -> {
+                TravelInsurance travelInsurance = new TravelInsurance();
+                travelInsurance.setInsurancePolicy(insurancePolicy);
+                travelInsuranceRepository.save(travelInsurance);
+            }
+            case "PROPERTY" -> {
+                PropertyInsurance propertyInsurance = new PropertyInsurance();
+                propertyInsurance.setInsurancePolicy(insurancePolicy);
+                propertyInsuranceRepository.save(propertyInsurance);
+            }
+            case "HEALTH" -> {
+                HealthInsurance healthInsurance = new HealthInsurance();
+                healthInsurance.setInsurancePolicy(insurancePolicy);
+                healthInsuranceRepository.save(healthInsurance);
+            }
+        }
 
         return insurancePolicyMapper.toDto(insurancePolicy);
     }
