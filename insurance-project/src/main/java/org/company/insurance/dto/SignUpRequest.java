@@ -11,10 +11,10 @@ public class SignUpRequest {
     @NotBlank
     private String username;
 
-//    @Size(min = 5, max = 255, message = "Адрес электронной почты должен содержать от 5 до 255 символов")
-//    @NotBlank(message = "Адрес электронной почты не может быть пустыми")
-//    @Email(message = "Email адрес должен быть в формате user@example.com")
-//    private String email;
+    @Size(min = 5, max = 255)
+    @NotBlank
+    @Email(message = "Email format user@example.com")
+    private String email;
 
     @Size(max = 255)
     private String password;

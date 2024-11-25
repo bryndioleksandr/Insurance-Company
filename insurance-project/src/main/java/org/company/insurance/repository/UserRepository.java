@@ -1,6 +1,7 @@
 package org.company.insurance.repository;
 
 import org.company.insurance.entity.User;
+import org.hibernate.validator.internal.constraintvalidators.bv.time.futureorpresent.FutureOrPresentValidatorForMinguoDate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -21,4 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     boolean existsByUsername(String username);
 
     Optional<User> findByUsername(String username);
+
+    @Query("UPDATE User u SET u.emailVerified = TRUE WHERE u.username = ?1")
+    void updateEmailVerifiedStatus(String username);
 }

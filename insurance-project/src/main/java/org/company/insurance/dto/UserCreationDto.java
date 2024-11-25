@@ -2,9 +2,11 @@ package org.company.insurance.dto;
 
 import jakarta.validation.constraints.*;
 import org.company.insurance.enums.Role;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -27,6 +29,11 @@ public record UserCreationDto(
                               LocalDate birthDate,
                               String password,
                               Role role
+//                              String emailVerificationCode,
+//                              @Value("#{T(java.time.LocalDateTime).now().plusMinutes(15)}")
+//                              LocalDateTime emailVerificationExpiry,
+//                              @Value("false")
+//                              boolean emailVerified
 //                              @Past
 //                              LocalDate hireDate,
 //                              @Size(max = 255)

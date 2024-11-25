@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.company.insurance.dto.AgentDto;
 import org.company.insurance.dto.UserCreationDto;
+import org.company.insurance.dto.UserCreationVerifyingDto;
 import org.company.insurance.dto.UserDto;
 import org.company.insurance.entity.Agent;
 import org.company.insurance.entity.User;
@@ -69,6 +70,21 @@ public class UserService {
 //            agent.setPosition(userDto.position());
 //            agentRepository.save(agent);
 //        }
+
+        return userMapper.toDto(savedUser);
+    }
+
+    @Transactional
+    public UserDto createUserVerified(UserCreationVerifyingDto userDto) {
+        String email = userDto.email();
+        User user = userMapper.toVerifiedEntity(userDto);
+        if(userRepository.existsByEmail(email)) {
+            throw new UserAlreadyExistsException("User with email " + email + " already exists");
+        }
+        if(userRepository.existsByUsername(userDto.username())) {
+            throw new UserAlreadyExistsException("User with username " + userDto.username() + " already exists");
+        }
+        User savedUser = userRepository.save(user);
 
         return userMapper.toDto(savedUser);
     }

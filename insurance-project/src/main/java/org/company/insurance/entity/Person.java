@@ -2,8 +2,7 @@ package org.company.insurance.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalDate;
@@ -13,10 +12,17 @@ import java.util.Date;
 @MappedSuperclass
 @Getter
 @Setter
-public class Person extends BaseEntity{
-    @Column(name = "email")
-    private String email;
 
+public class Person extends BaseEntity{
+
+//    @Column(name = "email")
+//    private String email;
+//
+//    private String emailVerificationCode;
+//
+//    private LocalDateTime emailVerificationExpiry;
+//
+//    private boolean emailVerified = false;
     @Column(name = "first_name")
     private String firstName;
 
@@ -29,13 +35,37 @@ public class Person extends BaseEntity{
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+//    public String getEmailVerificationCode() {
+//        return emailVerificationCode;
+//    }
+//
+//    public void setEmailVerificationCode(String emailVerificationCode) {
+//        this.emailVerificationCode = emailVerificationCode;
+//    }
+//
+//    public LocalDateTime getEmailVerificationExpiry() {
+//        return emailVerificationExpiry;
+//    }
+//
+//    public void setEmailVerificationExpiry(LocalDateTime emailVerificationExpiry) {
+//        this.emailVerificationExpiry = emailVerificationExpiry;
+//    }
+//
+//    public boolean isEmailVerified() {
+//        return emailVerified;
+//    }
+//
+//    public void setEmailVerified(boolean emailVerified) {
+//        this.emailVerified = emailVerified;
+//    }
+//
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
 
     public String getFirstName() {
         return firstName;

@@ -57,7 +57,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 Claims claims = jwtService.extractAllClaims(jwt);
                 String role = claims.get("role", String.class);
                 System.out.println("\n\n\n\t\t\tRole: " + role + "\n\n\n");
-
+                if (!((User) userDetails).isEmailVerified()) {
+                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                    response.getWriter().write("Email not verified. Please verify your email to access the system.");
+                    return;
+                }
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,

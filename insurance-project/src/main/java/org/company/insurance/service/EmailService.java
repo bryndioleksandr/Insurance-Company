@@ -32,6 +32,22 @@ public class  EmailService {
     }
 
     @Async
+    public void sendEmailCode(String to, String subject, String body) {
+        try {
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(body, true);
+
+            mailSender.send(mimeMessage);
+        } catch (MessagingException e) {
+            throw new IllegalStateException("Failed to send email", e);
+        }
+    }
+
+    @Async
     public void sendEmail(String email, String insuranceType, String insuranceDetails)
             throws MessagingException, UnsupportedEncodingException {
         String fromAddress = "bryndio.insurance@gmail.com";

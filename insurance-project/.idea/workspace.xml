@@ -7,12 +7,18 @@
     <list default="true" id="63f9a081-d918-4168-8f21-a8aac09d1e61" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/AutoInsuranceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/AutoInsuranceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/SignUpRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/SignUpRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/UserCreationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/UserCreationDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/dto/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/AuthenticationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/HealthInsuranceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/HealthInsuranceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/PropertyInsuranceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/PropertyInsuranceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/TravelInsuranceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/TravelInsuranceService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,11 +28,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="com.intellij.jpb.NewRecord" />
         <option value="com.intellij.jpb.NewInterface" />
         <option value="Exception" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="com.intellij.jpb.NewRecord" />
       </list>
     </option>
   </component>
@@ -144,7 +150,9 @@
       <workItem from="1732311102617" duration="1859000" />
       <workItem from="1732350087576" duration="9475000" />
       <workItem from="1732400317943" duration="21591000" />
-      <workItem from="1732538862051" duration="7251000" />
+      <workItem from="1732538862051" duration="8037000" />
+      <workItem from="1732554641327" duration="1513000" />
+      <workItem from="1732556180527" duration="3248000" />
     </task>
     <servers />
   </component>
