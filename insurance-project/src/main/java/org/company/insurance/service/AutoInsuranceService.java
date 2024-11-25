@@ -83,6 +83,17 @@ public class AutoInsuranceService {
     }
 
     @Transactional
+    public AutoInsuranceDto getAutoInsuranceByPolicyId(Long policyId){
+        logger.info("Fetching auto insurance by policy ID: {}", policyId);
+        AutoInsurance autoInsurance = autoInsuranceRepository.findByInsurancePolicyId(policyId).orElseThrow(() -> {
+            logger.error("Auto insurance with policy ID {} not found", policyId);
+            return new AutoInsuranceNotFoundException("Auto insurance with policy ID " + policyId + " not found");
+        });
+        logger.info("Found auto insurance: {}", autoInsurance);
+        return autoInsuranceMapper.toDto(autoInsurance);
+    }
+
+    @Transactional
     public AutoInsuranceDto updateAutoInsuranceByPolicyId(Long policyId, AutoInsuranceDto autoInsuranceDto) {
         logger.info("Updating auto insurance for policy ID: {}", policyId);
 

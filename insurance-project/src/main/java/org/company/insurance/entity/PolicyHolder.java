@@ -21,6 +21,7 @@ public class PolicyHolder extends BaseEntity{
     private String address;
 
     @OneToMany(mappedBy = "policyHolder")
+    @ToString.Exclude
     private List<InsurancePolicy> insurancePolicies;
 
     @OneToOne

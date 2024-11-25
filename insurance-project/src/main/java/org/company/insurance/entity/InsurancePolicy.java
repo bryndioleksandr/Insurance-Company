@@ -42,6 +42,7 @@ public class InsurancePolicy extends BaseEntity{
     private InsuranceType insuranceType;
 
     @OneToMany(mappedBy = "insurancePolicy")
+    @ToString.Exclude
     private List<Claim> claims;
 
     @ManyToOne

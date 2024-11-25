@@ -33,6 +33,7 @@ public class User extends Person implements UserDetails{
     private Role role;
 
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     private List<InsurancePolicy> insurancePolicies;
 
     @Override

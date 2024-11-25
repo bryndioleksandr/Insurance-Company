@@ -6,13 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="63f9a081-d918-4168-8f21-a8aac09d1e61" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/HealthInsuranceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/HealthInsuranceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/PropertyInsuranceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/PropertyInsuranceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/TravelInsuranceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/TravelInsuranceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/config/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/InsurancePolicyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/controller/InsurancePolicyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/InsurancePolicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/InsurancePolicy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/PolicyHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/PolicyHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/InsurancePolicyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/repository/InsurancePolicyRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/AutoInsuranceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/AutoInsuranceService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/HealthInsuranceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/HealthInsuranceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/InsurancePolicyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/InsurancePolicyService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/PropertyInsuranceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/PropertyInsuranceService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/TravelInsuranceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/TravelInsuranceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/company/insurance/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +148,8 @@
       <workItem from="1732310742559" duration="222000" />
       <workItem from="1732311102617" duration="1859000" />
       <workItem from="1732350087576" duration="9475000" />
-      <workItem from="1732400317943" duration="14410000" />
+      <workItem from="1732400317943" duration="21591000" />
+      <workItem from="1732538862051" duration="1276000" />
     </task>
     <servers />
   </component>

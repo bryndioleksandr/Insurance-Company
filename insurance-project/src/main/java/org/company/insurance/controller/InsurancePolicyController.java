@@ -129,6 +129,26 @@ public class InsurancePolicyController {
         return new ResponseEntity<>(insurancePolicyDtos, HttpStatus.OK);
     }
 
+    @GetMapping("user/auto-insurances/{id}")
+    public ResponseEntity<?> getAutoInsuranceByInsurancePolicyId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(insurancePolicyService.getAutoInsuranceByPolicyId(id));
+    }
+
+    @GetMapping("user/travel-insurances/{id}")
+    public ResponseEntity<?> getTravelInsuranceByInsurancePolicyId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(insurancePolicyService.getTravelInsuranceByPolicyId(id));
+    }
+
+    @GetMapping("user/health-insurances/{id}")
+    public ResponseEntity<?> getHealthInsuranceByInsurancePolicyId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(insurancePolicyService.getHealthInsuranceByPolicyId(id));
+    }
+
+    @GetMapping("user/property-insurances/{id}")
+    public ResponseEntity<?> getPropertyInsuranceByInsurancePolicyId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(insurancePolicyService.getPropertyInsuranceByPolicyId(id));
+    }
+
     @Operation(
             summary = "Get filtered insurance policies",
             description = "Fetches a filtered list of insurance policies based on the provided query parameters",
@@ -152,6 +172,78 @@ public class InsurancePolicyController {
             @RequestParam(name = "policyHolder", required = false) Long policyHolder,
             @PageableDefault Pageable pageable) {
         Page<InsurancePolicyDto> insurancePolicyDtos = insurancePolicyService.getFilteredInsurances(id, policyNumber, userId, startDate, endDate, price, status, insuranceType, policyHolder, pageable);
+
+        if (insurancePolicyDtos.isEmpty()) {
+            return new ResponseEntity<>("No insurance policies found.", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(insurancePolicyDtos, HttpStatus.OK);
+    }
+
+    @Operation(
+            summary = "Get all user`s insurance policies",
+            description = "Fetches a paginated list of all insurance policies",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "List of insurance policies",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = InsurancePolicyDto.class))),
+                    @ApiResponse(responseCode = "204", description = "No insurance policies found")
+            }
+    )
+    @GetMapping("/user/all")
+    public ResponseEntity<?> getUserAllInsurances(Pageable pageable) {
+        Page<InsurancePolicyDto> insurancePolicyDtos = insurancePolicyService.getAllInsurancesForCurrentUser(pageable);
+        if (insurancePolicyDtos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return new ResponseEntity<>(insurancePolicyDtos, HttpStatus.OK);
+    }
+
+    @Operation(
+            summary = "Get user`s sorted insurance policies",
+            description = "Fetches a sorted list of insurance policies based on provided parameters",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Sorted list of insurance policies",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = InsurancePolicyDto.class))),
+                    @ApiResponse(responseCode = "204", description = "No insurance policies found")
+            }
+    )
+    @GetMapping("/user/all/sorted")
+    public ResponseEntity<?> getUserSortedInsurances(
+            @RequestParam String sortBy,
+            @RequestParam String order,
+            @PageableDefault Pageable pageable) {
+        Page<InsurancePolicyDto> insurancePolicyDtos = insurancePolicyService.getSortedInsurancesForCurrentUser(sortBy, order, pageable);
+        if (insurancePolicyDtos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return new ResponseEntity<>(insurancePolicyDtos, HttpStatus.OK);
+    }
+
+    @Operation(
+            summary = "Get user`s filtered insurance policies",
+            description = "Fetches a filtered list of insurance policies based on the provided query parameters",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Filtered list of insurance policies",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = InsurancePolicyDto.class))),
+                    @ApiResponse(responseCode = "404", description = "No insurance policies found matching the filters")
+            }
+    )
+
+    @GetMapping("user/all/filtered")
+    public ResponseEntity<?> getUserFilteredInsurances(
+            @RequestParam(name = "id", required = false) Long id,
+            @RequestParam(name = "policyNumber", required = false) String policyNumber,
+            @RequestParam(name = "userId", required = false) Long userId,
+            @RequestParam(name = "startDate", required = false) LocalDate startDate,
+            @RequestParam(name = "endDate", required = false) LocalDate endDate,
+            @RequestParam(name = "price", required = false) double price,
+            @RequestParam(name = "status", required = false) String status,
+            @RequestParam(name = "insuranceType", required = false) String insuranceType,
+            @RequestParam(name = "policyHolder", required = false) Long policyHolder,
+            @PageableDefault Pageable pageable) {
+        Page<InsurancePolicyDto> insurancePolicyDtos = insurancePolicyService.getFilteredInsurancesForCurrentUser(id, policyNumber, userId, startDate, endDate, price, status, insuranceType, policyHolder, pageable);
 
         if (insurancePolicyDtos.isEmpty()) {
             return new ResponseEntity<>("No insurance policies found.", HttpStatus.NOT_FOUND);

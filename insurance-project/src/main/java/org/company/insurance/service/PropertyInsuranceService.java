@@ -55,6 +55,11 @@ public class PropertyInsuranceService {
         return basePricePerCubicMeter * houseSize * longevityMultiplier;
     }
 
+    @Transactional
+    public PropertyInsuranceDto getPropertyInsuranceByPolicyId(Long policyId){
+        return propertyInsuranceMapper.toDto(propertyInsuranceRepository.findByInsurancePolicyId(policyId).orElseThrow(() -> new PropertyInsuranceNotFoundException("Property insurance with policy ID " + policyId + " not found")));
+    }
+
     private double calculateCoverageAmount(double houseSize) {
         PropertyInsuranceType coverageAmount = PropertyInsuranceType.getCoverageAmount(houseSize);
         return coverageAmount.getAmount();

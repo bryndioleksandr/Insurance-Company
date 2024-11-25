@@ -102,6 +102,10 @@ public class HealthInsuranceService {
 
         return healthInsuranceMapper.toDto(updatedHealthInsurance);
     }
+
+    public HealthInsuranceDto getHealthInsuranceByPolicyId(Long policy){
+        return healthInsuranceMapper.toDto(healthInsuranceRepository.findByInsurancePolicyId(policy).orElseThrow(() -> new HealthInsuranceNotFoundException("Health insurance with policy ID " + policy + " not found")));
+    }
     
     private double calculateHealthInsuranceCost(HealthInsurance healthInsurance, int age) {
         Long currentInsurancePolicyId = healthInsurance.getInsurancePolicy().getId();

@@ -136,6 +136,11 @@ public class TravelInsuranceService {
     }
 
     @Transactional
+    public TravelInsuranceDto getTravelInsuranceByPolicyId(Long policy){
+        return travelInsuranceMapper.toDto(travelInsuranceRepository.findByInsurancePolicyId(policy).orElseThrow(() -> new TravelInsuranceNotFoundException("Travel insurance with policy ID " + policy + " not found")));
+    }
+
+    @Transactional
     public TravelInsuranceDto updateTravelInsurance(TravelInsuranceDto travelInsuranceDto) {
         return travelInsuranceMapper.toDto(travelInsuranceRepository.save(travelInsuranceMapper.toEntity(travelInsuranceDto)));
     }
