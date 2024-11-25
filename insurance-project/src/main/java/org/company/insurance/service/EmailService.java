@@ -30,6 +30,35 @@ public class  EmailService {
         helper.setText(exception, true);
         mailSender.send(message);
     }
+
+    @Async
+    public void sendEmail(String email, String insuranceType, String insuranceDetails)
+            throws MessagingException, UnsupportedEncodingException {
+        String fromAddress = "bryndio.insurance@gmail.com";
+        String senderName = "BRYinsurance";
+        String subject = "Your " + insuranceType +" Insurance Details Updated";
+
+        String emailBody = "<html><body>" +
+                "<h2>Dear Customer,</h2>" +
+                "<p>Your <strong>" + insuranceType + "</strong> insurance has been successfully purchased. Here are the details:</p>" +
+                "<table border='1' cellpadding='5' cellspacing='0'>" +
+                "<tr><td><strong>Insurance Type</strong></td><td>" + insuranceType + "</td></tr>" +
+                "<tr><td><strong>Details</strong></td><td>" + insuranceDetails + "</td></tr>" +
+                "</table>" +
+                "<p>Thank you for choosing <strong>BRYinsurance!</strong></p>" +
+                "<footer><p>Best regards, <br> The BRYinsurance Team</p></footer>" +
+                "</body></html>";
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        helper.setFrom(fromAddress, senderName);
+        helper.setTo(email);
+        helper.setSubject(subject);
+        helper.setText(emailBody, true);
+
+        mailSender.send(message);
+    }
+
     public void sendTestEmail() {
         try {
             SimpleMailMessage message = new SimpleMailMessage();

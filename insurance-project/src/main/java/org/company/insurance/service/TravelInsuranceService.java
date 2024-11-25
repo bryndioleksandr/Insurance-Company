@@ -1,6 +1,7 @@
 package org.company.insurance.service;
 
 
+import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.company.insurance.dto.TravelInsuranceCreationDto;
@@ -27,6 +28,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -39,6 +41,7 @@ public class TravelInsuranceService {
     private final TravelInsuranceMapper travelInsuranceMapper;
 
     private final InsurancePolicyRepository insurancePolicyRepository;
+    private final EmailService emailService;
     private static final Logger logger = LoggerFactory.getLogger(TravelInsuranceService.class);
     
 
@@ -106,7 +109,7 @@ public class TravelInsuranceService {
     }
 
     @Transactional
-    public TravelInsuranceDto updateTravelInsuranceByPolicyId(Long policyId, TravelInsuranceDto travelInsuranceDto) {
+    public TravelInsuranceDto updateTravelInsuranceByPolicyId(Long policyId, TravelInsuranceDto travelInsuranceDto) throws MessagingException, UnsupportedEncodingException {
         logger.info("Updating travel insurance for policy ID: {}", policyId);
 
         TravelInsurance existingTravelInsurance = travelInsuranceRepository.findByInsurancePolicyId(policyId)
@@ -123,14 +126,39 @@ public class TravelInsuranceService {
         logger.info("Travel insurance updated successfully: {}", updatedTravelInsurance);
 
         InsurancePolicy insurancePolicy = updatedTravelInsurance.getInsurancePolicy();
+        double updatedPrice = 0;
         if (insurancePolicy != null) {
             logger.info("Updating price and status for insurance policy ID: {}", insurancePolicy.getId());
-            double updatedPrice = calculateTravelInsurancePrice(updatedTravelInsurance);
+            updatedPrice = calculateTravelInsurancePrice(updatedTravelInsurance);
             insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
             insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
         } else {
             logger.warn("No insurance policy found for updated travel insurance ID: {}", updatedTravelInsurance.getId());
         }
+
+        double price = updatedPrice;
+
+        String coverageArea = updatedTravelInsurance.getCoverageArea().toString();
+        String destination = updatedTravelInsurance.getDestination();
+        String travelType = updatedTravelInsurance.getTravelType().toString();
+        double coverageAmount = updatedTravelInsurance.getCoverageAmount();
+
+        String body = "<html><body>" +
+                "<h2>Dear " + insurancePolicy.getUser().getFirstName() + ",</h2>" +
+                "<p>Your <strong>travel insurance</strong> has been successfully purchased. Here are the details:</p>" +
+                "<table border='1' cellpadding='8' cellspacing='0' style='border-collapse: collapse; width: 50%;'>" +
+                "<tr><td><strong>Coverage Area</strong></td><td>" + coverageArea + "</td></tr>" +
+                "<tr><td><strong>Destination</strong></td><td>" + destination + "</td></tr>" +
+                "<tr><td><strong>Travel Type</strong></td><td>" + travelType + "</td></tr>" +
+                "<tr><td><strong>Coverage Amount</strong></td><td>$" + coverageAmount + "</td></tr>" +
+                "<tr><td><strong>Price</strong></td><td>₴" + (int)price + "</td></tr>" +
+                "</table>" +
+                "<p>Thank you for choosing us!</p>" +
+                "</body></html>";
+
+        String email = insurancePolicy.getUser().getEmail();
+        emailService.sendEmail(email, insurancePolicy.getInsuranceType().toString(), body);
+
         return travelInsuranceMapper.toDto(updatedTravelInsurance);
 
     }

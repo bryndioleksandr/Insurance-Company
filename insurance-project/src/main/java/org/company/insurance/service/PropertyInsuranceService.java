@@ -1,6 +1,7 @@
 package org.company.insurance.service;
 
 
+import jakarta.mail.MessagingException;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -39,6 +41,7 @@ public class PropertyInsuranceService {
     private final PropertyInsuranceRepository propertyInsuranceRepository;
     private final PropertyInsuranceMapper propertyInsuranceMapper;
     private final InsurancePolicyRepository insurancePolicyRepository;
+    private final EmailService emailService;
     private static final Logger logger = LoggerFactory.getLogger(PropertyInsuranceService.class);
     
 
@@ -96,7 +99,7 @@ public class PropertyInsuranceService {
     }
 
     @Transactional
-    public PropertyInsuranceDto updatePropertyInsuranceByPolicyId(Long policyId, PropertyInsuranceDto propertyInsuranceDto) {
+    public PropertyInsuranceDto updatePropertyInsuranceByPolicyId(Long policyId, PropertyInsuranceDto propertyInsuranceDto) throws MessagingException, UnsupportedEncodingException {
         logger.info("Updating property insurance for policy ID: {}", policyId);
 
         PropertyInsurance existingPropertyInsurance = propertyInsuranceRepository.findByInsurancePolicyId(policyId)
@@ -113,14 +116,38 @@ public class PropertyInsuranceService {
         logger.info("Property insurance updated successfully: {}", updatedPropertyInsurance);
 
         InsurancePolicy insurancePolicy = updatedPropertyInsurance.getInsurancePolicy();
+        double updatedPrice = 0;
         if (insurancePolicy != null) {
             logger.info("Updating price and status for insurance policy ID: {}", insurancePolicy.getId());
-            double updatedPrice = calculatePropertyInsurancePrice(updatedPropertyInsurance);
+            updatedPrice = calculatePropertyInsurancePrice(updatedPropertyInsurance);
             insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
             insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
         } else {
             logger.warn("No insurance policy found for updated property insurance ID: {}", updatedPropertyInsurance.getId());
         }
+        double price = updatedPrice;
+
+        String propertyAddress = updatedPropertyInsurance.getPropertyAddress();
+        double houseSize = updatedPropertyInsurance.getHouseSize();
+        String insuranceType = updatedPropertyInsurance.getInsuranceType().toString();
+        double coverageAmount = updatedPropertyInsurance.getCoverageAmount();
+
+        String body = "<html><body>" +
+                "<h2>Dear " + insurancePolicy.getUser().getFirstName() + ",</h2>" +
+                "<p>Your <strong>property insurance</strong> has been successfully purchased. Here are the details:</p>" +
+                "<table border='1' cellpadding='8' cellspacing='0' style='border-collapse: collapse; width: 50%;'>" +
+                "<tr><td><strong>Insurance Type</strong></td><td>" + insuranceType + "</td></tr>" +
+                "<tr><td><strong>Property Address</strong></td><td>" + propertyAddress + "</td></tr>" +
+                "<tr><td><strong>House Size</strong></td><td>" + houseSize + "</td></tr>" +
+                "<tr><td><strong>Coverage Amount</strong></td><td>$" + coverageAmount + "</td></tr>" +
+                "<tr><td><strong>Price</strong></td><td>₴" + (int)price + "</td></tr>" +
+                "</table>" +
+                "<p>Thank you for choosing us!</p>" +
+                "</body></html>";
+
+        String email = insurancePolicy.getUser().getEmail();
+        emailService.sendEmail(email, insurancePolicy.getInsuranceType().toString(), body);
+
         return propertyInsuranceMapper.toDto(updatedPropertyInsurance);
 
     }

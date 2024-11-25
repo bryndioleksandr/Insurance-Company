@@ -1,5 +1,6 @@
 package org.company.insurance.service;
 
+import jakarta.mail.MessagingException;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.company.insurance.mapper.AutoInsuranceMapper;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
@@ -41,6 +43,7 @@ public class AutoInsuranceService {
     private AutoInsuranceRepository autoInsuranceRepository;
     private final InsurancePolicyRepository insurancePolicyRepository;
     private AutoInsuranceMapper autoInsuranceMapper;
+    private EmailService emailService;
 
     private static final Logger logger = LoggerFactory.getLogger(AutoInsuranceService.class);
 
@@ -94,7 +97,7 @@ public class AutoInsuranceService {
     }
 
     @Transactional
-    public AutoInsuranceDto updateAutoInsuranceByPolicyId(Long policyId, AutoInsuranceDto autoInsuranceDto) {
+    public AutoInsuranceDto updateAutoInsuranceByPolicyId(Long policyId, AutoInsuranceDto autoInsuranceDto) throws MessagingException, UnsupportedEncodingException {
         logger.info("Updating auto insurance for policy ID: {}", policyId);
 
         AutoInsurance existingAutoInsurance = autoInsuranceRepository.findByInsurancePolicyId(policyId)
@@ -111,15 +114,42 @@ public class AutoInsuranceService {
         logger.info("Auto insurance updated successfully: {}", updatedAutoInsurance);
 
         InsurancePolicy insurancePolicy = updatedAutoInsurance.getInsurancePolicy();
+        double updatedPrice = 0;
         if (insurancePolicy != null) {
             logger.info("Updating price and status for insurance policy ID: {}", insurancePolicy.getId());
-            double updatedPrice = calculatePriceBasedOnAutoInsurance(updatedAutoInsurance);
+            updatedPrice = calculatePriceBasedOnAutoInsurance(updatedAutoInsurance);
             insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
             insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
         }
         else {
             logger.warn("No insurance policy found for updated auto insurance ID: {}", updatedAutoInsurance.getId());
         }
+
+        String carBrand = updatedAutoInsurance.getBrand();
+        String carModel = updatedAutoInsurance.getModel();
+        int year = updatedAutoInsurance.getYear();
+        String plate = updatedAutoInsurance.getPlate();
+        String carType = updatedAutoInsurance.getType().toString();
+        double coverageAmount = updatedAutoInsurance.getCoverageAmount();
+        double price = updatedPrice;
+
+        String body = "<html><body>" +
+                "<h2>Dear " + insurancePolicy.getUser().getFirstName() + ",</h2>" +
+                "<p>Your <strong>auto insurance</strong> has been successfully purchased. Here are the details:</p>" +
+                "<table border='1' cellpadding='8' cellspacing='0' style='border-collapse: collapse; width: 50%;'>" +
+                "<tr><td><strong>Vehicle Brand</strong></td><td>" + carBrand + "</td></tr>" +
+                "<tr><td><strong>Vehicle Model</strong></td><td>" + carModel + "</td></tr>" +
+                "<tr><td><strong>Vehicle Year</strong></td><td>" + year + "</td></tr>" +
+                "<tr><td><strong>Vehicle Plate</strong></td><td>" + plate + "</td></tr>" +
+                "<tr><td><strong>Vehicle Type</strong></td><td>" + carType + "</td></tr>" +
+                "<tr><td><strong>Coverage Amount</strong></td><td>$" + coverageAmount + "</td></tr>" +
+                "<tr><td><strong>Price</strong></td><td>₴" + (int)price + "</td></tr>" +
+                "</table>" +
+                "<p>Thank you for choosing us!</p>" +
+                "</body></html>";
+
+        String email = insurancePolicy.getUser().getEmail();
+        emailService.sendEmail(email, insurancePolicy.getInsuranceType().toString(), body);
 
         return autoInsuranceMapper.toDto(updatedAutoInsurance);
     }

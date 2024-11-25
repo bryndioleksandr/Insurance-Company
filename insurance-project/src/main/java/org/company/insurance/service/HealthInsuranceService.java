@@ -1,5 +1,6 @@
 package org.company.insurance.service;
 
+import jakarta.mail.MessagingException;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -30,6 +31,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -40,6 +42,7 @@ public class HealthInsuranceService {
     private HealthInsuranceRepository healthInsuranceRepository;
     private HealthInsuranceMapper healthInsuranceMapper;
     private final InsurancePolicyRepository insurancePolicyRepository;
+    private final EmailService emailService;
     private static final Logger logger = LoggerFactory.getLogger(HealthInsuranceService.class);
     
 
@@ -73,7 +76,7 @@ public class HealthInsuranceService {
     }
 
     @Transactional
-    public HealthInsuranceDto updateHealthInsuranceByPolicyId(Long policyId, HealthInsuranceDto healthInsuranceDto) {
+    public HealthInsuranceDto updateHealthInsuranceByPolicyId(Long policyId, HealthInsuranceDto healthInsuranceDto) throws MessagingException, UnsupportedEncodingException {
         logger.info("Updating health insurance for policy ID: {}", policyId);
 
         HealthInsurance existingHealthInsurance = healthInsuranceRepository.findByInsurancePolicyId(policyId)
@@ -90,15 +93,42 @@ public class HealthInsuranceService {
         logger.info("Health insurance updated successfully: {}", updatedHealthInsurance);
 
         InsurancePolicy insurancePolicy = updatedHealthInsurance.getInsurancePolicy();
+
+        double updatedPrice = 0;
         if (insurancePolicy != null) {
             logger.info("Updating price and status for insurance policy ID: {}", insurancePolicy.getId());
-            double updatedPrice = calculateHealthInsuranceCost(updatedHealthInsurance, (LocalDate.now().getYear() - insurancePolicy.getUser().getBirthDate().getYear()));
+            updatedPrice = calculateHealthInsuranceCost(updatedHealthInsurance, (LocalDate.now().getYear() - insurancePolicy.getUser().getBirthDate().getYear()));
             insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
             insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
         }
         else {
             logger.warn("No insurance policy found for updated health insurance ID: {}", updatedHealthInsurance.getId());
         }
+
+        double price = updatedPrice;
+
+        String medicalHistory = updatedHealthInsurance.getMedicalHistory();
+        String insuranceType = updatedHealthInsurance.getInsuranceType().toString();
+        double coverageAmount = updatedHealthInsurance.getCoverageAmount();
+        int age = (LocalDate.now().getYear() - insurancePolicy.getUser().getBirthDate().getYear());
+
+        String subject = "Your Health Insurance Details";
+        String body = "<html><body>" +
+                "<h2>Dear " + insurancePolicy.getUser().getFirstName() + ",</h2>" +
+                "<p>Your <strong>health insurance</strong> has been successfully purchased. Here are the details:</p>" +
+                "<table border='1' cellpadding='8' cellspacing='0' style='border-collapse: collapse; width: 50%;'>" +
+                "<tr><td><strong>Insurance Type</strong></td><td>" + insuranceType + "</td></tr>" +
+                "<tr><td><strong>Medical History</strong></td><td>" + medicalHistory + "</td></tr>" +
+                "<tr><td><strong>Age</strong></td><td>" + age + "</td></tr>" +
+                "<tr><td><strong>Coverage Amount</strong></td><td>$" + coverageAmount + "</td></tr>" +
+                "<tr><td><strong>Price</strong></td><td>₴" + (int)price + "</td></tr>" +
+                "</table>" +
+                "<p>Thank you for choosing us!</p>" +
+                "</body></html>";
+
+
+        String email = insurancePolicy.getUser().getEmail();
+        emailService.sendEmail(email, insurancePolicy.getInsuranceType().toString(), body);
 
         return healthInsuranceMapper.toDto(updatedHealthInsurance);
     }

@@ -105,9 +105,9 @@ public class UserService {
         if(userRepository.existsByUsername(userDto.username())) {
             throw new UserAlreadyExistsException("User with username " + userDto.username() + " already exists");
         }
-        if(userDto.role() != null || userDto.role() != existingUser.getRole()) {
-            throw new RuntimeException("Role cannot be changed");
-        }
+//        if(userDto.role() != null || userDto.role() != existingUser.getRole()) {
+//            throw new RuntimeException("Role cannot be changed");
+//        }
         userMapper.partialUpdate(userDto, existingUser);
 
         User updatedUser = userRepository.save(existingUser);
