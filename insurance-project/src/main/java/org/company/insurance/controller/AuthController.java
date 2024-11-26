@@ -50,7 +50,7 @@
             user.setEmailVerificationExpiry(LocalDateTime.now().plusMinutes(15));
             userRepository.save(user);
 
-            emailService.sendEmail(
+            emailService.sendEmailCode(
                     user.getEmail(),
                     "Verify Your Email",
                     "Your new verification code is: " + user.getEmailVerificationCode()

@@ -47,7 +47,7 @@ public class AuthenticationService {
         userService.createUserVerified(userDto);
 
 
-        emailService.sendEmail(
+        emailService.sendEmailCode(
                 user.getEmail(),
                 "Verify Your Email",
                 "Your verification code is: " + user.getEmailVerificationCode()
