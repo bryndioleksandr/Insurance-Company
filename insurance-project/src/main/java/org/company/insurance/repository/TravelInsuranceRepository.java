@@ -19,5 +19,7 @@ public interface TravelInsuranceRepository extends JpaRepository<TravelInsurance
 
     Optional<TravelInsurance> findByInsurancePolicyId(Long insurancePolicyId);
 
+    @Query("SELECT a, i FROM TravelInsurance a JOIN a.insurancePolicy i WHERE a.insurancePolicy.id = ?1")
+    Object[] findByIdWithPolicyDetails(Long id);
 
 }

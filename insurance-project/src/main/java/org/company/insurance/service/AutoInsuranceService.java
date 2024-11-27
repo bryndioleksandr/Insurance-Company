@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.company.insurance.dto.AutoInsuranceCreationDto;
 import org.company.insurance.dto.AutoInsuranceDto;
 import org.company.insurance.dto.AutoInsuranceDto;
+import org.company.insurance.dto.AutoInsuranceWithPolicyDto;
 import org.company.insurance.entity.AutoInsurance;
 import org.company.insurance.entity.AutoInsurance;
 import org.company.insurance.entity.InsurancePolicy;
@@ -33,6 +34,9 @@ import org.company.insurance.mapper.AutoInsuranceMapper;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -58,6 +62,27 @@ public class AutoInsuranceService {
         logger.info("Found auto insurance: {}", autoInsurance);
         return autoInsuranceMapper.toDto(autoInsurance);
     }
+
+//    public List<AutoInsuranceWithPolicyDto> getAutoInsuranceWithPolicy(Long policyId) {
+//        List<java.lang.Object[]> results = Collections.singletonList(autoInsuranceRepository.findByIdWithPolicyDetails(policyId));
+//        List<AutoInsuranceWithPolicyDto> dtos = new ArrayList<>();
+//
+//        for (Object[] result : results) {
+//            AutoInsurance autoInsurance = (AutoInsurance) result[0];
+//            InsurancePolicy insurancePolicy = (InsurancePolicy) result[1];
+//
+//            // Конвертація в DTO
+//            AutoInsuranceWithPolicyDto dto = new AutoInsuranceWithPolicyDto();
+//            dto.setAutoInsuranceId(autoInsurance.getId());
+//            dto.setCoverageType(autoInsurance.getCoverageType());
+//            dto.setInsuredAmount(autoInsurance.getInsuredAmount());
+//            dto.setPolicyNumber(insurancePolicy.getPolicyNumber());
+//            dto.setPremiumAmount(insurancePolicy.getPremiumAmount());
+//            dtos.add(dto);
+//        }
+//
+//        return dtos;
+//    }
 
     public AutoInsuranceDto createAutoInsurance(AutoInsuranceCreationDto autoInsuranceDto) {
         logger.info("Creating auto insurance for policy ID: {}", autoInsuranceDto.insurancePolicyId());

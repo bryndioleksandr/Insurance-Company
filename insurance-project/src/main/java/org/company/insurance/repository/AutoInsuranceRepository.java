@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface AutoInsuranceRepository extends JpaRepository<AutoInsurance, Long>, JpaSpecificationExecutor<AutoInsurance> {
@@ -14,4 +15,7 @@ public interface AutoInsuranceRepository extends JpaRepository<AutoInsurance, Lo
     boolean existsByInsurancePolicyId(Long insurancePolicyId);
 
     Optional <AutoInsurance> findByInsurancePolicyId(Long insurancePolicyId);
+
+    @Query("SELECT a, i FROM AutoInsurance a JOIN a.insurancePolicy i WHERE a.insurancePolicy.id = ?1")
+    Object[] findByIdWithPolicyDetails(Long id);
 }

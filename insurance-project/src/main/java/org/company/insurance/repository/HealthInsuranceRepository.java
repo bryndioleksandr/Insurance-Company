@@ -15,4 +15,6 @@ public interface HealthInsuranceRepository extends JpaRepository<HealthInsurance
 
     Optional<HealthInsurance> findByInsurancePolicyId(Long insurancePolicyId);
 
+    @Query("SELECT a, i FROM HealthInsurance a JOIN a.insurancePolicy i WHERE a.insurancePolicy.id= ?1")
+    Object[] findByIdWithPolicyDetails(Long id);
 }

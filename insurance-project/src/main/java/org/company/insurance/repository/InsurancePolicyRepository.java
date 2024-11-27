@@ -3,6 +3,7 @@ package org.company.insurance.repository;
 import org.company.insurance.entity.Agent;
 import org.company.insurance.entity.InsurancePolicy;
 import org.company.insurance.enums.InsuranceStatus;
+import org.company.insurance.enums.InsuranceType;
 import org.hibernate.sql.Update;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,4 +30,10 @@ public interface InsurancePolicyRepository extends JpaRepository<InsurancePolicy
     InsurancePolicy findByIdAndUserId(Long id, Long userId);
 
     boolean existsByIdAndUserId(Long id, Long userId);
+
+    InsurancePolicy findByPolicyNumber(String policyNumber);
+
+    Page<InsurancePolicy> findAllByStatus(InsuranceStatus status, Pageable pageable);
+
+    Page<InsurancePolicy> findByInsuranceType(InsuranceType insuranceType, Pageable pageable);
 }

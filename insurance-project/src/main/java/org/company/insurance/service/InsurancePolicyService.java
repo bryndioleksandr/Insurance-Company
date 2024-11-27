@@ -150,6 +150,13 @@ public class InsurancePolicyService {
     }
 
     @Transactional
+    public InsurancePolicyDto findByPolicyNumber(String policyNumber) {
+        return insurancePolicyMapper.toDto(insurancePolicyRepository.findByPolicyNumber(policyNumber));
+    }
+
+
+
+    @Transactional
     public InsurancePolicyDto updateInsurancePolicy(InsurancePolicyDto insurancePolicyDto) {
         return insurancePolicyMapper.toDto(insurancePolicyRepository.save(insurancePolicyMapper.toEntity(insurancePolicyDto)));
     }
@@ -158,6 +165,17 @@ public class InsurancePolicyService {
     @CacheEvict
     public void deleteInsurancePolicyById(Long id) {
         insurancePolicyRepository.deleteById(id);
+    }
+
+
+    @Transactional
+    public Page<InsurancePolicyDto> findByStatus(InsuranceStatus status, Pageable pageable) {
+        return insurancePolicyRepository.findAllByStatus(status, pageable).map(insurancePolicyMapper::toDto);
+    }
+
+    @Transactional
+    public Page<InsurancePolicyDto> findByInsuranceType(InsuranceType insuranceType, Pageable pageable) {
+        return insurancePolicyRepository.findByInsuranceType(insuranceType, pageable).map(insurancePolicyMapper::toDto);
     }
 
     @Transactional
