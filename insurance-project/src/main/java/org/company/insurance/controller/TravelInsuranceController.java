@@ -5,14 +5,17 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
+import org.company.insurance.dto.TravelInsuranceDto;
 import org.company.insurance.dto.TravelInsuranceCreationDto;
 import org.company.insurance.dto.TravelInsuranceDto;
+import org.company.insurance.exception.TravelInsuranceNotFoundException;
 import org.company.insurance.service.TravelInsuranceService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -33,6 +36,7 @@ public class TravelInsuranceController {
                     @ApiResponse(responseCode = "404", description = "Travel insurance not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("{id}")
     public ResponseEntity<TravelInsuranceDto> getTravelInsuranceById(@PathVariable Long id){
         return ResponseEntity.ok(travelInsuranceService.getTravelInsuranceById(id));
@@ -47,33 +51,61 @@ public class TravelInsuranceController {
                                     schema = @Schema(implementation = TravelInsuranceDto.class)))
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @PostMapping
     public ResponseEntity<TravelInsuranceDto> createTravelInsurance(@RequestBody TravelInsuranceCreationDto travelInsuranceDto){
         return ResponseEntity.ok(travelInsuranceService.createTravelInsurance(travelInsuranceDto));
     }
 
+//    @Operation(
+//            summary = "Update an existing travel insurance",
+//            description = "Updates details of an existing travel insurance",
+//            responses = {
+//                    @ApiResponse(responseCode = "200", description = "Travel insurance updated",
+//                            content = @Content(mediaType = "application/json",
+//                                    schema = @Schema(implementation = TravelInsuranceDto.class)))
+//            }
+//    )
+//    @PutMapping
+//    public ResponseEntity<TravelInsuranceDto> updateTravel(@RequestBody TravelInsuranceDto travelInsuranceDto) {
+//        return ResponseEntity.ok(travelInsuranceService.updateTravelInsurance(travelInsuranceDto));
+//    }
+//
+//    @Operation(
+//            summary = "Delete travel insurance by ID",
+//            description = "Deletes a travel insurance from the system using its unique ID",
+//            responses = {
+//                    @ApiResponse(responseCode = "204", description = "Travel insurance deleted successfully"),
+//                    @ApiResponse(responseCode = "404", description = "Travel insurance not found")
+//            }
+//    )
     @Operation(
             summary = "Update an existing travel insurance",
-            description = "Updates details of an existing travel insurance",
+            description = "Updates the travel insurance details with the provided data",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Travel insurance updated",
+                    @ApiResponse(responseCode = "200", description = "Travel insurance updated successfully",
                             content = @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = TravelInsuranceDto.class)))
-            }
-    )
-    @PutMapping
-    public ResponseEntity<TravelInsuranceDto> updateTravel(@RequestBody TravelInsuranceDto travelInsuranceDto) {
-        return ResponseEntity.ok(travelInsuranceService.updateTravelInsurance(travelInsuranceDto));
-    }
-
-    @Operation(
-            summary = "Delete travel insurance by ID",
-            description = "Deletes a travel insurance from the system using its unique ID",
-            responses = {
-                    @ApiResponse(responseCode = "204", description = "Travel insurance deleted successfully"),
+                                    schema = @Schema(implementation = TravelInsuranceDto.class))),
+                    @ApiResponse(responseCode = "400", description = "Invalid input"),
                     @ApiResponse(responseCode = "404", description = "Travel insurance not found")
             }
     )
+    @PutMapping("/{policyId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER') or hasRole('ROLE_AGENT')")
+    public ResponseEntity<TravelInsuranceDto> updateTravelInsuranceByPolicyId(
+            @PathVariable("policyId") Long policyId,
+            @RequestBody TravelInsuranceDto travelInsuranceDto) {
+        try {
+            TravelInsuranceDto updatedTravelInsurance = travelInsuranceService.updateTravelInsuranceByPolicyId(policyId, travelInsuranceDto);
+            return ResponseEntity.ok(updatedTravelInsurance);
+        } catch (TravelInsuranceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteTravelById(@PathVariable("id") Long id) {
         travelInsuranceService.deleteTravelInsuranceById(id);
@@ -90,6 +122,7 @@ public class TravelInsuranceController {
                     @ApiResponse(responseCode = "204", description = "No travel insurances found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping
     public ResponseEntity<?> getAllTravels(Pageable pageable) {
         Page<TravelInsuranceDto> travelInsuranceDtos = travelInsuranceService.getAllTravels(pageable);
@@ -109,6 +142,7 @@ public class TravelInsuranceController {
                     @ApiResponse(responseCode = "204", description = "No travel insurances found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("/sorted")
     public ResponseEntity<?> getSortedTravels(
             @RequestParam String sortBy,
@@ -131,6 +165,7 @@ public class TravelInsuranceController {
                     @ApiResponse(responseCode = "404", description = "No travel insurances found matching the filters")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("/filtered")
     public ResponseEntity<?> getFilteredTravels (
             @RequestParam(name = "id", required = false) Long id,

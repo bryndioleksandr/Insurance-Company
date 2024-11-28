@@ -53,7 +53,7 @@ public class SecurityConfiguration {
                                 "/swagger-resources/**",
                                 "/v3/api-docs/**",
                                 "/webjars/**",
-                                "/api-docs/**").hasAnyRole("ADMIN", "USER", "AGENT")
+                                "/api-docs/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/**").hasAnyRole("ADMIN", "USER", "AGENT")
 //                        .requestMatchers("/api/users/**").hasAnyRole("USER", "AGENT", "ADMIN")

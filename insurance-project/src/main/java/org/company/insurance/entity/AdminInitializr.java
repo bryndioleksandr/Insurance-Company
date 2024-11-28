@@ -62,7 +62,7 @@ public class AdminInitializr {
 //                    position
             );
             userService.createUser(adminDto);
-            userRepository.updateEmailVerifiedStatus(adminUsername);
+            //userRepository.updateEmailVerifiedStatus(adminUsername);
             System.out.println("Initial admin user created: " + adminUsername);
         }
     }

@@ -38,6 +38,7 @@ public class ClaimAssessmentController {
                     @ApiResponse(responseCode = "404", description = "Claim assessment not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("{id}")
     public ResponseEntity<ClaimAssessmentDto> getClaimAssessmentById(@PathVariable Long id) {
         return ResponseEntity.ok(claimAssessmentService.getClaimAssessmentById(id));
@@ -54,7 +55,7 @@ public class ClaimAssessmentController {
             }
     )
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_AGENT')")
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<ClaimAssessmentDto> createClaimAssessment(@RequestBody ClaimAssessmentCreationDto claimAssessmentDto) {
         return ResponseEntity.ok(claimAssessmentService.createClaimAssessment(claimAssessmentDto));
     }
@@ -69,6 +70,7 @@ public class ClaimAssessmentController {
                     @ApiResponse(responseCode = "404", description = "Claim assessment not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @PutMapping
     public ResponseEntity<ClaimAssessmentDto> updateClaimAssessment(@RequestBody ClaimAssessmentDto claimAssessmentDto) {
         return ResponseEntity.ok(claimAssessmentService.updateClaimAssessment(claimAssessmentDto));
@@ -82,6 +84,7 @@ public class ClaimAssessmentController {
                     @ApiResponse(responseCode = "404", description = "Claim assessment not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteClaimAssessmentById(@PathVariable("id") Long id) {
         claimAssessmentService.deleteClaimAssessmentById(id);
@@ -98,6 +101,7 @@ public class ClaimAssessmentController {
                     @ApiResponse(responseCode = "204", description = "No claim assessments found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @GetMapping
     public ResponseEntity<?> getAllClaimAssessments(Pageable pageable) {
         Page<ClaimAssessmentDto> claimAssessmentDtos = claimAssessmentService.getAllClaimAssessments(pageable);
@@ -117,6 +121,7 @@ public class ClaimAssessmentController {
                     @ApiResponse(responseCode = "204", description = "No claim assessments found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @GetMapping("/sorted")
     public ResponseEntity<?> getSortedClaimAssessments(
             @RequestParam String sortBy,
@@ -139,6 +144,7 @@ public class ClaimAssessmentController {
                     @ApiResponse(responseCode = "404", description = "No claim assessments found matching the filters")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @GetMapping("/filtered")
     public ResponseEntity<?> getFilteredClaimAssessments(
             @RequestParam(name = "id", required = false) Long id,

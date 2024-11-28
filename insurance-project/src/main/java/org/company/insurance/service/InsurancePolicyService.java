@@ -1,5 +1,6 @@
 package org.company.insurance.service;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -46,27 +47,27 @@ public class InsurancePolicyService {
     private PropertyInsuranceService propertyInsuranceService;
     private HealthInsuranceService healthInsuranceService;
 
-//    private InsuranceStatus determineInsuranceStatus(InsurancePolicy policy) {
-//        LocalDate endDate = policy.getEndDate();
-//        if (endDate != null && LocalDate.now().isAfter(endDate)) {
-//            return InsuranceStatus.EXPIRED;
-//        }
-//        return InsuranceStatus.ACTIVE;
-//    }
-//
-//    @Transactional
-//    @PostConstruct
-//    public void checkAndUpdateInsuranceStatusOnStartup() {
-//        List<InsurancePolicy> policies = insurancePolicyRepository.findAll();
-//
-//        for (InsurancePolicy policy : policies) {
-//            InsuranceStatus status = determineInsuranceStatus(policy);
-//            if (status != policy.getStatus()) {
-//                policy.setStatus(status);
-//                insurancePolicyRepository.updateStatusById(status, policy.getId());
-//            }
-//        }
-//    }
+    private InsuranceStatus determineInsuranceStatus(InsurancePolicy policy) {
+        LocalDate endDate = policy.getEndDate();
+        if (endDate != null && LocalDate.now().isAfter(endDate)) {
+            return InsuranceStatus.EXPIRED;
+        }
+        return InsuranceStatus.ACTIVE;
+    }
+
+    @Transactional
+    @PostConstruct
+    public void checkAndUpdateInsuranceStatusOnStartup() {
+        List<InsurancePolicy> policies = insurancePolicyRepository.findAll();
+
+        for (InsurancePolicy policy : policies) {
+            InsuranceStatus status = determineInsuranceStatus(policy);
+            if (status != policy.getStatus()) {
+                policy.setStatus(status);
+                insurancePolicyRepository.updateStatusById(status, policy.getId());
+            }
+        }
+    }
 
     @Transactional
     @Cacheable

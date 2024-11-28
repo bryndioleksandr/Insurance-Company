@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,6 +34,7 @@ public class PolicyHolderController {
                     @ApiResponse(responseCode = "404", description = "Policy holder not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("{id}")
     public ResponseEntity<PolicyHolderDto> getPolicyHolderById(@PathVariable Long id){
         return ResponseEntity.ok(policyHolderService.getPolicyHolderById(id));
@@ -47,6 +49,7 @@ public class PolicyHolderController {
                                     schema = @Schema(implementation = PolicyHolderDto.class)))
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @PostMapping
     public ResponseEntity<PolicyHolderDto> createPolicyHolder(@RequestBody PolicyHolderCreationDto policyHolderDto){
         return ResponseEntity.ok(policyHolderService.createPolicyHolder(policyHolderDto));
@@ -61,6 +64,7 @@ public class PolicyHolderController {
                                     schema = @Schema(implementation = PolicyHolderDto.class)))
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @PutMapping
     public ResponseEntity<PolicyHolderDto> updatePolicyHolder(@RequestBody PolicyHolderDto policyHolderDto) {
         return ResponseEntity.ok(policyHolderService.updatePolicyHolder(policyHolderDto));
@@ -74,6 +78,7 @@ public class PolicyHolderController {
                     @ApiResponse(responseCode = "404", description = "Policy holder not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deletePolicyHolderById(@PathVariable("id") Long id) {
         policyHolderService.deletePolicyHolderById(id);
@@ -90,6 +95,7 @@ public class PolicyHolderController {
                     @ApiResponse(responseCode = "204", description = "No policy holders found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping
     public ResponseEntity<?> getAllHolders(Pageable pageable) {
         Page<PolicyHolderDto> policyHolderDtos = policyHolderService.getAllHolders(pageable);
@@ -109,6 +115,7 @@ public class PolicyHolderController {
                     @ApiResponse(responseCode = "204", description = "No policy holders found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("/sorted")
     public ResponseEntity<?> getSortedHolders(
             @RequestParam String sortBy,
@@ -131,6 +138,7 @@ public class PolicyHolderController {
                     @ApiResponse(responseCode = "404", description = "No policy holders found matching the filters")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("/filtered")
     public ResponseEntity<?> getFilteredHolders (
             @RequestParam(name = "id", required = false) Long id,

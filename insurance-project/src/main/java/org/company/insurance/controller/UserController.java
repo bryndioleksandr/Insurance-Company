@@ -27,7 +27,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @Operation(
             summary = "Get user by ID",
             description = "Fetches user details by ID",
@@ -108,6 +108,7 @@ public class UserController {
 
 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @Operation(
             summary = "Delete user by ID",
             description = "Deletes a user from the system by their ID",
@@ -122,6 +123,7 @@ public class UserController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @Operation(
             summary = "Get all users",
             description = "Fetches all users with pagination support",
@@ -141,6 +143,7 @@ public class UserController {
     }
 
     @GetMapping("/sorted")
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @Operation(
             summary = "Get sorted users",
             description = "Fetches users sorted by the specified field and order",
@@ -163,6 +166,7 @@ public class UserController {
     }
 
     @GetMapping("/filtered")
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @Operation(
             summary = "Get filtered users",
             description = "Fetches users based on provided filters (e.g., ID, birth date, phone number, etc.)",

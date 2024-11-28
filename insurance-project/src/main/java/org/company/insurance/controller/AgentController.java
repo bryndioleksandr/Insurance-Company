@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.company.insurance.service.AgentService;
 
@@ -35,6 +36,7 @@ public class AgentController {
                     @ApiResponse(responseCode = "404", description = "Agent not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("{id}")
     public ResponseEntity<AgentDto> getAgentById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(agentService.getAgentById(id));
@@ -50,6 +52,7 @@ public class AgentController {
                     @ApiResponse(responseCode = "400", description = "Invalid input")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<AgentDto> createAgent(@Valid @RequestBody AgentCreationDto agentCreationDto) {
         return ResponseEntity.ok(agentService.createAgent(agentCreationDto));
@@ -65,6 +68,7 @@ public class AgentController {
                     @ApiResponse(responseCode = "404", description = "Agent not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @PutMapping
     public ResponseEntity<AgentDto> updateAgent(@RequestBody AgentDto agentDto) {
         return ResponseEntity.ok(agentService.updateAgent(agentDto));
@@ -78,6 +82,7 @@ public class AgentController {
                     @ApiResponse(responseCode = "404", description = "Agent not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteAgentById(@PathVariable("id") Long id) {
         agentService.deleteAgentById(id);
@@ -94,6 +99,7 @@ public class AgentController {
                     @ApiResponse(responseCode = "204", description = "No agents found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping
     public ResponseEntity<?> getAllAgents(Pageable pageable) {
         Page<AgentDto> agentDtos = agentService.getAllAgents(pageable);
@@ -113,6 +119,7 @@ public class AgentController {
                     @ApiResponse(responseCode = "204", description = "No agents found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("/sorted")
     public ResponseEntity<?> getSortedAgents(
             @RequestParam String sortBy,
@@ -135,6 +142,7 @@ public class AgentController {
                     @ApiResponse(responseCode = "404", description = "No agents found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("/filtered")
     public ResponseEntity<?> getFilteredAgents(
             @RequestParam(name = "id", required = false) Long id,

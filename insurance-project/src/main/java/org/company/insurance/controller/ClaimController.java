@@ -35,6 +35,7 @@ public class ClaimController {
                     @ApiResponse(responseCode = "404", description = "Claim not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("{id}")
     public ResponseEntity<ClaimDto> getClaimById(@PathVariable Long id) {
         return ResponseEntity.ok(claimService.getClaimById(id));
@@ -67,6 +68,7 @@ public class ClaimController {
                     @ApiResponse(responseCode = "404", description = "Claim not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @PutMapping
     public ResponseEntity<ClaimDto> updateClaim(@RequestBody ClaimDto claimDto) {
         return ResponseEntity.ok(claimService.updateClaim(claimDto));
@@ -80,6 +82,7 @@ public class ClaimController {
                     @ApiResponse(responseCode = "404", description = "Claim not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteClaimById(@PathVariable("id") Long id) {
         claimService.deleteClaimById(id);
@@ -96,6 +99,7 @@ public class ClaimController {
                     @ApiResponse(responseCode = "204", description = "No content")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @GetMapping
     public ResponseEntity<?> getAllClaims(Pageable pageable) {
         Page<ClaimDto> claimDtos = claimService.getAllClaims(pageable);
@@ -115,6 +119,7 @@ public class ClaimController {
                     @ApiResponse(responseCode = "204", description = "No content")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @GetMapping("/sorted")
     public ResponseEntity<?> getSortedClaims(
             @RequestParam String sortBy,
@@ -137,6 +142,7 @@ public class ClaimController {
                     @ApiResponse(responseCode = "404", description = "No claims found matching the filters")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @GetMapping("/filtered")
     public ResponseEntity<?> getFilteredClaims(
             @RequestParam(name = "id", required = false) Long id,

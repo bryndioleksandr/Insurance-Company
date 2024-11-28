@@ -36,6 +36,7 @@ public class AutoInsuranceController {
                     @ApiResponse(responseCode = "404", description = "Auto insurance not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("{id}")
     public ResponseEntity<AutoInsuranceDto> getAutoInsuranceById(@PathVariable("id") Long id){
         return ResponseEntity.ok(autoInsuranceService.getAutoInsuranceById(id));
@@ -51,6 +52,7 @@ public class AutoInsuranceController {
                     @ApiResponse(responseCode = "400", description = "Invalid input")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @PostMapping
     public ResponseEntity<AutoInsuranceDto> createAutoInsurance(@RequestBody AutoInsuranceCreationDto autoInsuranceDto){
         return ResponseEntity.ok(autoInsuranceService.createAutoInsurance(autoInsuranceDto));
@@ -84,7 +86,7 @@ public class AutoInsuranceController {
             }
     )
     @PutMapping("/{policyId}")
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER') or hasRole('ROLE_AGENT')")
     public ResponseEntity<AutoInsuranceDto> updateAutoInsuranceByPolicyId(
             @PathVariable("policyId") Long policyId,
             @RequestBody AutoInsuranceDto autoInsuranceDto) {
@@ -106,6 +108,7 @@ public class AutoInsuranceController {
                     @ApiResponse(responseCode = "404", description = "Auto insurance not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteAutoInsuranceById(@PathVariable("id") Long id) {
         autoInsuranceService.deleteAutoInsuranceById(id);
@@ -122,6 +125,7 @@ public class AutoInsuranceController {
                     @ApiResponse(responseCode = "204", description = "No content available")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @GetMapping
     public ResponseEntity<?> getAllAutoInsurances(Pageable pageable) {
         Page<AutoInsuranceDto> autoInsuranceDtos = autoInsuranceService.getAllAutoInsurances(pageable);
@@ -141,6 +145,7 @@ public class AutoInsuranceController {
                     @ApiResponse(responseCode = "204", description = "No content available")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @GetMapping("/sorted")
     public ResponseEntity<?> getSortedAutoInsurances(
             @RequestParam String sortBy,
@@ -163,6 +168,7 @@ public class AutoInsuranceController {
                     @ApiResponse(responseCode = "404", description = "No auto insurances found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @GetMapping("/filtered")
     public ResponseEntity<?> getFilteredAutoInsurances (
             @RequestParam(name = "id", required = false) Long id,

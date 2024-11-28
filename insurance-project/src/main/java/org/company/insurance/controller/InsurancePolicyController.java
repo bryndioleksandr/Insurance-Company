@@ -40,6 +40,7 @@
                         @ApiResponse(responseCode = "404", description = "Insurance policy not found")
                 }
         )
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
         @GetMapping("{id}")
         public ResponseEntity<InsurancePolicyDto> getInsurancePolicyById(@PathVariable Long id) {
             return ResponseEntity.ok(insurancePolicyService.getInsurancePolicyById(id));
@@ -56,7 +57,7 @@
                 }
         )
         @PostMapping
-        @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
         public ResponseEntity<InsurancePolicyDto> createInsurancePolicy(@RequestBody InsurancePolicyCreationDto insurancePolicy) {
             return ResponseEntity.ok(insurancePolicyService.createInsurancePolicy(insurancePolicy));
         }
@@ -71,6 +72,7 @@
                         @ApiResponse(responseCode = "400", description = "Invalid input")
                 }
         )
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
         @PutMapping
         public ResponseEntity<InsurancePolicyDto> updateInsurancePolicy(@RequestBody InsurancePolicyDto insurancePolicyDto) {
             return ResponseEntity.ok(insurancePolicyService.updateInsurancePolicy(insurancePolicyDto));
@@ -84,6 +86,7 @@
                         @ApiResponse(responseCode = "404", description = "Insurance policy not found")
                 }
         )
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
         @DeleteMapping("{id}")
         public ResponseEntity<Void> deleteInsurancePolicyById(@PathVariable Long id) {
             insurancePolicyService.deleteInsurancePolicyById(id);
@@ -100,6 +103,7 @@
                         @ApiResponse(responseCode = "204", description = "No insurance policies found")
                 }
         )
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
         @GetMapping
         public ResponseEntity<?> getAllInsurances(Pageable pageable) {
             Page<InsurancePolicyDto> insurancePolicyDtos = insurancePolicyService.getAllInsurances(pageable);
@@ -109,17 +113,20 @@
             return new ResponseEntity<>(insurancePolicyDtos, HttpStatus.OK);
         }
 
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
         @GetMapping("/policy-number/{policyNumber}")
         public ResponseEntity<?> getInsurancePolicyByPolicyNumber(@PathVariable("policyNumber") String policyNumber) {
             return ResponseEntity.ok(insurancePolicyService.findByPolicyNumber(policyNumber));
         }
 
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
         @GetMapping("/status/{status}")
         public ResponseEntity<?> getInsurancePolicyByStatus(@PathVariable("status") InsuranceStatus status, Pageable pageable) {
             return ResponseEntity.ok(insurancePolicyService.findByStatus(status, pageable));
         }
 
         @GetMapping("/insurance-type/{insuranceType}")
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
         public ResponseEntity<?> getInsurancePolicyByInsuranceType(@PathVariable("insuranceType") InsuranceType insuranceType, Pageable pageable) {
             return ResponseEntity.ok(insurancePolicyService.findByInsuranceType(insuranceType, pageable));
         }
@@ -134,6 +141,7 @@
                         @ApiResponse(responseCode = "204", description = "No insurance policies found")
                 }
         )
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
         @GetMapping("/sorted")
         public ResponseEntity<?> getSortedInsurances(
                 @RequestParam String sortBy,
@@ -146,21 +154,25 @@
             return new ResponseEntity<>(insurancePolicyDtos, HttpStatus.OK);
         }
 
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
         @GetMapping("user/auto-insurances/{id}")
         public ResponseEntity<?> getAutoInsuranceByInsurancePolicyId(@PathVariable("id") Long id) {
             return ResponseEntity.ok(insurancePolicyService.getAutoInsuranceByPolicyId(id));
         }
 
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
         @GetMapping("user/travel-insurances/{id}")
         public ResponseEntity<?> getTravelInsuranceByInsurancePolicyId(@PathVariable("id") Long id) {
             return ResponseEntity.ok(insurancePolicyService.getTravelInsuranceByPolicyId(id));
         }
 
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
         @GetMapping("user/health-insurances/{id}")
         public ResponseEntity<?> getHealthInsuranceByInsurancePolicyId(@PathVariable("id") Long id) {
             return ResponseEntity.ok(insurancePolicyService.getHealthInsuranceByPolicyId(id));
         }
 
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
         @GetMapping("user/property-insurances/{id}")
         public ResponseEntity<?> getPropertyInsuranceByInsurancePolicyId(@PathVariable("id") Long id) {
             return ResponseEntity.ok(insurancePolicyService.getPropertyInsuranceByPolicyId(id));
@@ -176,6 +188,7 @@
                         @ApiResponse(responseCode = "404", description = "No insurance policies found matching the filters")
                 }
         )
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
         @GetMapping("/filtered")
         public ResponseEntity<?> getFilteredInsurances(
                 @RequestParam(name = "id", required = false) Long id,
@@ -206,6 +219,7 @@
                         @ApiResponse(responseCode = "204", description = "No insurance policies found")
                 }
         )
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
         @GetMapping("/user/all")
         public ResponseEntity<?> getUserAllInsurances(Pageable pageable) {
             Page<InsurancePolicyDto> insurancePolicyDtos = insurancePolicyService.getAllInsurancesForCurrentUser(pageable);
@@ -225,6 +239,7 @@
                         @ApiResponse(responseCode = "204", description = "No insurance policies found")
                 }
         )
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
         @GetMapping("/user/all/sorted")
         public ResponseEntity<?> getUserSortedInsurances(
                 @RequestParam String sortBy,
@@ -247,7 +262,7 @@
                         @ApiResponse(responseCode = "404", description = "No insurance policies found matching the filters")
                 }
         )
-
+        @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
         @GetMapping("user/all/filtered")
         public ResponseEntity<?> getUserFilteredInsurances(
                 @RequestParam(name = "id", required = false) Long id,

@@ -105,7 +105,6 @@
             user.setEmailVerificationExpiry(null);
             userRepository.save(user);
 
-            // Generate JWT token after successful email verification
             var jwt = jwtService.generateToken(user);
 
             return new JwtAuthenticationResponse(jwt);

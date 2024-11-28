@@ -6,15 +6,18 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
+import org.company.insurance.dto.HealthInsuranceDto;
 import org.company.insurance.dto.HealthInsuranceCreationDto;
 import org.company.insurance.dto.HealthInsuranceDto;
 import org.company.insurance.dto.HealthInsuranceDto;
+import org.company.insurance.exception.HealthInsuranceNotFoundException;
 import org.company.insurance.service.HealthInsuranceService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,6 +36,7 @@ public class HealthInsuranceController {
                     @ApiResponse(responseCode = "404", description = "Health insurance not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("{id}")
     public ResponseEntity<HealthInsuranceDto> getHealthInsuranceById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(healthInsuranceService.getHealthInsuranceById(id));
@@ -48,6 +52,7 @@ public class HealthInsuranceController {
                     @ApiResponse(responseCode = "400", description = "Invalid input")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @PostMapping
     public ResponseEntity<HealthInsuranceDto> createHealthInsurance(@RequestBody HealthInsuranceCreationDto healthInsuranceDto) {
         return ResponseEntity.ok(healthInsuranceService.createHealthInsurance(healthInsuranceDto));
@@ -61,25 +66,52 @@ public class HealthInsuranceController {
                     @ApiResponse(responseCode = "404", description = "Health insurance not found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN')")
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteHealthInsuranceById(@PathVariable("id") Long id) {
         healthInsuranceService.deleteHealthInsuranceById(id);
         return ResponseEntity.noContent().build();
     }
 
+//    @Operation(
+//            summary = "Update health insurance",
+//            description = "Updates an existing health insurance with the provided details",
+//            responses = {
+//                    @ApiResponse(responseCode = "200", description = "Health insurance updated successfully",
+//                            content = @Content(mediaType = "application/json",
+//                                    schema = @Schema(implementation = HealthInsuranceDto.class))),
+//                    @ApiResponse(responseCode = "400", description = "Invalid input")
+//            }
+//    )
+//    @PutMapping
+//    public ResponseEntity<HealthInsuranceDto> updateHealthInsurance(@RequestBody HealthInsuranceDto healthInsuranceDto) {
+//        return ResponseEntity.ok(healthInsuranceService.updateHealthInsurance(healthInsuranceDto));
+//    }
+
     @Operation(
-            summary = "Update health insurance",
-            description = "Updates an existing health insurance with the provided details",
+            summary = "Update an existing health insurance",
+            description = "Updates the health insurance details with the provided data",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Health insurance updated successfully",
                             content = @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = HealthInsuranceDto.class))),
-                    @ApiResponse(responseCode = "400", description = "Invalid input")
+                    @ApiResponse(responseCode = "400", description = "Invalid input"),
+                    @ApiResponse(responseCode = "404", description = "Health insurance not found")
             }
     )
-    @PutMapping
-    public ResponseEntity<HealthInsuranceDto> updateHealthInsurance(@RequestBody HealthInsuranceDto healthInsuranceDto) {
-        return ResponseEntity.ok(healthInsuranceService.updateHealthInsurance(healthInsuranceDto));
+    @PutMapping("/{policyId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER') or hasRole('ROLE_AGENT')")
+    public ResponseEntity<HealthInsuranceDto> updateHealthInsuranceByPolicyId(
+            @PathVariable("policyId") Long policyId,
+            @RequestBody HealthInsuranceDto healthInsuranceDto) {
+        try {
+            HealthInsuranceDto updatedHealthInsurance = healthInsuranceService.updateHealthInsuranceByPolicyId(policyId, healthInsuranceDto);
+            return ResponseEntity.ok(updatedHealthInsurance);
+        } catch (HealthInsuranceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @Operation(
@@ -92,6 +124,7 @@ public class HealthInsuranceController {
                     @ApiResponse(responseCode = "204", description = "No health insurances found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping
     public ResponseEntity<?> getAllHealth(Pageable pageable) {
         Page<HealthInsuranceDto> healthInsuranceDtos = healthInsuranceService.getAllHealth(pageable);
@@ -111,6 +144,7 @@ public class HealthInsuranceController {
                     @ApiResponse(responseCode = "204", description = "No health insurances found")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("/sorted")
     public ResponseEntity<?> getSortedHealth(
             @RequestParam String sortBy,
@@ -133,6 +167,7 @@ public class HealthInsuranceController {
                     @ApiResponse(responseCode = "404", description = "No health insurances found matching the filters")
             }
     )
+    @PreAuthorize("hasRole('ROLE_AGENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("/filtered")
     public ResponseEntity<?> getFilteredHealth(
             @RequestParam(name = "id", required = false) Long id,

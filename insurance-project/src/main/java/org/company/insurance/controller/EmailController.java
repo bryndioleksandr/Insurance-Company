@@ -26,15 +26,9 @@ public class EmailController {
         return "Test email sent!";
     }
     @GetMapping("/admin")
-    @Operation(summary = "Доступен только авторизованным пользователям с ролью ADMIN")
+    @Operation(summary = "ADMIN only is able to access this endpoint")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String exampleAdmin() {
         return "Hello, admin!";
-    }
-
-    @GetMapping("/get-admin")
-    @Operation(summary = "Получить роль ADMIN (для демонстрации)")
-    public void getAdmin() {
-        service.getAdmin();
     }
 }
