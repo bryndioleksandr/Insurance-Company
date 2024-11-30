@@ -5,17 +5,17 @@ public enum PropertyInsuranceType {
     MEDIUM(100000.0),
     LARGE(200000.0);
 
-    private final double amount;
+    private final Double amount;
 
-    PropertyInsuranceType(double amount) {
+    PropertyInsuranceType(Double amount) {
         this.amount = amount;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public static PropertyInsuranceType getCoverageAmount(double houseSize) {
+    public static PropertyInsuranceType getCoverageAmount(Double houseSize) {
         if (houseSize < 100) {
             return SMALL;
         } else if (houseSize < 300) {

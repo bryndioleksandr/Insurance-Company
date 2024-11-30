@@ -150,7 +150,7 @@ public class ClaimAssessmentController {
             @RequestParam(name = "id", required = false) Long id,
             @RequestParam(name = "assessmentDate", required = false) LocalDate assessmentDate,
             @RequestParam(name = "notes", required = false) String notes,
-            @RequestParam(name = "assessmentAmount", required = false) double assessmentAmount,
+            @RequestParam(name = "assessmentAmount", required = false) Double assessmentAmount,
             @RequestParam(name = "agent", required = false) Long agent,
             @PageableDefault Pageable pageable) {
         Page<ClaimAssessmentDto> claimAssessmentDtos = claimAssessmentService.getFilteredClaimAssessments(id, assessmentDate, notes, assessmentAmount, agent, pageable);

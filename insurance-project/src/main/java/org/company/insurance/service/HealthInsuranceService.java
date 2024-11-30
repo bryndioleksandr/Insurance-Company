@@ -64,7 +64,7 @@ public class HealthInsuranceService {
 
         InsurancePolicy insurancePolicy = healthInsurance.getInsurancePolicy();
         if (insurancePolicy != null) {
-            double updatedPrice = calculateHealthInsuranceCost(healthInsurance, (LocalDate.now().getYear() - insurancePolicy.getUser().getBirthDate().getYear()));
+            Double updatedPrice = calculateHealthInsuranceCost(healthInsurance, (LocalDate.now().getYear() - insurancePolicy.getUser().getBirthDate().getYear()));
 
             insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
             insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
@@ -94,7 +94,7 @@ public class HealthInsuranceService {
 
         InsurancePolicy insurancePolicy = updatedHealthInsurance.getInsurancePolicy();
 
-        double updatedPrice = 0;
+        Double updatedPrice = 0.0;
         if (insurancePolicy != null) {
             logger.info("Updating price and status for insurance policy ID: {}", insurancePolicy.getId());
             updatedPrice = calculateHealthInsuranceCost(updatedHealthInsurance, (LocalDate.now().getYear() - insurancePolicy.getUser().getBirthDate().getYear()));
@@ -105,11 +105,11 @@ public class HealthInsuranceService {
             logger.warn("No insurance policy found for updated health insurance ID: {}", updatedHealthInsurance.getId());
         }
 
-        double price = updatedPrice;
+        Double price = updatedPrice;
 
         String medicalHistory = updatedHealthInsurance.getMedicalHistory();
         String insuranceType = updatedHealthInsurance.getInsuranceType().toString();
-        double coverageAmount = updatedHealthInsurance.getCoverageAmount();
+        Double coverageAmount = updatedHealthInsurance.getCoverageAmount();
         int age = (LocalDate.now().getYear() - insurancePolicy.getUser().getBirthDate().getYear());
 
         String subject = "Your Health Insurance Details";
@@ -121,7 +121,7 @@ public class HealthInsuranceService {
                 "<tr><td><strong>Medical History</strong></td><td>" + medicalHistory + "</td></tr>" +
                 "<tr><td><strong>Age</strong></td><td>" + age + "</td></tr>" +
                 "<tr><td><strong>Coverage Amount</strong></td><td>$" + coverageAmount + "</td></tr>" +
-                "<tr><td><strong>Price</strong></td><td>₴" + (int)price + "</td></tr>" +
+                "<tr><td><strong>Price</strong></td><td>₴" + (Double)price + "</td></tr>" +
                 "</table>" +
                 "<p>Thank you for choosing us!</p>" +
                 "</body></html>";
@@ -137,18 +137,18 @@ public class HealthInsuranceService {
         return healthInsuranceMapper.toDto(healthInsuranceRepository.findByInsurancePolicyId(policy).orElseThrow(() -> new HealthInsuranceNotFoundException("Health insurance with policy ID " + policy + " not found")));
     }
     
-    private double calculateHealthInsuranceCost(HealthInsurance healthInsurance, int age) {
+    private Double calculateHealthInsuranceCost(HealthInsurance healthInsurance, int age) {
         Long currentInsurancePolicyId = healthInsurance.getInsurancePolicy().getId();
         LocalDate startDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getStartDate();
         LocalDate endDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getEndDate();
         long daysDifference = ChronoUnit.DAYS.between(startDate, endDate);
-        double longevityMultiplier = daysDifference / 365.0;
+        Double longevityMultiplier = daysDifference / 365.0;
 
         HealthInsuranceType serviceType = healthInsurance.getInsuranceType();
-        double basePrice = 300;
-        double ageMultiplier = (age > 60) ? 1.5 : 1.0;
+        Double basePrice = 300.0;
+        Double ageMultiplier = (age > 60) ? 1.5 : 1.0;
 
-        double serviceMultiplier = switch (serviceType) {
+        Double serviceMultiplier = switch (serviceType) {
             case STANDARD -> 1.0;
             case MEDICAL -> 1.8;
             case DENTAL -> 1.2;
@@ -159,7 +159,7 @@ public class HealthInsuranceService {
         return basePrice * serviceMultiplier * ageMultiplier * longevityMultiplier;
     }
 
-    private double calculateHealthInsuranceCoverage(HealthInsuranceType insuranceType) {
+    private Double calculateHealthInsuranceCoverage(HealthInsuranceType insuranceType) {
         return switch (insuranceType) {
             case DENTAL -> 20000.0;
             case VISION -> 10000.0;

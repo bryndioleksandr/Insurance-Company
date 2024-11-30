@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 /**
  * DTO for {@link org.company.insurance.entity.HealthInsurance}
  */
-public record HealthInsuranceDto(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, double coverageAmount,
+public record HealthInsuranceDto(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, Double coverageAmount,
                                  int insuranceLongevity, Long insurancePolicyId, String insurancePolicyPolicyNumber,
                                  String medicalHistory) implements Serializable {
 }

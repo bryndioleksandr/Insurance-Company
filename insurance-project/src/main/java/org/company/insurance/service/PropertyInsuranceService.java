@@ -45,16 +45,17 @@ public class PropertyInsuranceService {
     private static final Logger logger = LoggerFactory.getLogger(PropertyInsuranceService.class);
     
 
-    private double calculatePropertyInsurancePrice(PropertyInsurance propertyInsurance) {
+    private Double calculatePropertyInsurancePrice(PropertyInsurance propertyInsurance) {
         Long currentInsurancePolicyId = propertyInsurance.getInsurancePolicy().getId();
         LocalDate startDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getStartDate();
         LocalDate endDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getEndDate();
-
+logger.info("Start date: {}", startDate);
+logger.info("End date: {}", endDate);
         long daysDifference = ChronoUnit.DAYS.between(startDate, endDate);
-        double longevityMultiplier = daysDifference / 365.0;
+        Double longevityMultiplier = daysDifference / 365.0;
 
-        double houseSize = propertyInsurance.getHouseSize();
-        double basePricePerCubicMeter = 25.0;
+        Double houseSize = propertyInsurance.getHouseSize();
+        Double basePricePerCubicMeter = 25.0;
         return basePricePerCubicMeter * houseSize * longevityMultiplier;
     }
 
@@ -63,7 +64,7 @@ public class PropertyInsuranceService {
         return propertyInsuranceMapper.toDto(propertyInsuranceRepository.findByInsurancePolicyId(policyId).orElseThrow(() -> new PropertyInsuranceNotFoundException("Property insurance with policy ID " + policyId + " not found")));
     }
 
-    private double calculateCoverageAmount(double houseSize) {
+    private Double calculateCoverageAmount(Double houseSize) {
         PropertyInsuranceType coverageAmount = PropertyInsuranceType.getCoverageAmount(houseSize);
         return coverageAmount.getAmount();
     }
@@ -86,7 +87,7 @@ public class PropertyInsuranceService {
 
         InsurancePolicy insurancePolicy = propertyInsurance.getInsurancePolicy();
         if (insurancePolicy != null) {
-            double updatedPrice = calculatePropertyInsurancePrice(propertyInsurance);
+            Double updatedPrice = calculatePropertyInsurancePrice(propertyInsurance);
 
             insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
             insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
@@ -116,31 +117,32 @@ public class PropertyInsuranceService {
         logger.info("Property insurance updated successfully: {}", updatedPropertyInsurance);
 
         InsurancePolicy insurancePolicy = updatedPropertyInsurance.getInsurancePolicy();
-        double updatedPrice = 0;
+        Double updatedPrice = 0.0;
         if (insurancePolicy != null) {
             logger.info("Updating price and status for insurance policy ID: {}", insurancePolicy.getId());
             updatedPrice = calculatePropertyInsurancePrice(updatedPropertyInsurance);
+            logger.info("New price for insurance policy ID {}: {}", insurancePolicy.getId(), updatedPrice);
             insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
             insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
         } else {
             logger.warn("No insurance policy found for updated property insurance ID: {}", updatedPropertyInsurance.getId());
         }
-        double price = updatedPrice;
+        Double price = updatedPrice;
 
         String propertyAddress = updatedPropertyInsurance.getPropertyAddress();
-        double houseSize = updatedPropertyInsurance.getHouseSize();
-        String insuranceType = updatedPropertyInsurance.getInsuranceType().toString();
-        double coverageAmount = updatedPropertyInsurance.getCoverageAmount();
+        Double houseSize = updatedPropertyInsurance.getHouseSize();
+       // String insuranceType = updatedPropertyInsurance.getInsuranceType().toString();
+        Double coverageAmount = updatedPropertyInsurance.getCoverageAmount();
 
         String body = "<html><body>" +
                 "<h2>Dear " + insurancePolicy.getUser().getFirstName() + ",</h2>" +
                 "<p>Your <strong>property insurance</strong> has been successfully purchased. Here are the details:</p>" +
                 "<table border='1' cellpadding='8' cellspacing='0' style='border-collapse: collapse; width: 50%;'>" +
-                "<tr><td><strong>Insurance Type</strong></td><td>" + insuranceType + "</td></tr>" +
+                "<tr><td><strong>Insurance Type</strong></td><td>"  + "</td></tr>" +
                 "<tr><td><strong>Property Address</strong></td><td>" + propertyAddress + "</td></tr>" +
                 "<tr><td><strong>House Size</strong></td><td>" + houseSize + "</td></tr>" +
                 "<tr><td><strong>Coverage Amount</strong></td><td>$" + coverageAmount + "</td></tr>" +
-                "<tr><td><strong>Price</strong></td><td>₴" + (int)price + "</td></tr>" +
+                "<tr><td><strong>Price</strong></td><td>₴" + (Double)price + "</td></tr>" +
                 "</table>" +
                 "<p>Thank you for choosing us!</p>" +
                 "</body></html>";
@@ -178,7 +180,7 @@ public class PropertyInsuranceService {
     }
 
     @Transactional
-    public Page<PropertyInsuranceDto> getFilteredProperty(Long id, String propertyAddress, double houseSize, String insuranceType, Pageable pageable) {
+    public Page<PropertyInsuranceDto> getFilteredProperty(Long id, String propertyAddress, Double houseSize, String insuranceType, Pageable pageable) {
         Specification<PropertyInsurance> specification = Specification.where(null);
 
         if (id != null) {

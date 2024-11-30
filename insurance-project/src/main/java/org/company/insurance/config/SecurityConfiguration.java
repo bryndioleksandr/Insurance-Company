@@ -35,7 +35,6 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                // Своего рода отключение CORS (разрешение запросов со всех доменов)
                 .cors(cors -> cors.configurationSource(request -> {
                     var corsConfiguration = new CorsConfiguration();
                     corsConfiguration.setAllowedOriginPatterns(List.of("*"));
@@ -44,9 +43,7 @@ public class SecurityConfiguration {
                     corsConfiguration.setAllowCredentials(true);
                     return corsConfiguration;
                 }))
-                // Настройка доступа к конечным точкам
                 .authorizeHttpRequests(request -> request
-                        // Можно указать конкретный путь, * - 1 уровень вложенности, ** - любое количество уровней вложенности
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers(
                                 "/swagger-ui/**",
@@ -56,17 +53,7 @@ public class SecurityConfiguration {
                                 "/api-docs/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/**").hasAnyRole("ADMIN", "USER", "AGENT")
-//                        .requestMatchers("/api/users/**").hasAnyRole("USER", "AGENT", "ADMIN")
-//                        .requestMatchers("/api/agents/**").hasAnyRole("USER", "AGENT", "ADMIN")
-//                        .requestMatchers("/api/auto-insurances/**").hasAnyRole("USER", "AGENT", "ADMIN")
-//                        .requestMatchers("/api/health-insurances/**").hasAnyRole("USER", "AGENT", "ADMIN")
-//                        .requestMatchers("/api/travel-insurances/**").hasAnyRole("USER", "AGENT", "ADMIN")
-//                        .requestMatchers("/api/property-insurances/**").hasAnyRole("USER", "AGENT", "ADMIN")
-//                        .requestMatchers("/api/insurance-policies/**").hasAnyRole("USER", "AGENT", "ADMIN")
-//                        .requestMatchers("/api/policy-holders/**").hasAnyRole("USER", "AGENT", "ADMIN")
-//                        .requestMatchers("/api/claims/**").hasAnyRole("USER", "AGENT", "ADMIN")
-//                        .requestMatchers("/api/claim-assessments/**").hasAnyRole("USER", "AGENT", "ADMIN")
-                        .requestMatchers("/agent/**").hasRole("AGENT")
+                         .requestMatchers("/agent/**").hasRole("AGENT")
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider())

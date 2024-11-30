@@ -29,14 +29,5 @@ public record UserCreationDto(
                               LocalDate birthDate,
                               String password,
                               Role role
-//                              String emailVerificationCode,
-//                              @Value("#{T(java.time.LocalDateTime).now().plusMinutes(15)}")
-//                              LocalDateTime emailVerificationExpiry,
-//                              @Value("false")
-//                              boolean emailVerified
-//                              @Past
-//                              LocalDate hireDate,
-//                              @Size(max = 255)
-//                              String position
                               ) implements Serializable {
 }

@@ -31,7 +31,7 @@ public class InsurancePolicy extends BaseEntity{
     private LocalDate endDate;
 
     @Column(name = "price")
-    private double price;
+    private Double price;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -101,11 +101,11 @@ public class InsurancePolicy extends BaseEntity{
         this.endDate = endDate;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

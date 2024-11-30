@@ -63,27 +63,6 @@ public class AutoInsuranceService {
         return autoInsuranceMapper.toDto(autoInsurance);
     }
 
-//    public List<AutoInsuranceWithPolicyDto> getAutoInsuranceWithPolicy(Long policyId) {
-//        List<java.lang.Object[]> results = Collections.singletonList(autoInsuranceRepository.findByIdWithPolicyDetails(policyId));
-//        List<AutoInsuranceWithPolicyDto> dtos = new ArrayList<>();
-//
-//        for (Object[] result : results) {
-//            AutoInsurance autoInsurance = (AutoInsurance) result[0];
-//            InsurancePolicy insurancePolicy = (InsurancePolicy) result[1];
-//
-//            // Конвертація в DTO
-//            AutoInsuranceWithPolicyDto dto = new AutoInsuranceWithPolicyDto();
-//            dto.setAutoInsuranceId(autoInsurance.getId());
-//            dto.setCoverageType(autoInsurance.getCoverageType());
-//            dto.setInsuredAmount(autoInsurance.getInsuredAmount());
-//            dto.setPolicyNumber(insurancePolicy.getPolicyNumber());
-//            dto.setPremiumAmount(insurancePolicy.getPremiumAmount());
-//            dtos.add(dto);
-//        }
-//
-//        return dtos;
-//    }
-
     public AutoInsuranceDto createAutoInsurance(AutoInsuranceCreationDto autoInsuranceDto) {
         logger.info("Creating auto insurance for policy ID: {}", autoInsuranceDto.insurancePolicyId());
 
@@ -101,7 +80,7 @@ public class AutoInsuranceService {
         InsurancePolicy insurancePolicy = autoInsurance.getInsurancePolicy();
         if (insurancePolicy != null) {
             logger.info("Updating price and status for insurance policy ID: {}", insurancePolicy.getId());
-            double updatedPrice = calculatePriceBasedOnAutoInsurance(autoInsurance);
+            Double updatedPrice = calculatePriceBasedOnAutoInsurance(autoInsurance);
             insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
             insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
         }
@@ -139,10 +118,12 @@ public class AutoInsuranceService {
         logger.info("Auto insurance updated successfully: {}", updatedAutoInsurance);
 
         InsurancePolicy insurancePolicy = updatedAutoInsurance.getInsurancePolicy();
-        double updatedPrice = 0;
+        Double updatedPrice = 0.0;
         if (insurancePolicy != null) {
             logger.info("Updating price and status for insurance policy ID: {}", insurancePolicy.getId());
             updatedPrice = calculatePriceBasedOnAutoInsurance(updatedAutoInsurance);
+            logger.info("New price for insurance policy ID {}:", updatedPrice);
+
             insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
             insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
         }
@@ -155,8 +136,8 @@ public class AutoInsuranceService {
         int year = updatedAutoInsurance.getYear();
         String plate = updatedAutoInsurance.getPlate();
         String carType = updatedAutoInsurance.getType().toString();
-        double coverageAmount = updatedAutoInsurance.getCoverageAmount();
-        double price = updatedPrice;
+        Double coverageAmount = updatedAutoInsurance.getCoverageAmount();
+        Double price = updatedPrice;
 
         String body = "<html><body>" +
                 "<h2>Dear " + insurancePolicy.getUser().getFirstName() + ",</h2>" +
@@ -168,7 +149,7 @@ public class AutoInsuranceService {
                 "<tr><td><strong>Vehicle Plate</strong></td><td>" + plate + "</td></tr>" +
                 "<tr><td><strong>Vehicle Type</strong></td><td>" + carType + "</td></tr>" +
                 "<tr><td><strong>Coverage Amount</strong></td><td>$" + coverageAmount + "</td></tr>" +
-                "<tr><td><strong>Price</strong></td><td>₴" + (int)price + "</td></tr>" +
+                "<tr><td><strong>Price</strong></td><td>₴" + (Double)price + "</td></tr>" +
                 "</table>" +
                 "<p>Thank you for choosing us!</p>" +
                 "</body></html>";
@@ -179,20 +160,20 @@ public class AutoInsuranceService {
         return autoInsuranceMapper.toDto(updatedAutoInsurance);
     }
 
-    private double calculatePriceBasedOnAutoInsurance(AutoInsurance autoInsurance) {
+    private Double calculatePriceBasedOnAutoInsurance(AutoInsurance autoInsurance) {
         logger.info("Calculating price based on auto insurance: {}", autoInsurance);
 
         Long currentInsurancePolicyId = autoInsurance.getInsurancePolicy().getId();
         LocalDate startDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getStartDate();
         LocalDate endDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getEndDate();
         long daysDifference = ChronoUnit.DAYS.between(startDate, endDate);
-        double basePrice = 500;
+        Double basePrice = 500.0;
         int currentYear = LocalDate.now().getYear();
         int carAge = currentYear - autoInsurance.getYear();
-        double capacity = autoInsurance.getEngineCapacity();
+        Double capacity = autoInsurance.getEngineCapacity();
 
-        double ageMultiplier = carAge > 10 ? 1.5 : 1.2;
-        double capacityMultiplier;
+        Double ageMultiplier = carAge > 10 ? 1.5 : 1.2;
+        Double capacityMultiplier;
         if (capacity > 3000) {
             capacityMultiplier = 1.8;
         } else if (capacity > 2500) {
@@ -206,7 +187,7 @@ public class AutoInsuranceService {
         } else {
             capacityMultiplier = 0.8;
         }
-        double typeMultiplier = switch (autoInsurance.getType()) {
+        Double typeMultiplier = switch (autoInsurance.getType()) {
             case CAR -> 1.0;
             case MOTORCYCLE -> 0.8;
             case BUS -> 1.4;
@@ -214,18 +195,18 @@ public class AutoInsuranceService {
             case TRUCK -> 1.5;
         };
 
-        double longevityMultiplier = daysDifference / 365.0;
+        Double longevityMultiplier = daysDifference / 365.0;
         logger.debug("Days diff is {}, Base price is {}, Age multiplier is {}, Type multiplier is {}, Capacity multiplier is {}",
                 daysDifference, basePrice, ageMultiplier, typeMultiplier, capacityMultiplier);
 
-        double price = basePrice * ageMultiplier * typeMultiplier * capacityMultiplier * longevityMultiplier;
+        Double price = basePrice * ageMultiplier * typeMultiplier * capacityMultiplier * longevityMultiplier;
         logger.debug("Calculated price: {}", price);
         return price;
     }
 
-    private double calculateCoverageAmount(AutoInsuranceType type) {
+    private Double calculateCoverageAmount(AutoInsuranceType type) {
         logger.info("Calculating coverage amount for insurance type: {}", type);
-        double coverageAmount = switch (type) {
+        Double coverageAmount = switch (type) {
             case OSAGO -> 50000.0;
             case KASKO -> 100000.0;
             case CIVIL_LIABILITY -> 30000.0;
@@ -271,7 +252,7 @@ public class AutoInsuranceService {
     }
 
     @Transactional
-    public Page<AutoInsuranceDto> getFilteredAutoInsurances(Long id, double engineCapacity, String brand, String model, int year, String plate, String type, String insuranceType, Long insurancePolicy, Pageable pageable) {
+    public Page<AutoInsuranceDto> getFilteredAutoInsurances(Long id, Double engineCapacity, String brand, String model, int year, String plate, String type, String insuranceType, Long insurancePolicy, Pageable pageable) {
         logger.info("Fetching filtered auto insurances with parameters: id={}, engineCapacity={}, brand={}, model={}, year={}, plate={}, type={}, insuranceType={}, insurancePolicy={}",
                 id, engineCapacity, brand, model, year, plate, type, insuranceType, insurancePolicy);
 

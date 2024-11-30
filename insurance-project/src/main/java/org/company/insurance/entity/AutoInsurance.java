@@ -15,7 +15,7 @@ import org.company.insurance.enums.VehicleType;
 @AllArgsConstructor
 public class AutoInsurance extends Insurance {
     @Column(name = "engine_capacity")
-    private double engineCapacity;
+    private Double engineCapacity;
 
     @Column(name = "brand")
     private String brand;
@@ -40,11 +40,11 @@ public class AutoInsurance extends Insurance {
     @JoinColumn(name = "policy_id")
     private InsurancePolicy insurancePolicy;
 
-    public double getEngineCapacity() {
+    public Double getEngineCapacity() {
         return engineCapacity;
     }
 
-    public void setEngineCapacity(double engineCapacity) {
+    public void setEngineCapacity(Double engineCapacity) {
         this.engineCapacity = engineCapacity;
     }
 

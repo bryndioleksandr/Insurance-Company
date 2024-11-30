@@ -12,6 +12,8 @@ import org.company.insurance.exception.HealthInsuranceNotFoundException;
 import org.company.insurance.exception.InsurancePolicyNotFoundException;
 import org.company.insurance.mapper.InsurancePolicyMapper;
 import org.company.insurance.repository.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -46,6 +48,7 @@ public class InsurancePolicyService {
     private TravelInsuranceService travelInsuranceService;
     private PropertyInsuranceService propertyInsuranceService;
     private HealthInsuranceService healthInsuranceService;
+    private static final Logger logger = LoggerFactory.getLogger(PropertyInsuranceService.class);
 
     private InsuranceStatus determineInsuranceStatus(InsurancePolicy policy) {
         LocalDate endDate = policy.getEndDate();
@@ -56,7 +59,7 @@ public class InsurancePolicyService {
     }
 
     @Transactional
-    @PostConstruct
+    //@PostConstruct
     public void checkAndUpdateInsuranceStatusOnStartup() {
         List<InsurancePolicy> policies = insurancePolicyRepository.findAll();
 
@@ -113,18 +116,21 @@ public class InsurancePolicyService {
             case "VEHICLE" -> {
                 AutoInsurance autoInsurance = new AutoInsurance();
                 autoInsurance.setInsurancePolicy(insurancePolicy);
+                logger.info("Insurance longevity:{}", initLongevity(insurancePolicy));
                 autoInsurance.setInsuranceLongevity(initLongevity(insurancePolicy));
                 autoInsuranceRepository.save(autoInsurance);
             }
             case "TRAVEL" -> {
                 TravelInsurance travelInsurance = new TravelInsurance();
                 travelInsurance.setInsurancePolicy(insurancePolicy);
+                logger.info("Insurance longevity:{}", initLongevity(insurancePolicy));
                 travelInsurance.setInsuranceLongevity(initLongevity(insurancePolicy));
                 travelInsuranceRepository.save(travelInsurance);
             }
             case "PROPERTY" -> {
                 PropertyInsurance propertyInsurance = new PropertyInsurance();
                 propertyInsurance.setInsurancePolicy(insurancePolicy);
+                logger.info("Insurance longevity:{}", initLongevity(insurancePolicy));
                 propertyInsurance.setInsuranceLongevity(initLongevity(insurancePolicy));
                 propertyInsuranceRepository.save(propertyInsurance);
             }
@@ -141,12 +147,15 @@ public class InsurancePolicyService {
 
     public int initLongevity(InsurancePolicy insurancePolicy) {
         LocalDate now = LocalDate.now();
+        logger.info("First case:{}", (int) ChronoUnit.DAYS.between(insurancePolicy.getStartDate(), insurancePolicy.getEndDate()));
+        logger.info("Second case:{}", (int) ChronoUnit.DAYS.between(now, insurancePolicy.getEndDate()));
         if (now.isBefore(insurancePolicy.getStartDate())) {
             return (int) ChronoUnit.DAYS.between(insurancePolicy.getStartDate(), insurancePolicy.getEndDate());
-        } else if (now.isAfter(insurancePolicy.getStartDate()) && now.isBefore(insurancePolicy.getEndDate())) {
+        } else if (now.isAfter(insurancePolicy.getStartDate()) && now.isBefore(insurancePolicy.getEndDate()) || now.isEqual(now) && now.isBefore(insurancePolicy.getEndDate())) {
             return (int) ChronoUnit.DAYS.between(now, insurancePolicy.getEndDate());
-        } else {
-            return 0;
+        }
+        else{
+            return (int) 0.0;
         }
     }
 
@@ -194,7 +203,7 @@ public class InsurancePolicyService {
     }
 
     @Transactional
-    public Page<InsurancePolicyDto> getFilteredInsurances(Long id, String policyNumber, Long userId, LocalDate startDate, LocalDate endDate, double price, String status, String insuranceType, Long policyHolder, Pageable pageable) {
+    public Page<InsurancePolicyDto> getFilteredInsurances(Long id, String policyNumber, Long userId, LocalDate startDate, LocalDate endDate, Double price, String status, String insuranceType, Long policyHolder, Pageable pageable) {
         Specification<InsurancePolicy> specification = Specification.where(null);
 
         if (id != null) {
@@ -297,7 +306,7 @@ public class InsurancePolicyService {
     }
 
     @Transactional
-    public Page<InsurancePolicyDto> getFilteredInsurancesForCurrentUser(Long id, String policyNumber, Long userId, LocalDate startDate, LocalDate endDate, double price, String status, String insuranceType, Long policyHolder, Pageable pageable) {
+    public Page<InsurancePolicyDto> getFilteredInsurancesForCurrentUser(Long id, String policyNumber, Long userId, LocalDate startDate, LocalDate endDate, Double price, String status, String insuranceType, Long policyHolder, Pageable pageable) {
         User currentUser = userService.getCurrentUser();
         Specification<InsurancePolicy> specification = Specification.where((root, query, criteriaBuilder) ->
                 criteriaBuilder.equal(root.get("userId"), currentUser.getId()));

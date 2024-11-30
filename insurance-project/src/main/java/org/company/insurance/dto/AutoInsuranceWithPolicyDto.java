@@ -13,12 +13,12 @@ import java.time.LocalDateTime;
  * DTO for {@link org.company.insurance.entity.AutoInsurance}
  */
 public record AutoInsuranceWithPolicyDto(Long id, LocalDateTime createdAt, LocalDateTime updatedAt,
-                                         double coverageAmount, int insuranceLongevity, double engineCapacity,
+                                         Double coverageAmount, int insuranceLongevity, Double engineCapacity,
                                          String brand, String model, int year, String plate, VehicleType type,
                                          AutoInsuranceType insuranceType, Long insurancePolicyId,
                                          String insurancePolicyPolicyNumber, Long insurancePolicyUserId,
                                          LocalDate insurancePolicyStartDate, LocalDate insurancePolicyEndDate,
-                                         double insurancePolicyPrice, InsuranceStatus insurancePolicyStatus,
+                                         Double insurancePolicyPrice, InsuranceStatus insurancePolicyStatus,
                                          InsuranceType insurancePolicyInsuranceType,
                                          Long insurancePolicyPolicyHolderId) implements Serializable {
 }

@@ -28,8 +28,6 @@ public class AdminInitializr {
     @Value("${admin.phoneNumber}")
     private String phoneNumber;
 
-
-
     private final UserService userService;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -58,12 +56,11 @@ public class AdminInitializr {
                     birthDate,
                     passwordEncoder.encode(adminPassword),
                     Role.valueOf(role)
-//                    hireDate,
-//                    position
+
             );
             userService.createUser(adminDto);
-            //userRepository.updateEmailVerifiedStatus(adminUsername);
             System.out.println("Initial admin user created: " + adminUsername);
         }
+
     }
 }

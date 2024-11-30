@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * DTO for {@link org.company.insurance.entity.HealthInsurance}
  */
-public record HealthInsuranceCreationDto(double coverageAmount,
+public record HealthInsuranceCreationDto(Double coverageAmount,
 //                                         int insuranceLongevity,
                                          @NotBlank @Size(max = 512) String medicalHistory,
                                          Long insurancePolicyId) implements Serializable {

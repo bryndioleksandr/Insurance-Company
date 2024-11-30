@@ -10,7 +10,10 @@ import org.company.insurance.dto.PropertyInsuranceCreationDto;
 import org.company.insurance.dto.PropertyInsuranceDto;
 import org.company.insurance.dto.PropertyInsuranceDto;
 import org.company.insurance.exception.PropertyInsuranceNotFoundException;
+import org.company.insurance.service.AgentService;
 import org.company.insurance.service.PropertyInsuranceService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -24,6 +27,8 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class PropertyInsuranceController {
     private final PropertyInsuranceService propertyInsuranceService;
+    private static final Logger logger = LoggerFactory.getLogger(AgentService.class);
+
 
     @Operation(
             summary = "Get property insurance by ID",
@@ -90,8 +95,10 @@ public class PropertyInsuranceController {
             PropertyInsuranceDto updatedPropertyInsurance = propertyInsuranceService.updatePropertyInsuranceByPolicyId(policyId, propertyInsuranceDto);
             return ResponseEntity.ok(updatedPropertyInsurance);
         } catch (PropertyInsuranceNotFoundException e) {
+            logger.error("PropertyInsuranceNotFoundException: {}", e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } catch (Exception e) {
+            logger.error("Unexpected error occurred: {}", e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
@@ -169,7 +176,7 @@ public class PropertyInsuranceController {
     public ResponseEntity<?> getFilteredProperty (
             @RequestParam(name = "id", required = false)  Long id,
             @RequestParam(name = "propertyAddress", required = false) String propertyAddress,
-            @RequestParam(name = "houseSize", required = false) double houseSize,
+            @RequestParam(name = "houseSize", required = false) Double houseSize,
             @RequestParam(name = "insuranceType", required = false) String insuranceType,
             @PageableDefault Pageable pageable
     ) {

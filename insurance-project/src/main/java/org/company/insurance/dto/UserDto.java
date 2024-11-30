@@ -32,8 +32,7 @@ public record UserDto(Long id,
                       LocalDate birthDate,
                       String password,
                       Role role
-        /*@Nullable LocalDate hireDate,
-        @Nullable String position*/) implements Serializable {
+        ) implements Serializable {
     /**
      * DTO for {@link org.company.insurance.entity.InsurancePolicy}
      */

@@ -17,7 +17,7 @@ public class PropertyInsurance extends Insurance {
     private String propertyAddress;
 
     @Column(name = "house_size")
-    private double houseSize;
+    private Double houseSize;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "insurance_type")

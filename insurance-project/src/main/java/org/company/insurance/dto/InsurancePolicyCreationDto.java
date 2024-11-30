@@ -26,7 +26,7 @@ public record InsurancePolicyCreationDto(
                                           LocalDate endDate,
 
                                           @Positive(message = "Price must be a positive number")
-                                          double price,
+                                          Double price,
 
                                           @NotNull(message = "Insurance status cannot be null")
                                           InsuranceStatus status,

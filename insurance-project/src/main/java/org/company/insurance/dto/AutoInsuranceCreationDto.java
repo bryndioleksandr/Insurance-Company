@@ -9,8 +9,8 @@ import java.io.Serializable;
 /**
  * DTO for {@link org.company.insurance.entity.AutoInsurance}
  */
-public record AutoInsuranceCreationDto( double coverageAmount,
-                                       @NotBlank @Min(50) @Max(10000) double engineCapacity,
+public record AutoInsuranceCreationDto( Double coverageAmount,
+                                       @NotBlank @Min(50) @Max(10000) Double engineCapacity,
 //                                       int insuranceLongevity,
                                        @NotBlank @Size(max = 255) String brand,
                                        @NotBlank @Size(max = 255) String model,

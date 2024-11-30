@@ -147,7 +147,7 @@ public class ClaimController {
     public ResponseEntity<?> getFilteredClaims(
             @RequestParam(name = "id", required = false) Long id,
             @RequestParam(name = "submissionDate", required = false) LocalDate submissionDate,
-            @RequestParam(name = "amount", required = false) double amount,
+            @RequestParam(name = "amount", required = false) Double amount,
             @RequestParam(name = "status", required = false) String status,
             @RequestParam(name = "insurancePolicy", required = false) Long insurancePolicy,
             @RequestParam(name = "incidentDescription", required = false) String incidentDescription,

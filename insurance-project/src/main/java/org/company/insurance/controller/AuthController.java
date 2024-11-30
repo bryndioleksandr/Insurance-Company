@@ -64,30 +64,6 @@
             Optional<User> optionalUser = userRepository.findByUsername(username);
             User user = userRepository.findByUsername(username).orElse(null);
 
-//            if (optionalUser.isEmpty()) {
-//                return ResponseEntity.badRequest().body("User not found.");
-//            }
-//
-//            User user = optionalUser.get();
-//
-//            if (user.isEmailVerified()) {
-//                return ResponseEntity.badRequest().body("Email is already verified.");
-//            }
-//
-//            if (user.getEmailVerificationExpiry().isBefore(LocalDateTime.now())) {
-//                return ResponseEntity.badRequest().body("Verification code has expired.");
-//            }
-//
-//            if (!user.getEmailVerificationCode().equals(code)) {
-//                return ResponseEntity.badRequest().body("Invalid verification code.");
-//            }
-//
-//            user.setEmailVerified(true);
-//            user.setEmailVerificationCode(null);
-//            user.setEmailVerificationExpiry(null);
-//            userRepository.save(user);
-//
-//            return ResponseEntity.ok("Email verified successfully.");
             if (user == null) {
                 throw new IllegalArgumentException("User not found");
             }

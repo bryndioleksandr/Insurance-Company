@@ -19,7 +19,7 @@ import java.util.List;
 public interface InsurancePolicyRepository extends JpaRepository<InsurancePolicy, Long>, JpaSpecificationExecutor<InsurancePolicy> {
     @Modifying
     @Query("UPDATE InsurancePolicy ip SET ip.price = :price WHERE ip.id = :id")
-    void updatePriceById(@Param("price") double price, @Param("id") Long id);
+    void updatePriceById(@Param("price") Double price, @Param("id") Long id);
 
     @Modifying
     @Query("UPDATE InsurancePolicy ip SET ip.status = :status WHERE ip.id = :id")

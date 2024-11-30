@@ -172,7 +172,7 @@ public class AutoInsuranceController {
     @GetMapping("/filtered")
     public ResponseEntity<?> getFilteredAutoInsurances (
             @RequestParam(name = "id", required = false) Long id,
-            @RequestParam(name = "engineCapacity", required = false) double engineCapacity,
+            @RequestParam(name = "engineCapacity", required = false) Double engineCapacity,
             @RequestParam(name = "brand", required = false) String brand,
             @RequestParam(name = "model", required = false) String model,
             @RequestParam(name = "year", required = false) int year,

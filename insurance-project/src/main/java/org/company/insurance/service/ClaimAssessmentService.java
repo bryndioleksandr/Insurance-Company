@@ -101,7 +101,7 @@ public class ClaimAssessmentService {
     }
 
     @Transactional
-    public Page<ClaimAssessmentDto> getFilteredClaimAssessments(Long id, LocalDate assessmentDate, String notes, double assessmentAmount, Long agent, Pageable pageable) {
+    public Page<ClaimAssessmentDto> getFilteredClaimAssessments(Long id, LocalDate assessmentDate, String notes, Double assessmentAmount, Long agent, Pageable pageable) {
         logger.info("Fetching filtered claim assessments with filters: id = {}, assessmentDate = {}, notes = {}, assessmentAmount = {}, agent = {}", id, assessmentDate, notes, assessmentAmount, agent);
 
         Specification<ClaimAssessment> specification = Specification.where(null);

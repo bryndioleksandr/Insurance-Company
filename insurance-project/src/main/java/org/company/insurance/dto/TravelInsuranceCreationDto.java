@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * DTO for {@link org.company.insurance.entity.TravelInsurance}
  */
-public record TravelInsuranceCreationDto(double coverageAmount,
+public record TravelInsuranceCreationDto(Double coverageAmount,
                                          @NotBlank CoverageArea coverageArea,
                                          @NotBlank String destination,
                                          @NotBlank TravelType travelType,

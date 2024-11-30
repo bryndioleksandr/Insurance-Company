@@ -155,8 +155,8 @@ public class UserController {
             }
     )
     public ResponseEntity<?> getSortedUsers(
-            @RequestParam String sortBy,
-            @RequestParam String order,
+            @RequestParam(name = "sortBy") String sortBy,
+            @RequestParam(name = "order") String order,
             @PageableDefault Pageable pageable) {
         Page<UserDto> userDtos = userService.getSortedUsers(sortBy, order, pageable);
         if (userDtos.isEmpty()) {

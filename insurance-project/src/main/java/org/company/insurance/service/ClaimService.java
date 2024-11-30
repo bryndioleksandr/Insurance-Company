@@ -85,7 +85,7 @@ public class ClaimService {
     }
 
     @Transactional
-    public Page<ClaimDto> getFilteredClaims(Long id, LocalDate submissionDate, double amount, String status, Long insurancePolicy, String incidentDescription, String claimType, Pageable pageable) {
+    public Page<ClaimDto> getFilteredClaims(Long id, LocalDate submissionDate, Double amount, String status, Long insurancePolicy, String incidentDescription, String claimType, Pageable pageable) {
         Specification<Claim> specification = Specification.where(null);
 
         if (id != null) {

@@ -12,6 +12,6 @@ import java.util.List;
  * DTO for {@link org.company.insurance.entity.InsurancePolicy}
  */
 public record InsurancePolicyDto(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, String policyNumber,
-                                 Long userId, LocalDate startDate, LocalDate endDate, double price, InsuranceType insuranceType,
+                                 Long userId, LocalDate startDate, LocalDate endDate, Double price, InsuranceType insuranceType,
                                  List<Long> claimIds, Long policyHolderId) implements Serializable {
 }

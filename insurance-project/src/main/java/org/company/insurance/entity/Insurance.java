@@ -13,16 +13,16 @@ import lombok.*;
 public abstract class Insurance extends BaseEntity {
 
     @Column(name = "coverage_amount")
-    private double coverageAmount;
+    private Double coverageAmount;
 
     @Column(name = "insurance_longevity")
     private int insuranceLongevity;
 
-    public double getCoverageAmount() {
+    public Double getCoverageAmount() {
         return coverageAmount;
     }
 
-    public void setCoverageAmount(double coverageAmount) {
+    public void setCoverageAmount(Double coverageAmount) {
         this.coverageAmount = coverageAmount;
     }
 

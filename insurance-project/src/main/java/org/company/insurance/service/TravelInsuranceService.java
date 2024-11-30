@@ -45,23 +45,23 @@ public class TravelInsuranceService {
     private static final Logger logger = LoggerFactory.getLogger(TravelInsuranceService.class);
     
 
-    private double calculateTravelInsurancePrice(TravelInsurance insurance) {
+    private Double calculateTravelInsurancePrice(TravelInsurance insurance) {
         Long currentInsurancePolicyId = insurance.getInsurancePolicy().getId();
         LocalDate startDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getStartDate();
         LocalDate endDate = insurancePolicyRepository.findById(currentInsurancePolicyId).get().getEndDate();
 
         long daysDifference = ChronoUnit.DAYS.between(startDate, endDate);
-        double longevityMultiplier = daysDifference / 365.0;
+        Double longevityMultiplier = daysDifference / 365.0;
 
-        double basePrice = 100;
+        Double basePrice = 100.0;
 
-        double typeMultiplier = switch (insurance.getTravelType()) {
+        Double typeMultiplier = switch (insurance.getTravelType()) {
             case BUSINESS -> 1.5;
             case LEISURE -> 1.2;
             case STUDENT -> 1.1;
         };
 
-        double areaMultiplier = switch (insurance.getCoverageArea()) {
+        Double areaMultiplier = switch (insurance.getCoverageArea()) {
             case EUROPE_UK -> 1.0;
             case WORLDWIDE_EXCLUDING_USA_CANADA -> 1.3;
             case WORLDWIDE -> 1.5;
@@ -70,7 +70,7 @@ public class TravelInsuranceService {
         return basePrice * typeMultiplier * areaMultiplier * longevityMultiplier;
     }
 
-    private double calculateCoverageAmount(TravelInsurance insurance) {
+    private Double calculateCoverageAmount(TravelInsurance insurance) {
         return switch (insurance.getCoverageArea()) {
             case EUROPE_UK -> 100000.0;
             case WORLDWIDE_EXCLUDING_USA_CANADA -> 200000.0;
@@ -96,7 +96,7 @@ public class TravelInsuranceService {
 
         InsurancePolicy insurancePolicy = travelInsurance.getInsurancePolicy();
         if (insurancePolicy != null) {
-            double updatedPrice = calculateTravelInsurancePrice(travelInsurance);
+            Double updatedPrice = calculateTravelInsurancePrice(travelInsurance);
 
             insurancePolicyRepository.updatePriceById(updatedPrice, insurancePolicy.getId());
             insurancePolicyRepository.updateStatusById(InsuranceStatus.valueOf("ACTIVE"), insurancePolicy.getId());
@@ -126,7 +126,7 @@ public class TravelInsuranceService {
         logger.info("Travel insurance updated successfully: {}", updatedTravelInsurance);
 
         InsurancePolicy insurancePolicy = updatedTravelInsurance.getInsurancePolicy();
-        double updatedPrice = 0;
+        Double updatedPrice = 0.0;
         if (insurancePolicy != null) {
             logger.info("Updating price and status for insurance policy ID: {}", insurancePolicy.getId());
             updatedPrice = calculateTravelInsurancePrice(updatedTravelInsurance);
@@ -136,12 +136,12 @@ public class TravelInsuranceService {
             logger.warn("No insurance policy found for updated travel insurance ID: {}", updatedTravelInsurance.getId());
         }
 
-        double price = updatedPrice;
+        Double price = updatedPrice;
 
         String coverageArea = updatedTravelInsurance.getCoverageArea().toString();
         String destination = updatedTravelInsurance.getDestination();
         String travelType = updatedTravelInsurance.getTravelType().toString();
-        double coverageAmount = updatedTravelInsurance.getCoverageAmount();
+        Double coverageAmount = updatedTravelInsurance.getCoverageAmount();
 
         String body = "<html><body>" +
                 "<h2>Dear " + insurancePolicy.getUser().getFirstName() + ",</h2>" +
@@ -151,7 +151,7 @@ public class TravelInsuranceService {
                 "<tr><td><strong>Destination</strong></td><td>" + destination + "</td></tr>" +
                 "<tr><td><strong>Travel Type</strong></td><td>" + travelType + "</td></tr>" +
                 "<tr><td><strong>Coverage Amount</strong></td><td>$" + coverageAmount + "</td></tr>" +
-                "<tr><td><strong>Price</strong></td><td>₴" + (int)price + "</td></tr>" +
+                "<tr><td><strong>Price</strong></td><td>₴" + (Double)price + "</td></tr>" +
                 "</table>" +
                 "<p>Thank you for choosing us!</p>" +
                 "</body></html>";

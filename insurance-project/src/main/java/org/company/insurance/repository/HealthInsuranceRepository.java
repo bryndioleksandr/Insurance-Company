@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface HealthInsuranceRepository extends JpaRepository<HealthInsurance, Long>, JpaSpecificationExecutor<HealthInsurance> {
-    @Query("SELECT COUNT(a) > 0 FROM AutoInsurance a WHERE a.insurancePolicy.id = ?1")
+    @Query("SELECT COUNT(a) > 0 FROM HealthInsurance a WHERE a.insurancePolicy.id = ?1")
     boolean existsByInsurancePolicyId(Long insurancePolicyId);
 
     Optional<HealthInsurance> findByInsurancePolicyId(Long insurancePolicyId);

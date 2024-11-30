@@ -15,7 +15,7 @@ import java.util.Date;
  * DTO for {@link org.company.insurance.entity.Claim}
  */
 public record ClaimCreationDto(LocalDate submissionDate,
-                               @Min(20) @Max(500000) double amount,
+                               @Min(20) @Max(500000) Double amount,
                                @NotBlank @Size(max = 512)
                                String incidentDescription,
                                @NotBlank ClaimType claimType,
